@@ -53,7 +53,7 @@ public class TerrianManager : MonoBehaviour {
             if (Slop)
             {
                     angle = Mathf.Sin((i / Angle)) * (random);
-                    angle = Mathf.Clamp(angle, -0.7f, 1.2f);
+                    angle = Mathf.Clamp(angle, -0.6f, 1.2f);
             }
 
 
