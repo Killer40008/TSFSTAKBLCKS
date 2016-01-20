@@ -31,7 +31,8 @@ public class TerrianManager : MonoBehaviour {
             else
                 Angle = rnd;
         }
-    
+
+        //Angle = 1;
         Mesh mesh = null;
         GameObject gPiece;
         mesh = new Mesh();

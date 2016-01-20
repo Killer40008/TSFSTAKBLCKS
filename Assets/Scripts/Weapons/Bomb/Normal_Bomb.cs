@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Normal_Bomb
+public class Normal_Bomb : MonoBehaviour
 {
 
-    Rigidbody rigit;
+    GameObject Tank;
 
-   public Normal_Bomb(GameObject bombObj,Sprite sprite, float lunchSpeed, GameObject tank)
+   public void Create(GameObject bombObj, Sprite sprite, Object explosion ,float fireStrengh, GameObject tank)
     {
-        rigit = bombObj.GetComponent<Rigidbody>();
+        Tank = tank;
         Bomb = new BombData()
         {
             Damage = 20,
@@ -16,12 +16,22 @@ public class Normal_Bomb
             SizeInital = new Vector3(0.5f, 0.5f, 0.5f),
             SizeFinal = new Vector3(0.5f, 0.5f, 0.5f),
             Sprite = sprite,
-            FireSpeed = lunchSpeed,
-            Mass = 1,
+            ExplosionPrefap = explosion,
+            Mass = 0.5f,
+            FireSpeed = fireStrengh * 0.1f,
         };
     }
     public BombData Bomb { get; set; }
 
+
+
+    public void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Player" && other.gameObject != Tank)
+            Bomb.PlayerHit(other.gameObject);
+        else if (other.gameObject.tag == "Terrain")
+            Bomb.FloorHit(other.gameObject);
+    }
 
     
 }

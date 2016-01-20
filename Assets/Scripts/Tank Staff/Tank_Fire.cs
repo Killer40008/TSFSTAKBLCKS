@@ -13,9 +13,16 @@ public class Tank_Fire : MonoBehaviour
         {
             if (Input.GetKeyDown("space"))
             {
+                GameObject bomb = new GameObject();
+                Normal_Bomb script = bomb.AddComponent<Normal_Bomb>();
+
                 Sprite[] sprites = this.transform.parent.GetComponent<Tank>().BombSprites;
-                Normal_Bomb nb = new Normal_Bomb(new GameObject(), sprites[0], 500, this.transform.parent.gameObject);
-                nb.Bomb.Fire(this.transform.parent.gameObject);
+                Object[] Explosions = this.transform.parent.GetComponent<Tank>().BombExplosions;
+                script.Create( bomb, sprites[0], Explosions[0] ,50, this.transform.parent.gameObject);
+
+
+                script.Bomb.Fire(this.transform.parent.gameObject);
+                this.GetComponent<Burrell_Movement>().OnFire();
 
                 Managers.TurnManager.SetTurnToNextTank();
             }

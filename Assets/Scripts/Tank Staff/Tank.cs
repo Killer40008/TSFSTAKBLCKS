@@ -19,6 +19,7 @@ public class Tank : MonoBehaviour
     public Vector3 BurrellPosition;
     public Vector3 BurrellRotation;
     public Sprite[] BombSprites;
+    public Object[] BombExplosions;
 
 
     //player

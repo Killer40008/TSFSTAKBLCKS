@@ -20,4 +20,12 @@ public class Burrell_Movement : MonoBehaviour
 
         }
     }
+
+    public void OnFire()
+    {
+        this.transform.FindChild("tank-01_up").GetComponent<Animator>().enabled = true;
+        this.transform.FindChild("tank-01_up").GetComponent<Animator>().Play(0);
+    }
+
+  
 }

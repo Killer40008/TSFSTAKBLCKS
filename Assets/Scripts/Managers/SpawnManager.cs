@@ -6,6 +6,7 @@ public class SpawnManager : MonoBehaviour
 
     public Object TankPrefap;
     public Sprite[] BombSprites;
+    public Object[] BombExplosions;
 
     public void Spawn(int Count ,string playername, int playerrand, int playerscore)
     {
@@ -33,6 +34,8 @@ public class SpawnManager : MonoBehaviour
         tData.PlayerRank = playerrand;
         tData.PlayerScore = playerscore;
         tData.BombSprites = BombSprites;
+        tData.BombExplosions = BombExplosions;
+        obj.GetComponent<Rigidbody>().centerOfMass = new Vector3(0f, -0.5f, 0);
     }
 
     private float CalculateY(float x)

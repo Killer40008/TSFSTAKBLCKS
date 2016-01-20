@@ -6,7 +6,12 @@ public class Tank_Movement : MonoBehaviour
 
     bool IsGrounded = false;
     public float Speed = 0.03f;
+    Rigidbody rigit;
 
+    void Start()
+    {
+        rigit = GetComponent<Rigidbody>();
+    }
 
 
     void FixedUpdate()
@@ -15,17 +20,15 @@ public class Tank_Movement : MonoBehaviour
         {
             //get input from user
             float translation = Input.GetAxis("Horizontal") * Speed;
-
-            ////get tanks around player
-            //RaycastHit rInfo, lInfo; 
-            //Physics.Raycast(transform.position, Vector3.right ,out rInfo);
-            //Physics.Raycast(transform.position, Vector3.left ,out lInfo);
-
             if (translation != 0 && IsGrounded)
             {
                 //if (rInfo.g.
                 this.transform.Translate(translation, 0, 0);
             }
+
+            //apply tank gravity
+            rigit.AddForce(Physics.gravity * 0.3f, ForceMode.VelocityChange);
+
             ClampPosition();
         }
     }
@@ -40,16 +43,14 @@ public class Tank_Movement : MonoBehaviour
 
     void OnCollisionEnter(Collision theCollision)
     {
-        if (enabled)
+        if (theCollision.gameObject.tag == "Terrain")
         {
-            if (theCollision.gameObject.tag == "Terrain")
-            {
-                IsGrounded = true;
-            }
-            else if (theCollision.gameObject.tag == "Player")
-            {
-                theCollision.gameObject.GetComponent<Rigidbody>().isKinematic = true;
-            }
+            IsGrounded = true;
+        }
+        else if (theCollision.gameObject.tag == "Player")
+        {
+            if (enabled)
+                 theCollision.gameObject.GetComponent<Rigidbody>().isKinematic = true;
         }
     }
 
