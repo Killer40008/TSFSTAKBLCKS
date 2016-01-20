@@ -1,0 +1,23 @@
+﻿using UnityEngine;
+using System.Collections;
+using UnityEngine.EventSystems;
+
+public class RightMovementButton : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IUpdateSelectedHandler
+{
+    bool IsPressed = false;
+    public void OnPointerDown(PointerEventData data)
+    {
+        IsPressed = true;
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        IsPressed = false;
+    }
+
+    public void OnUpdateSelected(BaseEventData eventData)
+    {
+        if (IsPressed)
+            TurnManager.PlayerTank.GetComponent<Tank_Movement>().MoveRight();
+    }
+}

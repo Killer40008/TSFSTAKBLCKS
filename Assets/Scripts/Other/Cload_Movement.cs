@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Cload_Movement : MonoBehaviour
 {
-    const float CONSTRAIN = 9.06f;
+    const float CONSTRAIN = 9.5f;
     bool HasCreated = false;
     public Sprite[] sprites;
 
@@ -29,7 +29,7 @@ public class Cload_Movement : MonoBehaviour
             //
             if (Mathf.Abs(this.transform.position.x) <= 0.2f && HasCreated == false)
             {
-                GameObject gm = (GameObject)Instantiate(((Object)this.gameObject), new Vector3(CONSTRAIN * Wind.WindDirection, this.transform.position.y, 0), Quaternion.identity);
+                GameObject gm = (GameObject)Instantiate(((Object)this.gameObject), new Vector3(CONSTRAIN * Wind.WindDirection, this.transform.position.y, -1), Quaternion.identity);
                 gm.name = "Cloud Clone";
                 gm.GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, sprites.Length)];
                 HasCreated = true;

@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Linq;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class TurnManager : MonoBehaviour 
 {
+    public static GameObject PlayerTank;
      GameObject[] tanks;
      int Selector = 0;
 
@@ -33,6 +36,7 @@ public class TurnManager : MonoBehaviour
                 tanksToDisabled[i].GetComponent<Tank>().Active(true);
                 tanksToDisabled[i].GetComponent<Rigidbody>().isKinematic = false;
                 tanksToDisabled[i].transform.FindChild("Burrell").GetComponent<Tank_Fire>().enabled = true;
+                PlayerTank = tanksToDisabled[i];
             }
             else
             {
@@ -42,4 +46,5 @@ public class TurnManager : MonoBehaviour
             }
         }
     }
+
 }

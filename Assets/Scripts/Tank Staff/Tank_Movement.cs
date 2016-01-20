@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
 
-public class Tank_Movement : MonoBehaviour 
+public class Tank_Movement : MonoBehaviour, IPointerDownHandler
 {
 
     bool IsGrounded = false;
@@ -13,13 +14,36 @@ public class Tank_Movement : MonoBehaviour
         rigit = GetComponent<Rigidbody>();
     }
 
+    public void OnPointerDown(PointerEventData data)
+    {
+    }
 
-    void FixedUpdate()
+
+    public void MoveLeft()
     {
         if (enabled)
         {
             //get input from user
-            float translation = Input.GetAxis("Horizontal") * Speed;
+            float translation = -1 * Speed;
+            if (translation != 0 && IsGrounded)
+            {
+                //if (rInfo.g.
+                this.transform.Translate(translation, 0, 0);
+            }
+
+            //apply tank gravity
+            rigit.AddForce(Physics.gravity * 0.3f, ForceMode.VelocityChange);
+
+            ClampPosition();
+        }
+    }
+
+    public void MoveRight()
+    {
+        if (enabled)
+        {
+            //get input from user
+            float translation = 1 * Speed;
             if (translation != 0 && IsGrounded)
             {
                 //if (rInfo.g.

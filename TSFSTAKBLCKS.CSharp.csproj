@@ -73,6 +73,8 @@
     <Compile Include="Assets\Scripts\Tank Staff\Tank.cs" />
     <Compile Include="Assets\Scripts\Tank Staff\Tank_Fire.cs" />
     <Compile Include="Assets\Scripts\Tank Staff\Tank_Movement.cs" />
+    <Compile Include="Assets\Scripts\UI\LeftMovementButton.cs" />
+    <Compile Include="Assets\Scripts\UI\RightMovementButton.cs" />
     <Compile Include="Assets\Scripts\Weapons\Bomb\BombBase.cs" />
     <Compile Include="Assets\Scripts\Weapons\Bomb\Cluster_Bomb.cs" />
     <Compile Include="Assets\Scripts\Weapons\Bomb\Large_Bomb.cs" />
