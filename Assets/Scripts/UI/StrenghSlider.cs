@@ -9,8 +9,12 @@ public class StrenghSlider : MonoBehaviour
 
     public void PointerUp()
     {
-        Strengh = (int)this.GetComponent<Slider>().value;
-       TurnManager.PlayerTank.transform.FindChild("Burrell").GetComponent<Tank_Fire>().Fire();
-       this.GetComponent<Slider>().value = 0;
+        int current = (int)this.GetComponent<Slider>().value;
+        if (current > 0)
+        {
+            Strengh = current;
+            TurnManager.PlayerTank.transform.FindChild("Burrell").GetComponent<Tank_Fire>().Fire();
+            this.GetComponent<Slider>().value = 0;
+        }
     }
 }

@@ -31,6 +31,7 @@ public class TurnManager : MonoBehaviour
         GameObject[] tanksToDisabled =   tanks.Where(t => t.GetComponent<Tank>().CanDisabled == true).ToArray();
         for (int i = 0; i < tanks.Length; i++)
         {
+            //active tanks
             if (i == index)
             {
                 var burrell = tanksToDisabled[i].transform.FindChild("Burrell").GetComponent<Burrell_Movement>();
@@ -40,6 +41,7 @@ public class TurnManager : MonoBehaviour
                 tanksToDisabled[i].transform.FindChild("Burrell").GetComponent<Tank_Fire>().enabled = true;
                 PlayerTank = tanksToDisabled[i];
             }
+            //disblead other
             else
             {
                 tanksToDisabled[i].GetComponent<Tank>().Active(false);

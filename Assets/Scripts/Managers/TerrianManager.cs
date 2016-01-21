@@ -80,17 +80,21 @@ public class TerrianManager : MonoBehaviour {
             if (counter == 10)
             {
                 counter = 0;
-                random = Random.Range(0f, 2.5f);
+                random = Random.Range(0.1f, 2.5f);
+               // random = 0.1f;
             }
         }
 
         this.transform.localScale = new Vector3(1, 0.2f, 1);
-        if (Angle <= 10)
+        if (angle == 0)
             this.transform.position = new Vector3(-21.5f, -4.85f, 0);
+
+       else if (Angle <= 10)
+            this.transform.position = new Vector3(-21.5f, -5.6f, 0);
         else if (Angle < 15)
-            this.transform.position = new Vector3(-27.2f, -5.4f, 0);
+            this.transform.position = new Vector3(-27.2f, -5.58f, 0);
         else if (Angle <= 15 || Angle < 18)
-            this.transform.position = new Vector3(-35.8f, -5.4f, 0);
+            this.transform.position = new Vector3(-35.8f, -6.4f, 0);
         else if (Angle >= 18)
             this.transform.position = new Vector3(-19.7f, -10f, 0);
     }
