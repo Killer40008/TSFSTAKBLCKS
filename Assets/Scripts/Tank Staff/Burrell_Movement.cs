@@ -4,14 +4,14 @@ using System.Collections;
 public class Burrell_Movement : MonoBehaviour
 {
     public float Speed = 2;
-    float rotatoinAngleZ = 0;
-	
-	// Update is called once per frame
+    public float rotatoinAngleZ = 0;
+
+    // Update is called once per frame
     void FixedUpdate()
     {
         if (enabled)
         {
-            rotatoinAngleZ += Input.GetAxis("Vertical") * Speed;
+            rotatoinAngleZ = TankFileAngleSlider.Angle * Speed;
             rotatoinAngleZ = Mathf.Clamp(rotatoinAngleZ, 0F, 180F); // clamp angle between 0 to 180
 
             this.transform.localEulerAngles = new Vector3(0, 0, rotatoinAngleZ);

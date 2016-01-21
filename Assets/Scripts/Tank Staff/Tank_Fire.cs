@@ -21,7 +21,7 @@ public class Tank_Fire : MonoBehaviour
 
             script.Bomb.Fire(this.transform.parent.gameObject);
             this.GetComponent<Burrell_Movement>().OnFire();
-
+            
             Managers.TurnManager.SetTurnToNextTank();
 
         }

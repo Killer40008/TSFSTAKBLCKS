@@ -33,6 +33,8 @@ public class TurnManager : MonoBehaviour
         {
             if (i == index)
             {
+                var burrell = tanksToDisabled[i].transform.FindChild("Burrell").GetComponent<Burrell_Movement>();
+                TankFileAngleSlider.me.Value = burrell.rotatoinAngleZ / burrell.Speed;
                 tanksToDisabled[i].GetComponent<Tank>().Active(true);
                 tanksToDisabled[i].GetComponent<Rigidbody>().isKinematic = false;
                 tanksToDisabled[i].transform.FindChild("Burrell").GetComponent<Tank_Fire>().enabled = true;
@@ -45,6 +47,8 @@ public class TurnManager : MonoBehaviour
                 tanksToDisabled[i].transform.FindChild("Burrell").GetComponent<Tank_Fire>().enabled = false;
             }
         }
+
+        
     }
 
 }
