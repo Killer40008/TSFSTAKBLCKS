@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 public class TurnManager : MonoBehaviour 
 {
     public static GameObject PlayerTank;
+    public Object SelectorArrow;
      GameObject[] tanks;
      int Selector = 0;
 
@@ -22,16 +23,26 @@ public class TurnManager : MonoBehaviour
         if (Selector == Managers.TanksCount)
             Selector = 0;
 
-        TankEnabled(Selector, true, firstTime);
+        TankEnabled(Selector, firstTime);
+        ShowArrowAboveTank(Selector);
 
         Selector++;
     }
-    public void TankEnabled(int index,bool enabled, bool firstTime = false)
+
+    private void ShowArrowAboveTank(int index)
+    {
+        Vector3 tPos = tanks[index].transform.position;
+        GameObject arr = (GameObject)Instantiate(SelectorArrow, new Vector3(tPos.x, tPos.y + 3f, 0), Quaternion.identity);
+        arr.transform.SetParent(tanks[index].transform);
+    }
+
+  
+    public void TankEnabled(int index,bool firstTime = false)
     {
         GameObject[] tanksToDisabled =   tanks.Where(t => t.GetComponent<Tank>().CanDisabled == true).ToArray();
         for (int i = 0; i < tanks.Length; i++)
         {
-            //active tanks
+            //active tank by index
             if (i == index)
             {
                 var burrell = tanksToDisabled[i].transform.FindChild("Burrell").GetComponent<Burrell_Movement>();
@@ -41,7 +52,7 @@ public class TurnManager : MonoBehaviour
                 tanksToDisabled[i].transform.FindChild("Burrell").GetComponent<Tank_Fire>().enabled = true;
                 PlayerTank = tanksToDisabled[i];
             }
-            //disblead other
+            //disblead others
             else
             {
                 tanksToDisabled[i].GetComponent<Tank>().Active(false);

@@ -25,20 +25,30 @@ public class BombData :  IBomb
     public Object ExplosionPrefap { get; set; }
     public AudioClip FireClip { get; set; }
     public AudioClip ExplosionClip { get; set; }
-
+    public bool BombObjectDestroyed { private set; get; }
 
     public void PlayerHit(GameObject hit)
     {
-        float deltaPosition = Mathf.Abs(hit.transform.position.x - BombObj.transform.position.x);
-        hit.GetComponent<Tank>().Health -= (Damage - (deltaPosition * 10));
-        //
-        PlayExplosionEffect();
+
+        if (!BombObjectDestroyed)
+        {
+            float deltaPosition = Mathf.Abs(hit.transform.position.x - BombObj.transform.position.x);
+            hit.GetComponent<Tank>().Health -= (Damage - (deltaPosition * 10));
+            //
+            PlayExplosionEffect();
+            BombObjectDestroyed = true;
+        }
     }
 
 
     public void FloorHit(GameObject hit)
     {
-        MonoBehaviour.Destroy(BombObj);
+        if (!BombObjectDestroyed)
+        {
+            MonoBehaviour.Destroy(BombObj);
+            Managers.TurnManager.SetTurnToNextTank();
+            BombObjectDestroyed = true;
+        }
     }
 
     public void Fire(GameObject tank)
@@ -73,9 +83,9 @@ public class BombData :  IBomb
     private void PlayExplosionEffect()
     {
         GameObject explosion = (GameObject)MonoBehaviour.Instantiate(ExplosionPrefap, BombObj.transform.position, Quaternion.identity);
-        explosion.AddComponent<DestroyExplosionEffect>();
+        explosion.AddComponent<DestroyWhenFinished>();
         AnimationClip clip = explosion.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip;
-        AnimationEvent ev = new AnimationEvent() { functionName = "EffectAnimationFinished", time = clip.length, intParameter = 1 };
+        AnimationEvent ev = new AnimationEvent() { functionName = "ExplosionAnimationFinished", time = clip.length, intParameter = 0 };
         clip.AddEvent(ev);
         MonoBehaviour.Destroy(BombObj);
     }

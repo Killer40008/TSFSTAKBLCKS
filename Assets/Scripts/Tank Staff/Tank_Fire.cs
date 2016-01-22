@@ -4,8 +4,6 @@ using System.Collections;
 public class Tank_Fire : MonoBehaviour
 {
 
-    GameObject game;
-    Rigidbody rigit;
 
     public void Fire()
     {
@@ -21,9 +19,7 @@ public class Tank_Fire : MonoBehaviour
 
             script.Bomb.Fire(this.transform.parent.gameObject);
             this.GetComponent<Burrell_Movement>().OnFire();
-            
-            Managers.TurnManager.SetTurnToNextTank();
-
+            this.enabled = false;
         }
     }
 }

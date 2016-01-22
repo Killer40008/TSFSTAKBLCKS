@@ -15,7 +15,7 @@ public class SpawnManager : MonoBehaviour
 
         for (int i = 0; i < Count; i++)
         {
-            float x = lastX += eachX;
+            float x = lastX += eachX + 1;
             float y = CalculateY(x);
             GameObject obj = Instantiate(TankPrefap,new Vector3(x,y,0), Quaternion.identity) as GameObject;
             SetPropertiesToTank(obj, i, playername, playerrand, playerscore);
@@ -51,7 +51,7 @@ public class SpawnManager : MonoBehaviour
     }
 
 
-    float CameraWidth
+    public static float CameraWidth
     {
         get
         {

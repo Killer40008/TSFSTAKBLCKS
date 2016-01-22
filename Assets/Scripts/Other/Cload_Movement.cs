@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Cload_Movement : MonoBehaviour
 {
-    const float CONSTRAIN = 9.5f;
+    const float CONSTRAIN = 17.11f;
     bool HasCreated = false;
     public Sprite[] sprites;
 

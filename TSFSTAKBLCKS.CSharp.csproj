@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>5.3.1f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -68,7 +70,7 @@
     <Compile Include="Assets\Scripts\Managers\TerrianManager.cs" />
     <Compile Include="Assets\Scripts\Managers\TurnManager.cs" />
     <Compile Include="Assets\Scripts\Other\Cload_Movement.cs" />
-    <Compile Include="Assets\Scripts\Other\DestroyExplosionEffect.cs" />
+    <Compile Include="Assets\Scripts\Other\DestroyWhenFinished.cs" />
     <Compile Include="Assets\Scripts\Other\Wind.cs" />
     <Compile Include="Assets\Scripts\Tank Staff\Burrell_Movement.cs" />
     <Compile Include="Assets\Scripts\Tank Staff\Tank.cs" />

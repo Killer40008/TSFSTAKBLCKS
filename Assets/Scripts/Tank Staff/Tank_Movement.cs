@@ -59,7 +59,8 @@ public class Tank_Movement : MonoBehaviour, IPointerDownHandler
 
     private void ClampPosition()
     {
-        float xClamped = Mathf.Clamp(this.transform.position.x, -8.184701f, 8.184701f);
+        float width = this.GetComponent<SpriteRenderer>().bounds.size.x / 2;
+        float xClamped = Mathf.Clamp(this.transform.position.x, (-SpawnManager.CameraWidth / 2) + width, (SpawnManager.CameraWidth / 2) - width);
 
         this.transform.position = new Vector3(xClamped, this.transform.position.y, this.transform.position.z);
             

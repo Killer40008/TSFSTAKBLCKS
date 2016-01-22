@@ -33,5 +33,19 @@ public class Normal_Bomb : MonoBehaviour
             Bomb.FloorHit(other.gameObject);
     }
 
+    void LateUpdate()
+    {
+        //destroy bomb when it's leaves the screen and set turn to the next tank
+        if (-(SpawnManager.CameraWidth / 2) >= this.transform.position.x ||
+            (SpawnManager.CameraWidth / 2) <= this.transform.position.x)
+        {
+            if (!Bomb.BombObjectDestroyed)
+            {
+                Destroy(this.gameObject);
+                Managers.TurnManager.SetTurnToNextTank();
+            }
+        }
+    }
+
     
 }
