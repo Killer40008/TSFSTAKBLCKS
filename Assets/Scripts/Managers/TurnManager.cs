@@ -14,27 +14,24 @@ public class TurnManager : MonoBehaviour
      public void Begin()
      {
          tanks = GameObject.FindGameObjectsWithTag("Player").OrderBy(x => Random.Range(0, 100)).ToArray();
+         int playerIndex = Random.Range(0, Managers.TanksCount);
+         PlayerTank = tanks[playerIndex];
+         Debug.Log(playerIndex);
          SetTurnToNextTank(true);
      }
 
 
-    public void SetTurnToNextTank(bool firstTime = false)
-    {
-        if (Selector == Managers.TanksCount)
-            Selector = 0;
+     public void SetTurnToNextTank(bool firstTime = false)
+     {
+         if (Selector == Managers.TanksCount)
+             Selector = 0;
 
-        TankEnabled(Selector, firstTime);
-        ShowArrowAboveTank(Selector);
+         TankEnabled(Selector, firstTime);
+         ShowArrowAboveTank(Selector);
+         SetController(Selector);
 
-        Selector++;
-    }
-
-    private void ShowArrowAboveTank(int index)
-    {
-        Vector3 tPos = tanks[index].transform.position;
-        GameObject arr = (GameObject)Instantiate(SelectorArrow, new Vector3(tPos.x, tPos.y + 3f, 0), Quaternion.identity);
-        arr.transform.SetParent(tanks[index].transform);
-    }
+         Selector++;
+     }
 
   
     public void TankEnabled(int index,bool firstTime = false)
@@ -47,10 +44,11 @@ public class TurnManager : MonoBehaviour
             {
                 var burrell = tanksToDisabled[i].transform.FindChild("Burrell").GetComponent<Burrell_Movement>();
                 TankFileAngleSlider.me.Value = burrell.rotatoinAngleZ / burrell.Speed;
+
                 tanksToDisabled[i].GetComponent<Tank>().Active(true);
                 tanksToDisabled[i].GetComponent<Rigidbody>().isKinematic = false;
                 tanksToDisabled[i].transform.FindChild("Burrell").GetComponent<Tank_Fire>().enabled = true;
-                PlayerTank = tanksToDisabled[i];
+
             }
             //disblead others
             else
@@ -62,6 +60,40 @@ public class TurnManager : MonoBehaviour
         }
 
         
+    }
+
+    private void SetController(int selector)
+    {
+        //set control either to Al system or to the HUD (if it's player tank)
+        if (tanks[selector] == PlayerTank)
+        {
+            ShowHUD(true);
+        }
+        else
+        {
+            ShowHUD(false);
+            tanks[selector].GetComponent<Tank_AI>().IsAlTank = true;
+            tanks[selector].GetComponent<Tank_AI>().AimBurrellToRandomTank(tanks.Where(t => t != tanks[selector]).ToArray());
+        }
+    }
+
+    private void ShowArrowAboveTank(int index)
+    {
+        GameObject.FindGameObjectsWithTag("Arrow").ToList().ForEach(a => Destroy(a));
+        Vector3 tPos = tanks[index].transform.position;
+        GameObject arr = (GameObject)Instantiate(SelectorArrow, new Vector3(tPos.x, tPos.y + 3f, 0), Quaternion.identity);
+        arr.transform.SetParent(tanks[index].transform);
+    }
+
+
+
+    void ShowHUD(bool show)
+    {
+
+        if (show)
+            GameObject.Find("Canvas").GetComponent<CanvasGroup>().alpha = 1;
+        else
+            GameObject.Find("Canvas").GetComponent<CanvasGroup>().alpha = 0;
     }
 
 }

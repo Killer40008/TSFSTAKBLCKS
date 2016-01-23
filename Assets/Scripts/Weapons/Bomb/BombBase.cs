@@ -27,6 +27,7 @@ public class BombData :  IBomb
     public AudioClip ExplosionClip { get; set; }
     public bool BombObjectDestroyed { private set; get; }
 
+
     public void PlayerHit(GameObject hit)
     {
 

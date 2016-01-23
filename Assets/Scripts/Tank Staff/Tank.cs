@@ -13,6 +13,7 @@ public class Tank : MonoBehaviour
             transform.FindChild("Burrell").FindChild("tank-01_up").GetComponent<SpriteRenderer>().color = value;
         }
     }
+
     public float Health; //100.0 to 0.0
     public float Power; //0 to 100;
     public bool CanDisabled;

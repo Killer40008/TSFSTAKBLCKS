@@ -67,7 +67,9 @@ public class TerrianManager : MonoBehaviour {
             gPiece.AddComponent<MeshFilter>().mesh = mesh;
             MeshRenderer rend = gPiece.AddComponent<MeshRenderer>();
             rend.sharedMaterials = materials; //assign material 
-            Bounds pieceBound = gPiece.AddComponent<MeshCollider>().bounds;
+            var collider = gPiece.AddComponent<MeshCollider>();
+            collider.convex = true;
+            Bounds pieceBound = collider.bounds;
             gPiece.transform.SetParent(this.gameObject.transform);
 
             //assign position

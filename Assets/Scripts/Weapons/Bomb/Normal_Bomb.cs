@@ -18,9 +18,10 @@ public class Normal_Bomb : MonoBehaviour
             Sprite = sprite,
             ExplosionPrefap = explosion,
             Mass = 0.5f,
-            FireSpeed = fireStrengh * 0.1f,
+            FireSpeed = fireStrengh,
         };
     }
+
     public BombData Bomb { get; set; }
 
 
@@ -28,9 +29,21 @@ public class Normal_Bomb : MonoBehaviour
     public void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "Player" && other.gameObject != Tank)
+        {
             Bomb.PlayerHit(other.gameObject);
+            SetAlTankHit(other.gameObject);
+        }
         else if (other.gameObject.tag == "Terrain")
+        {
             Bomb.FloorHit(other.gameObject);
+            SetAlTankHit(null);
+        }
+    }
+    void SetAlTankHit(GameObject hit)
+    {
+        if (Tank.GetComponent<Tank_AI>().IsAlTank)
+            Tank.GetComponent<Tank_AI>().LastTankHit = hit;
+
     }
 
     void LateUpdate()
@@ -41,6 +54,7 @@ public class Normal_Bomb : MonoBehaviour
         {
             if (!Bomb.BombObjectDestroyed)
             {
+                SetAlTankHit(null);
                 Destroy(this.gameObject);
                 Managers.TurnManager.SetTurnToNextTank();
             }
