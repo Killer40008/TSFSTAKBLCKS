@@ -44,11 +44,10 @@ class ColorRandom
     static ColorRandom()
     {
         listOFColor.Add(new Color32(0, 202, 255,255));
-        listOFColor.Add(new Color32(255, 0, 0, 255));
+        listOFColor.Add(new Color32(255, 140, 140, 255));
         listOFColor.Add(new Color32(241, 202, 0, 255));
         listOFColor.Add(new Color32(9, 255, 0, 255));
-        listOFColor.Add(new Color32(0, 44, 255, 255));
-        listOFColor.Add(new Color32(218, 0, 255, 255));
+        listOFColor.Add(new Color32(238, 141, 255, 255));
         orderedColors = listOFColor.Cast<Color32>().OrderBy(x => Random.Range(0, 100)).ToArray();
     }
 
