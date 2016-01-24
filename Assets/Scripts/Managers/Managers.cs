@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Managers : MonoBehaviour 
 {
-    public static readonly int TanksCount = 2;
+    public static readonly int TanksCount = 4;
     public static TerrianManager TerrianManager;
     public static SpawnManager SpawnManager;
     public static TurnManager TurnManager;

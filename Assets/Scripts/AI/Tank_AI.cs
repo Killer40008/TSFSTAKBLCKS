@@ -30,8 +30,7 @@ public class Tank_AI : MonoBehaviour
 
         float deltaX = virtulOtherTank.transform.position.x - virtulThisTank.transform.position.x;
         float deltaY = this.transform.position.y - otherTank.transform.position.y;
-        if (Mathf.Sign(this.transform.position.y - otherTank.transform.position.y) == -1)
-            deltaY = otherTank.transform.position.y - this.transform.position.y;
+
 
         float gravity = Mathf.Abs(Physics.gravity.y);
         float angle = 0;
@@ -51,7 +50,7 @@ public class Tank_AI : MonoBehaviour
         else
             strength = Mathf.Sqrt((Mathf.Abs(deltaX) * gravity) / Mathf.Sin(DegreeToRadian(angle * 2)));
 
-        strength -= 0.4f - (deltaY * 0.3f);
+        strength -= 0.4f + (deltaY);
 
         StartCoroutine(this.transform.FindChild("Burrell").GetComponent<Burrell_Movement>().
             MoveToAngleAndFire(Quaternion.Euler(0, 0, angle), strength));
