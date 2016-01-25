@@ -51,6 +51,9 @@
      <Compile Include="Assets\Scripts\Managers\SpawnManager.cs" />
      <Compile Include="Assets\Scripts\Managers\TerrianManager.cs" />
      <Compile Include="Assets\Scripts\Managers\TurnManager.cs" />
+     <Compile Include="Assets\Scripts\Menu\MenuBase.cs" />
+     <Compile Include="Assets\Scripts\Menu\Options.cs" />
+     <Compile Include="Assets\Scripts\Menu\SinglePlayer.cs" />
      <Compile Include="Assets\Scripts\Other\Cload_Movement.cs" />
      <Compile Include="Assets\Scripts\Other\DestroyWhenFinished.cs" />
      <Compile Include="Assets\Scripts\Other\Wind.cs" />
