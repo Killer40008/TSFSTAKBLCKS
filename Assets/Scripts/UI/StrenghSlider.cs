@@ -12,9 +12,49 @@ public class StrenghSlider : MonoBehaviour
         int current = (int)this.GetComponent<Slider>().value;
         if (current > 0)
         {
-            Strengh = current;
-            TurnManager.PlayerTank.transform.FindChild("Burrell").GetComponent<Tank_Fire>().Fire();
-            this.GetComponent<Slider>().value = 0;
+            if (!CheckIfWeaponsValid())
+            {
+                this.GetComponent<Slider>().value = 0;
+                return;
+            }
+            else
+            {
+                Strengh = current;
+                Managers.TurnManager.PlayerTank.transform.FindChild("Burrell").GetComponent<Tank_Fire>().Fire();
+                this.GetComponent<Slider>().value = 0;
+
+                //decrease count
+                if (Managers.WeaponManager.WeaponType != Weapons.Normal_Bomb)
+                    WeaponsClass.WeaponsQuantities[Managers.WeaponManager.WeaponType]--;
+
+                GameObject.Find("PlayerTimer").GetComponent<Timer>().StopTimer();
+            }
+
         }
+    }
+
+    private bool CheckIfWeaponsValid()
+    {
+        if (WeaponsClass.WeaponsQuantities[Managers.WeaponManager.WeaponType] == 0)
+        {
+            StartCoroutine(Highlight());
+            return false;
+        }
+        else return true;
+    }
+
+    private IEnumerator Highlight()
+    {
+        GameObject.Find("WeaponsCombo").GetComponent<Image>().color = new Color32(255, 0, 0, 20);
+        yield return new WaitForSeconds(0.4f);
+        GameObject.Find("WeaponsCombo").GetComponent<Image>().color = Color.white;
+        yield return new WaitForSeconds(0.4f);
+        GameObject.Find("WeaponsCombo").GetComponent<Image>().color = new Color32(255, 0, 0, 20);
+        yield return new WaitForSeconds(0.4f);
+        GameObject.Find("WeaponsCombo").GetComponent<Image>().color = Color.white;
+        yield return new WaitForSeconds(0.4f);
+        GameObject.Find("WeaponsCombo").GetComponent<Image>().color = new Color32(255, 0, 0, 20);
+        yield return new WaitForSeconds(0.4f);
+        GameObject.Find("WeaponsCombo").GetComponent<Image>().color = Color.white;
     }
 }

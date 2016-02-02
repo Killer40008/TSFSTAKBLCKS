@@ -4,6 +4,8 @@ using System.Linq;
 
 public class Tank : MonoBehaviour
 {
+
+    #region Color
     public Color32 Color 
     {
         get { return GetComponent<SpriteRenderer>().color; }
@@ -13,14 +15,13 @@ public class Tank : MonoBehaviour
             transform.FindChild("Burrell").FindChild("tank-01_up").GetComponent<SpriteRenderer>().color = value;
         }
     }
+    #endregion
 
     public float Health; //100.0 to 0.0
-    public float Power; //0 to 100;
+    public float Strength; //100 to 0.0;
     public bool CanDisabled;
     public Vector3 BurrellPosition;
     public Vector3 BurrellRotation;
-    public Sprite[] BombSprites;
-    public Object[] BombExplosions;
 
 
     //player
@@ -28,12 +29,18 @@ public class Tank : MonoBehaviour
     public int PlayerRank;
     public int PlayerScore;
 
+
+
+    #region Functions
+
     public void Active(bool active)
     {
         GetComponent<Tank_Movement>().enabled = active;
         transform.FindChild("Burrell").GetComponent<Burrell_Movement>().enabled = active;
 
     }
+
+    #endregion
 }
 
 

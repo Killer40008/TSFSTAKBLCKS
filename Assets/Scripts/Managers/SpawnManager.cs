@@ -7,6 +7,7 @@ public class SpawnManager : MonoBehaviour
     public Object TankPrefap;
     public Sprite[] BombSprites;
     public Object[] BombExplosions;
+    public float[] CustomPositionX = null;
 
     public void Spawn(int Count ,string playername, int playerrand, int playerscore)
     {
@@ -15,9 +16,11 @@ public class SpawnManager : MonoBehaviour
 
         for (int i = 0; i < Count; i++)
         {
-            float x = lastX += eachX + 1;
+            float x = CustomPositionX == null ? lastX += eachX + 1 : CustomPositionX[i];
             float y = CalculateY(x);
-            GameObject obj = Instantiate(TankPrefap,new Vector3(x,y,0), Quaternion.identity) as GameObject;
+
+
+            GameObject obj = Instantiate(TankPrefap, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
             SetPropertiesToTank(obj, i, playername, playerrand, playerscore);
         }
     }
@@ -29,12 +32,10 @@ public class SpawnManager : MonoBehaviour
         tData.Color = ColorRandom.GetRandomColors(counter);
         tData.CanDisabled = true;
         tData.Health = 100;
-        tData.Power = 50;
+        tData.Strength = 100;
         tData.PlayerName = "Mohammed";
         tData.PlayerRank = playerrand;
         tData.PlayerScore = playerscore;
-        tData.BombSprites = BombSprites;
-        tData.BombExplosions = BombExplosions;
         obj.GetComponent<Rigidbody>().centerOfMass = new Vector3(0f, -0.5f, 0);
     }
 

@@ -35,7 +35,7 @@ public class Burrell_Movement : MonoBehaviour
 
             this.transform.parent.GetComponent<Tank>().BurrellPosition = this.transform.FindChild("Fire").transform.position;
             this.transform.parent.GetComponent<Tank>().BurrellRotation = this.transform.eulerAngles;
-            this.transform.GetComponent<Tank_Fire>().Fire(strength);
+            this.transform.GetComponent<Tank_Fire>().Fire(strength,true);
         }
     }
 

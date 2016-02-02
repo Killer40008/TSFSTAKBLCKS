@@ -18,6 +18,6 @@ public class RightMovementButton : MonoBehaviour, IPointerUpHandler, IPointerDow
     public void OnUpdateSelected(BaseEventData eventData)
     {
         if (IsPressed)
-            TurnManager.PlayerTank.GetComponent<Tank_Movement>().MoveRight();
+            Managers.TurnManager.PlayerTank.GetComponent<Tank_Movement>().MoveRight();
     }
 }

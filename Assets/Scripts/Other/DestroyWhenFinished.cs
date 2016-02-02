@@ -19,4 +19,8 @@ public class DestroyWhenFinished : MonoBehaviour
     {
         Destroy(this.transform.parent.gameObject);
     }
+    public void DestroyAnimationFinished()
+    {
+        Destroy(this.transform.gameObject);
+    }
 }

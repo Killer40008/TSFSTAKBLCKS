@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class Tank_AI : MonoBehaviour 
 {
@@ -17,9 +18,9 @@ public class Tank_AI : MonoBehaviour
         GameObject virtulThisTank = CreateVirtualTank(this.transform.position);
         GameObject virtulOtherTank = null, otherTank = null;
 
-        if (LastTankHit == null)
+        if (LastTankHit == null || LastTankHit.activeSelf == false)
         {
-            otherTank = tanks[Random.Range(0, tanks.Length)];
+            otherTank = tanks.Where(t => t.activeSelf == true).ToArray().OrderBy(x => Random.Range(0, 100)).FirstOrDefault();
             virtulOtherTank = CreateVirtualTank(otherTank.transform.position);
         }
         else
@@ -50,7 +51,7 @@ public class Tank_AI : MonoBehaviour
         else
             strength = Mathf.Sqrt((Mathf.Abs(deltaX) * gravity) / Mathf.Sin(DegreeToRadian(angle * 2)));
 
-        strength -= 0.4f + (deltaY);
+        strength -= 0.4f + (deltaY * 0.8f);
 
         StartCoroutine(this.transform.FindChild("Burrell").GetComponent<Burrell_Movement>().
             MoveToAngleAndFire(Quaternion.Euler(0, 0, angle), strength));

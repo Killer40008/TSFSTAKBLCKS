@@ -5,39 +5,26 @@ public class Tank_Fire : MonoBehaviour
 {
 
 
-    public void Fire()
+    public void Fire(float strength = 0, bool AI = false)
     {
         if (enabled)
         {
-            GameObject bomb = new GameObject();
-            Normal_Bomb script = bomb.AddComponent<Normal_Bomb>();
+            if (strength == 0) strength = StrenghSlider.Strengh;
 
-            Sprite[] sprites = this.transform.parent.GetComponent<Tank>().BombSprites;
-            Object[] Explosions = this.transform.parent.GetComponent<Tank>().BombExplosions;
-            script.Create(bomb, sprites[0], Explosions[0], StrenghSlider.Strengh, this.transform.parent.gameObject);
+            Managers.WeaponManager.GenerateGameObject();
+            IWeapon weapon = (IWeapon)WeaponsCombo.CurrentWeapon;
+            if (!AI) weapon.Drag = (100 - Managers.DamageManager.GetStrength(this.transform.parent.gameObject)) / 100;
+
+            Sprite[] sprites = Managers.SpawnManager.BombSprites;
+            Object[] Explosions = Managers.SpawnManager.BombExplosions;
+            weapon.Create(sprites[weapon.GameObjectSpriteIndex], Explosions[weapon.ExplosionSpriteIndex],
+                strength, this.transform.parent.gameObject);
 
 
-            script.Bomb.Fire(this.transform.parent.gameObject);
+            weapon.Fire(this.transform.parent.gameObject);
             this.GetComponent<Burrell_Movement>().OnFire();
             this.enabled = false;
         }
     }
 
-    public void Fire(float strength)
-    {
-        if (enabled)
-        {
-            GameObject bomb = new GameObject();
-            Normal_Bomb script = bomb.AddComponent<Normal_Bomb>();
-
-            Sprite[] sprites = this.transform.parent.GetComponent<Tank>().BombSprites;
-            Object[] Explosions = this.transform.parent.GetComponent<Tank>().BombExplosions;
-            script.Create(bomb, sprites[0], Explosions[0], strength, this.transform.parent.gameObject);
-
-
-            script.Bomb.Fire(this.transform.parent.gameObject);
-            this.GetComponent<Burrell_Movement>().OnFire();
-            this.enabled = false;
-        }
-    }
 }

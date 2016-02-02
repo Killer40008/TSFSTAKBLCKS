@@ -18,6 +18,6 @@ public class LeftMovementButton : MonoBehaviour, IPointerUpHandler, IPointerDown
     public void OnUpdateSelected(BaseEventData eventData)
     {
         if (IsPressed)
-         TurnManager.PlayerTank.GetComponent<Tank_Movement>().MoveLeft();
+            Managers.TurnManager.PlayerTank.GetComponent<Tank_Movement>().MoveLeft();
     }
 }

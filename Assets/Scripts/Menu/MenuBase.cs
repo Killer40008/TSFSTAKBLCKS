@@ -6,7 +6,7 @@ public class MenuBase : MonoBehaviour {
     public static void BringToFront(GameObject panel)
     {
         panel.transform.SetParent(null, false);
-        panel.transform.SetParent(GameObject.Find("Canvas").transform, true);
+        panel.transform.SetParent(GameObject.Find("Canvas").transform, false);
         panel.transform.localPosition = Vector3.zero;
     }
 

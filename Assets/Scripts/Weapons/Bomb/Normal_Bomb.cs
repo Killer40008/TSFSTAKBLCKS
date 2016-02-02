@@ -1,44 +1,54 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Normal_Bomb : MonoBehaviour
+public class Normal_Bomb : MonoBehaviour , IWeapon
 {
 
     GameObject Tank;
 
-   public void Create(GameObject bombObj, Sprite sprite, Object explosion ,float fireStrengh, GameObject tank)
+    public void Create(Sprite sprite, Object explosion, float fireStrengh, GameObject tank)
     {
         Tank = tank;
-        Bomb = new BombData()
+        Bomb = new WeaponData()
         {
             Damage = 20,
-            BombObj = bombObj,
-            SizeInital = new Vector3(0.5f, 0.5f, 0.5f),
-            SizeFinal = new Vector3(0.5f, 0.5f, 0.5f),
+            Strength = 10,
+            BombObj = this.gameObject,Drag = this.Drag,
+            SizeInital = new Vector3(0.7f, 0.7f, 0.7f),
+            SizeFinal = new Vector3(0.7f, 0.7f, 0.7f),
+            ExplosionSize = new Vector3(0.25f,0.25f,0.25f),
+            IntialPeriod = 0.5f,
+            SpriteColor = Color.black,
             Sprite = sprite,
             ExplosionPrefap = explosion,
             Mass = 0.5f,
             FireSpeed = fireStrengh,
         };
+        StartCoroutine(Bomb.InitalPeriodEnd());
     }
 
-    public BombData Bomb { get; set; }
+    public WeaponData Bomb { get; set; }
 
 
-
+    bool isCollide = false;
     public void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Player" && other.gameObject != Tank)
+        if (!isCollide)
         {
-            Bomb.PlayerHit(other.gameObject);
-            SetAlTankHit(other.gameObject);
-        }
-        else if (other.gameObject.tag == "Terrain")
-        {
-            Bomb.FloorHit(other.gameObject);
-            SetAlTankHit(null);
+            if (other.gameObject.tag == "Player")
+            {
+                Bomb.PlayerHit(other.gameObject);
+                SetAlTankHit(other.gameObject);
+            }
+            else if (other.gameObject.tag == "Terrain" || other.gameObject.tag == "Pistons" || other.gameObject.tag == "ForestFloor")
+            {
+                Bomb.FloorHit(other.gameObject);
+                SetAlTankHit(null);
+            }
+            isCollide = true;
         }
     }
+
     void SetAlTankHit(GameObject hit)
     {
         if (Tank.GetComponent<Tank_AI>().IsAlTank)
@@ -61,5 +71,24 @@ public class Normal_Bomb : MonoBehaviour
         }
     }
 
-    
+
+
+    public int ExplosionSpriteIndex
+    {
+        get { return 0; }
+    }
+
+    public int GameObjectSpriteIndex
+    {
+        get { return 0; }
+    }
+
+    public GameObject WeaponObj { get; set; }
+
+    public void Fire(GameObject tank)
+    {
+        Bomb.Fire(tank);
+    }
+
+    public float Drag { get; set; }
 }

@@ -3,41 +3,53 @@ using System.Collections;
 using System.Linq;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-
+using System.Collections.Generic;
 public class TurnManager : MonoBehaviour 
 {
-    public static GameObject PlayerTank;
+    public GameObject PlayerTank;
     public Object SelectorArrow;
-     GameObject[] tanks;
-     int Selector = 0;
+    public List<GameObject> tanks;
+    public int Selector = 0;
 
      public void Begin()
      {
-         tanks = GameObject.FindGameObjectsWithTag("Player").OrderBy(x => Random.Range(0, 100)).ToArray();
-         int playerIndex = Random.Range(0, Managers.TanksCount);
+         tanks.AddRange(GameObject.FindGameObjectsWithTag("Player").OrderBy(x => Random.Range(0, 100)).ToArray());
+         int playerIndex = Random.Range(0, Managers.TanksStaringCount);
          PlayerTank = tanks[playerIndex];
-         Debug.Log(playerIndex);
+
          SetTurnToNextTank(true);
      }
-
+    
 
      public void SetTurnToNextTank(bool firstTime = false)
      {
-         if (Selector == Managers.TanksCount)
-             Selector = 0;
+         if (tanks.Count(t => t.activeSelf == true) > 1)
+         {
+             //reset selector
+             if (Selector >= tanks.Count)
+                 Selector = 0;
 
-         TankEnabled(Selector, firstTime);
-         ShowArrowAboveTank(Selector);
-         SetController(Selector);
+             if (tanks[Selector].activeSelf)
+             {
 
-         Selector++;
+                 TankEnabled(Selector, firstTime);
+                 ShowArrowAboveTank(Selector);
+                 SetController(Selector);
+                 Selector++;
+             }
+             else
+             {
+                 Selector++;
+                 SetTurnToNextTank();
+             }
+         }
      }
 
   
     public void TankEnabled(int index,bool firstTime = false)
     {
         GameObject[] tanksToDisabled =   tanks.Where(t => t.GetComponent<Tank>().CanDisabled == true).ToArray();
-        for (int i = 0; i < tanks.Length; i++)
+        for (int i = 0; i < tanks.Count; i++)
         {
             //active tank by index
             if (i == index)
@@ -54,7 +66,10 @@ public class TurnManager : MonoBehaviour
             else
             {
                 tanksToDisabled[i].GetComponent<Tank>().Active(false);
-                if (!firstTime) tanksToDisabled[i].GetComponent<Rigidbody>().isKinematic = true;
+
+                if (!firstTime && Managers.MapsManager.CurrentMap == MapManager.Maps.Volcano)
+                    tanksToDisabled[i].GetComponent<Rigidbody>().isKinematic = true;
+                
                 tanksToDisabled[i].transform.FindChild("Burrell").GetComponent<Tank_Fire>().enabled = false;
             }
         }
@@ -68,6 +83,10 @@ public class TurnManager : MonoBehaviour
         if (tanks[selector] == PlayerTank)
         {
             ShowHUD(true);
+            Managers.DamageManager.CalculatePlayerHealthInUI();
+            Managers.DamageManager.CalculatePlayerStrenghInUI();
+            Managers.WeaponManager.DrawWeaponInfoInUI();
+            GameObject.Find("PlayerTimer").GetComponent<Timer>().StartTimer();
         }
         else
         {

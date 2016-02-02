@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TerrianManager : MonoBehaviour {
+public class TerrianManager : MonoBehaviour
+{
 
 
     public bool Slop = true;
@@ -13,7 +14,7 @@ public class TerrianManager : MonoBehaviour {
     public Material BodyMaterial;
     public Vector3 SizeOfPiece;
 
-	// Use this for initialization
+    // Use this for initialization
     public void Create()
     {
         if (!Slop)
@@ -52,8 +53,8 @@ public class TerrianManager : MonoBehaviour {
 
             if (Slop)
             {
-                    angle = Mathf.Sin((i / Angle)) * (random);
-                    angle = Mathf.Clamp(angle, -0.6f, 1.2f);
+                angle = Mathf.Sin((i / Angle)) * (random);
+                angle = Mathf.Clamp(angle, -0.6f, 1.2f);
             }
 
 
@@ -83,7 +84,7 @@ public class TerrianManager : MonoBehaviour {
             {
                 counter = 0;
                 random = Random.Range(0.1f, 2.5f);
-               // random = 0.1f;
+                // random = 0.1f;
             }
         }
 
@@ -91,7 +92,7 @@ public class TerrianManager : MonoBehaviour {
         if (angle == 0)
             this.transform.position = new Vector3(-21.5f, -6.85f, 0);
 
-       else if (Angle <= 10)
+        else if (Angle <= 10)
             this.transform.position = new Vector3(-21.5f, -8.6f, 0);
         else if (Angle < 15)
             this.transform.position = new Vector3(-27.2f, -8.58f, 0);
@@ -101,14 +102,14 @@ public class TerrianManager : MonoBehaviour {
             this.transform.position = new Vector3(-19.7f, -10f, 0);
     }
 
-    
+
 
 
 
     static class Cupe
     {
 
-        public static void Create(float width, int height, int depth, float sideHeight , float bodyHeight,ref Mesh mesh)
+        public static void Create(float width, int height, int depth, float sideHeight, float bodyHeight, ref Mesh mesh)
         {
 
             //vertices
@@ -135,7 +136,7 @@ public class TerrianManager : MonoBehaviour {
             new Vector3(width * .5f, (-height * .5f + sideHeight - bodyHeight),-depth * .5f), //3
 
         };
-            
+
 
 
             //triangles //MUST BE IN CLOCK-WISE
