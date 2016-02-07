@@ -6,6 +6,7 @@ public class Tank : MonoBehaviour
 {
 
     #region Color
+    public Color OrginalColor { get; set; }
     public Color32 Color 
     {
         get { return GetComponent<SpriteRenderer>().color; }

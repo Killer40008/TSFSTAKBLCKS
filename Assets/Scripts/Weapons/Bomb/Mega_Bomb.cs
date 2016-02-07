@@ -15,36 +15,25 @@ public class Mega_Bomb : MonoBehaviour, IWeapon
            BombObj = this.gameObject,Drag = this.Drag,
             SizeInital = new Vector3(0.1523757f, 0.1523757f, 0.1523757f),
             SizeFinal = new Vector3(0.25f, 0.25f, 0.25f),
+            ExplosionSize = new Vector3(1.5f, 1.5f, 1.5f),
             IntialPeriod = 0.5f,
+            RadiusOfExplosion = 1.6f,
             SpriteColor = Color.white,
             Sprite = sprite,
             ExplosionPrefap = explosion,
             Mass = 0.5f,
             FireSpeed = fireStrengh,
         };
-        StartCoroutine(Bomb.InitalPeriodEnd());
+        
     }
 
     public WeaponData Bomb { get; set; }
 
 
-    bool isCollide = false;
     public void OnCollisionEnter(Collision other)
     {
-        if (!isCollide)
-        {
-            if (other.gameObject.tag == "Player")
-            {
-                Bomb.PlayerHit(other.gameObject);
-                SetAlTankHit(other.gameObject);
-            }
-            else if (other.gameObject.tag == "Terrain" || other.gameObject.tag == "Pistons" || other.gameObject.tag == "ForestFloor")
-            {
-                Bomb.FloorHit(other.gameObject);
-                SetAlTankHit(null);
-            }
-            isCollide = true;
-        }
+        Bomb.OnCollide(Tank, other);
+
     }
     void SetAlTankHit(GameObject hit)
     {
@@ -72,7 +61,7 @@ public class Mega_Bomb : MonoBehaviour, IWeapon
 
     public int ExplosionSpriteIndex
     {
-        get { return 0; }
+        get { return 1; }
     }
 
     public int GameObjectSpriteIndex

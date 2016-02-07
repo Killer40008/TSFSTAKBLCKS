@@ -17,6 +17,7 @@ public class Large_Bomb : MonoBehaviour , IWeapon
             SizeInital = new Vector3(0.06799684f, 0.06799684f, 0.06799684f),
             SizeFinal = new Vector3(0.15f, 0.15f, 0.15f),
             ExplosionSize = new Vector3(1f, 1f, 1f),
+            RadiusOfExplosion = 1f,
             IntialPeriod = 0.5f,
             SpriteColor = new Color32(191, 0, 0, 255),
             Sprite = sprite,
@@ -24,30 +25,17 @@ public class Large_Bomb : MonoBehaviour , IWeapon
             Mass = 0.5f,
             FireSpeed = fireStrengh,
         };
-        StartCoroutine(Bomb.InitalPeriodEnd());
+        
     }
 
     public WeaponData Bomb { get; set; }
 
 
 
-    bool isCollide = false;
     public void OnCollisionEnter(Collision other)
     {
-        if (!isCollide)
-        {
-            if (other.gameObject.tag == "Player")
-            {
-                Bomb.PlayerHit(other.gameObject);
-                SetAlTankHit(other.gameObject);
-            }
-            else if (other.gameObject.tag == "Terrain" || other.gameObject.tag == "Pistons" || other.gameObject.tag == "ForestFloor")
-            {
-                Bomb.FloorHit(other.gameObject);
-                SetAlTankHit(null);
-            }
-            isCollide = true;
-        }
+        Bomb.OnCollide(Tank, other);
+
     }
     void SetAlTankHit(GameObject hit)
     {

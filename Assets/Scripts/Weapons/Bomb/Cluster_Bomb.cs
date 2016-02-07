@@ -24,7 +24,7 @@ public class Cluster_Bomb : MonoBehaviour, IWeapon
             Mass = 0.5f,
             FireSpeed = fireStrengh,
         };
-        StartCoroutine(Bomb.InitalPeriodEnd());
+        
     }
 
     public WeaponData Bomb { get; set; }
@@ -33,19 +33,12 @@ public class Cluster_Bomb : MonoBehaviour, IWeapon
 
     public void OnCollisionEnter(Collision other)
     {
-        Debug.Log(other.gameObject.name);
-        if (other.gameObject.tag == "Player")
-        {
-            Bomb.PlayerHit(other.gameObject);
-            SetAlTankHit(other.gameObject);
-        }
-        else if (other.gameObject.tag == "Terrain" || other.gameObject.tag == "Pistons" || other.gameObject.tag == "ForestFloor")
-        {
-            
-           // Bomb.FloorHit(other.gameObject);
-            //SetAlTankHit(null);
-        }
+        Bomb.OnCollide(Tank, other);
+
     }
+
+
+
     void SetAlTankHit(GameObject hit)
     {
         if (Tank.GetComponent<Tank_AI>().IsAlTank)

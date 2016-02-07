@@ -10,19 +10,22 @@ public class Slided_Bomb : MonoBehaviour, IWeapon
         Tank = tank;
         Bomb = new WeaponData()
         {
-            Damage = 20,
-            Strength = 10,
-           BombObj = this.gameObject,Drag = this.Drag,
+            Damage = 80,
+            Strength = 80,
+            BombObj = this.gameObject,
+            Drag = this.Drag,
             SizeInital = new Vector3(0.1523757f, 0.1523757f, 0.1523757f),
             SizeFinal = new Vector3(0.25f, 0.25f, 0.25f),
+            ExplosionSize = new Vector3(1.5f, 1.5f, 1.5f),
             IntialPeriod = 0.5f,
+            RadiusOfExplosion = 1.6f,
             SpriteColor = Color.white,
             Sprite = sprite,
             ExplosionPrefap = explosion,
             Mass = 0.5f,
             FireSpeed = fireStrengh,
         };
-        StartCoroutine(Bomb.InitalPeriodEnd());
+        
     }
 
     public WeaponData Bomb { get; set; }
@@ -31,18 +34,30 @@ public class Slided_Bomb : MonoBehaviour, IWeapon
 
     public void OnCollisionEnter(Collision other)
     {
-        Debug.Log(other.gameObject.name);
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Terrain" || other.gameObject.tag == "Pistons" || other.gameObject.tag == "ForestFloor")
         {
-            Bomb.PlayerHit(other.gameObject);
-            SetAlTankHit(other.gameObject);
+            StartCoroutine(MoveToWindDirection());
+            StartCoroutine(Timeout(other));
         }
-        else if (other.gameObject.tag == "Terrain" || other.gameObject.tag == "Pistons" || other.gameObject.tag == "ForestFloor")
+        else
         {
-            Bomb.FloorHit(other.gameObject);
-            SetAlTankHit(null);
+            StopCoroutine(MoveToWindDirection());
+            Bomb.OnCollide(Tank, other);
         }
     }
+
+    private IEnumerator MoveToWindDirection()
+    {
+        yield return new WaitForFixedUpdate();
+        GetComponent<Rigidbody>().velocity = new Vector3(2f * -Wind.WindDirection, 0, 0);
+    }
+
+    private IEnumerator Timeout(Collision other)
+    {
+        yield return new WaitForSeconds(1);
+        Bomb.OnCollide(Tank, other);
+    }
+
     void SetAlTankHit(GameObject hit)
     {
         if (Tank.GetComponent<Tank_AI>().IsAlTank)
@@ -69,7 +84,7 @@ public class Slided_Bomb : MonoBehaviour, IWeapon
 
     public int ExplosionSpriteIndex
     {
-        get { return 0; }
+        get { return 1; }
     }
 
     public int GameObjectSpriteIndex

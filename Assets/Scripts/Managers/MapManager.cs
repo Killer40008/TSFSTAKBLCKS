@@ -25,7 +25,11 @@ public class MapManager : MonoBehaviour
                 GameObject.Find("BackGround").GetComponent<SpriteRenderer>().sprite = Background_Forest;
                 transform.FindChild("Forest").gameObject.SetActive(true);
                 float[] xPos = GetChilds(transform.FindChild("Forest"), "Pistons").Select(g => g.transform.position.x).ToArray();
-                Managers.SpawnManager.CustomPositionX = xPos;
+                Managers.SpawnManager.CustomPositionX.AddRange(xPos);
+                break;
+            case Maps.Ice:
+                GameObject.Find("BackGround").GetComponent<SpriteRenderer>().sprite = Background_Ice;
+                transform.FindChild("Ice").gameObject.SetActive(true);
                 break;
         }
 

@@ -7,7 +7,8 @@ public class SpawnManager : MonoBehaviour
     public Object TankPrefap;
     public Sprite[] BombSprites;
     public Object[] BombExplosions;
-    public float[] CustomPositionX = null;
+    public Object RocketEffect;
+    public ArrayList CustomPositionX = new ArrayList();
 
     public void Spawn(int Count ,string playername, int playerrand, int playerscore)
     {
@@ -16,7 +17,7 @@ public class SpawnManager : MonoBehaviour
 
         for (int i = 0; i < Count; i++)
         {
-            float x = CustomPositionX == null ? lastX += eachX + 1 : CustomPositionX[i];
+            float x = (float)CustomPositionX.Count == 0f ? lastX += eachX + 1 : (float)CustomPositionX[i];
             float y = CalculateY(x);
 
 
@@ -27,9 +28,10 @@ public class SpawnManager : MonoBehaviour
 
     private void SetPropertiesToTank(GameObject obj, int counter, string playername, int playerrand, int playerscore)
     {
+        Color color = ColorRandom.GetRandomColors(counter);
         obj.tag = "Player";
         Tank tData = obj.GetComponent<Tank>();
-        tData.Color = ColorRandom.GetRandomColors(counter);
+        tData.Color = tData.OrginalColor = color;
         tData.CanDisabled = true;
         tData.Health = 100;
         tData.Strength = 100;

@@ -8,40 +8,33 @@ public class NeclearBomb : MonoBehaviour, IWeapon {
     public void Create( Sprite sprite, Object explosion, float fireStrengh, GameObject tank)
     {
         Tank = tank;
+        this.transform.eulerAngles = new Vector3(0, 0, 315);
         Bomb = new WeaponData()
         {
             Damage = 100,
             Strength = 100,
-           BombObj = this.gameObject,Drag = this.Drag,
+            BombObj = this.gameObject,Drag = this.Drag,
             SizeInital = new Vector3(0.1523757f, 0.1523757f, 0.1523757f),
-            SizeFinal = new Vector3(0.25f, 0.25f, 0.25f),
+            SizeFinal = new Vector3(0.5f, 0.5f, 0.5f),
+            ExplosionSize = new Vector3(1,1,1),
+            RadiusOfExplosion = 4f,
             IntialPeriod = 0.5f,
-            SpriteColor = Color.black,
+            SpriteColor = Color.white,
             Sprite = sprite,
             ExplosionPrefap = explosion,
             Mass = 0.5f,
             FireSpeed = fireStrengh,
         };
-        StartCoroutine(Bomb.InitalPeriodEnd());
+        
     }
 
     public WeaponData Bomb { get; set; }
 
 
-
     public void OnCollisionEnter(Collision other)
     {
-        Debug.Log(other.gameObject.name);
-        if (other.gameObject.tag == "Player")
-        {
-            Bomb.PlayerHit(other.gameObject);
-            SetAlTankHit(other.gameObject);
-        }
-        else if (other.gameObject.tag == "Terrain" || other.gameObject.tag == "Pistons" || other.gameObject.tag == "ForestFloor")
-        {
-            Bomb.FloorHit(other.gameObject);
-            SetAlTankHit(null);
-        }
+        Bomb.OnCollide(Tank, other);
+
     }
     void SetAlTankHit(GameObject hit)
     {
@@ -49,6 +42,10 @@ public class NeclearBomb : MonoBehaviour, IWeapon {
             Tank.GetComponent<Tank_AI>().LastTankHit = hit;
 
     }
+
+
+  
+
 
     void LateUpdate()
     {
@@ -69,12 +66,12 @@ public class NeclearBomb : MonoBehaviour, IWeapon {
 
     public int ExplosionSpriteIndex
     {
-        get { return 0; }
+        get { return 2; }
     }
 
     public int GameObjectSpriteIndex
     {
-        get { return 0; }
+        get { return 3; }
     }
 
     public GameObject WeaponObj { get; set; }

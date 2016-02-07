@@ -15,7 +15,8 @@ public class TurnManager : MonoBehaviour
      {
          tanks.AddRange(GameObject.FindGameObjectsWithTag("Player").OrderBy(x => Random.Range(0, 100)).ToArray());
          int playerIndex = Random.Range(0, Managers.TanksStaringCount);
-         PlayerTank = tanks[playerIndex];
+        // PlayerTank = tanks[playerIndex];
+         PlayerTank = tanks[0];
 
          SetTurnToNextTank(true);
      }
@@ -79,14 +80,22 @@ public class TurnManager : MonoBehaviour
 
     private void SetController(int selector)
     {
+
+        //deactive focus icon 
+        Managers.TurnManager.tanks.Where(t => t.activeSelf == true).ToList().ForEach(e => e.GetComponent<Focus>().DeActive());
+
         //set control either to Al system or to the HUD (if it's player tank)
         if (tanks[selector] == PlayerTank)
         {
             ShowHUD(true);
+            Managers.ShowSliders(true);
             Managers.DamageManager.CalculatePlayerHealthInUI();
             Managers.DamageManager.CalculatePlayerStrenghInUI();
             Managers.WeaponManager.DrawWeaponInfoInUI();
+            if (Managers.WeaponManager.lastButton != null)
+                Managers.WeaponManager.OnWeaponsSelected(Managers.WeaponManager.lastButton);
             GameObject.Find("PlayerTimer").GetComponent<Timer>().StartTimer();
+            
         }
         else
         {

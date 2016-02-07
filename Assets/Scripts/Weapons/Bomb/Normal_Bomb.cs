@@ -16,7 +16,7 @@ public class Normal_Bomb : MonoBehaviour , IWeapon
             BombObj = this.gameObject,Drag = this.Drag,
             SizeInital = new Vector3(0.7f, 0.7f, 0.7f),
             SizeFinal = new Vector3(0.7f, 0.7f, 0.7f),
-            ExplosionSize = new Vector3(0.25f,0.25f,0.25f),
+            ExplosionSize = new Vector3(0.3f,0.3f,0.3f),
             IntialPeriod = 0.5f,
             SpriteColor = Color.black,
             Sprite = sprite,
@@ -24,30 +24,21 @@ public class Normal_Bomb : MonoBehaviour , IWeapon
             Mass = 0.5f,
             FireSpeed = fireStrengh,
         };
-        StartCoroutine(Bomb.InitalPeriodEnd());
+        
     }
 
     public WeaponData Bomb { get; set; }
 
 
-    bool isCollide = false;
+
     public void OnCollisionEnter(Collision other)
     {
-        if (!isCollide)
-        {
-            if (other.gameObject.tag == "Player")
-            {
-                Bomb.PlayerHit(other.gameObject);
-                SetAlTankHit(other.gameObject);
-            }
-            else if (other.gameObject.tag == "Terrain" || other.gameObject.tag == "Pistons" || other.gameObject.tag == "ForestFloor")
-            {
-                Bomb.FloorHit(other.gameObject);
-                SetAlTankHit(null);
-            }
-            isCollide = true;
-        }
+        Bomb.OnCollide(Tank, other);
+  
     }
+
+
+
 
     void SetAlTankHit(GameObject hit)
     {

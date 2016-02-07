@@ -39,6 +39,21 @@ public class Burrell_Movement : MonoBehaviour
         }
     }
 
+    public IEnumerator MoveToAngle(Quaternion angle)
+    {
+        this.enabled = false;
+        while (Mathf.Abs(this.transform.rotation.eulerAngles.z - angle.eulerAngles.z) >= 0.5f)
+        {
+            yield return new WaitForFixedUpdate();
+            this.transform.rotation = Quaternion.Slerp(transform.rotation, angle, Time.deltaTime * 2);
+            if (this.transform.localEulerAngles.z >= 180 || this.transform.localEulerAngles.z <= 0) break;
+        }
+
+        this.transform.parent.GetComponent<Tank>().BurrellPosition = this.transform.FindChild("Fire").transform.position;
+        this.transform.parent.GetComponent<Tank>().BurrellRotation = this.transform.eulerAngles;
+
+    }
+
 
     public void OnFire()
     {

@@ -5,11 +5,11 @@ public class DestroyWhenFinished : MonoBehaviour
 {
     private bool _localDestroyed = false;
 
-    public void ExplosionAnimationFinished(int nothing)
+    public void ExplosionAnimationFinished(int destroy)
     {
         if (!_localDestroyed)
         {
-            Destroy(this.gameObject);
+           if (destroy == 1) Destroy(this.gameObject);
             Managers.TurnManager.SetTurnToNextTank();
             _localDestroyed = true;
         }

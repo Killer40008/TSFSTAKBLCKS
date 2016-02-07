@@ -20,14 +20,6 @@ public class StrenghSlider : MonoBehaviour
             else
             {
                 Strengh = current;
-                Managers.TurnManager.PlayerTank.transform.FindChild("Burrell").GetComponent<Tank_Fire>().Fire();
-                this.GetComponent<Slider>().value = 0;
-
-                //decrease count
-                if (Managers.WeaponManager.WeaponType != Weapons.Normal_Bomb)
-                    WeaponsClass.WeaponsQuantities[Managers.WeaponManager.WeaponType]--;
-
-                GameObject.Find("PlayerTimer").GetComponent<Timer>().StopTimer();
             }
 
         }

@@ -14,9 +14,12 @@ public class Managers : MonoBehaviour
     public static DestroyManager DestroyManager;
     public static WeaponsCombo WeaponManager;
     public static MapManager MapsManager;
+    public static Managers Me;
 
     void Start()
     {
+
+        Me = this;
         TerrianManager = transform.FindChild("TerrainManager").GetComponent<TerrianManager>();
         SpawnManager = transform.FindChild("SpawnManager").GetComponent<SpawnManager>();
         TurnManager = transform.FindChild("TurnManager").GetComponent<TurnManager>();
@@ -26,14 +29,24 @@ public class Managers : MonoBehaviour
         WeaponManager = transform.FindChild("WeaponsManager").GetComponent<WeaponsCombo>();
         MapsManager = transform.FindChild("MapManager").GetComponent<MapManager>();
 
-        MapsManager.StartMap(MapManager.Maps.Forest);
+        MapsManager.StartMap(MapManager.Maps.Volcano);
         SpawnManager.Spawn(TanksStaringCount, "", 1, 2);
         TurnManager.Begin();
         Wind.StartWind();
         WeaponsClass.InitiallizeWeaponsQuantities();
 
+        //begin clouds
         GameObject.Find("Cloud").GetComponent<Cload_Movement>().Begin();
         GameObject.Find("Cloud (1)").GetComponent<Cload_Movement>().Begin();
         GameObject.Find("Cloud (2)").GetComponent<Cload_Movement>().Begin();
+    }
+
+
+    public static void ShowSliders(bool active)
+    {
+        GameObject.Find("StrenghSlider").GetComponent<CanvasGroup>().alpha = System.Convert.ToInt32(active);
+        GameObject.Find("StrenghSlider").GetComponent<CanvasGroup>().interactable = active;
+        GameObject.Find("AngleSlider").GetComponent<CanvasGroup>().alpha = System.Convert.ToInt32(active);
+        GameObject.Find("AngleSlider").GetComponent<CanvasGroup>().interactable = active;
     }
 }
