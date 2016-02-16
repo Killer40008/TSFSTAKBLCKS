@@ -20,7 +20,9 @@ public class Tank : MonoBehaviour
 
     public float Health; //100.0 to 0.0
     public float Strength; //100 to 0.0;
+    public float Oil;
     public bool CanDisabled;
+    public bool ArmorActivate;
     public Vector3 BurrellPosition;
     public Vector3 BurrellRotation;
 

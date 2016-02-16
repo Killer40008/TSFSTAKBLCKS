@@ -21,6 +21,8 @@ public class Laser : MonoBehaviour, IWeapon
             ExplosionPrefap = explosion,
             Mass = 0.5f,
             FireSpeed = fireStrengh,
+            SoruceTank = tank
+
         };
         
     }
@@ -44,14 +46,13 @@ public class Laser : MonoBehaviour, IWeapon
     void LateUpdate()
     {
         //destroy bomb when it's leaves the screen and set turn to the next tank
-        if (-(SpawnManager.CameraWidth / 2) >= this.transform.position.x ||
-            (SpawnManager.CameraWidth / 2) <= this.transform.position.x)
+        if (-(SpawnManager.CameraWidth / 2) >= this.transform.position.x + 1 ||
+            (SpawnManager.CameraWidth / 2) <= this.transform.position.x - 1)
         {
             if (!Bomb.BombObjectDestroyed)
             {
                 SetAlTankHit(null);
-                Destroy(this.gameObject);
-                Managers.TurnManager.SetTurnToNextTank();
+                Bomb.PlayExplosionEffect();
             }
         }
     }
@@ -74,5 +75,9 @@ public class Laser : MonoBehaviour, IWeapon
     public void Fire(GameObject tank)
     {
         Bomb.Fire(tank);
+    }
+    public void FireCluster(GameObject mainBomb, float strength, WeaponData.Direction direction)
+    {
+        Bomb.FireCluster(mainBomb, strength,direction);
     }
 }

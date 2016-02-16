@@ -14,7 +14,7 @@ public class WeaponsCombo : MonoBehaviour
     {
         GameObject.Find("WeaponsCombo").transform.FindChild("Border").gameObject.SetActive(true);
 
-        if (WeaponType == Weapons.Auto_Missile)
+        if (WeaponType == Weapons.Auto_Missile || WeaponType == Weapons.Airstike)
         {
             if (Missile.highlightCoroutines.Count > 0)
             {
@@ -43,7 +43,7 @@ public class WeaponsCombo : MonoBehaviour
             GameObject.Find("WeaponsCombo").transform.FindChild("Count").GetComponent<Text>().text = "∞";
 
         //call selected if magnit bomb
-        if (WeaponType == Weapons.Auto_Missile) Missile.Selected();
+        if (WeaponType == Weapons.Auto_Missile || WeaponType == Weapons.Airstike) Missile.Selected();
 
         lastButton = button;
         GameObject.Find("WeaponsCombo").transform.FindChild("Border").gameObject.SetActive(false);
@@ -63,6 +63,7 @@ public class WeaponsCombo : MonoBehaviour
     public void GenerateGameObject()
     {
         GameObject wObj = new GameObject() { layer = 9 };
+        wObj.tag = "Bomb";
         switch (WeaponType)
         {
             case Weapons.Airstike: CurrentWeapon = wObj.AddComponent<Airstike>(); break;
@@ -79,5 +80,6 @@ public class WeaponsCombo : MonoBehaviour
             case Weapons.Small_Bomb: CurrentWeapon = wObj.AddComponent<Small_Bomb>(); break;
             case Weapons.Molotove: CurrentWeapon = wObj.AddComponent<Molotove>(); break;
         }
+        CurrentWeapon.WeaponObj = wObj;
     }
 }

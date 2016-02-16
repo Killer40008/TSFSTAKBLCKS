@@ -6,6 +6,7 @@ public class DestroyManager : MonoBehaviour
 {
 
     public Object DestroyEffect1;
+    public bool Win = false;
 
     public void CheckAndDestroy(GameObject tank)
     {
@@ -32,6 +33,7 @@ public class DestroyManager : MonoBehaviour
         {
             //winner
             Instantiate(new GameObject() { name = "ddddddddddddddd" }, Vector3.zero, Quaternion.identity);
+            Win = true;
         }
     }
 }

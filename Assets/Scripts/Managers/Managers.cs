@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class Managers : MonoBehaviour 
 {
+    public Object FadePanel;
     public static readonly int TanksStaringCount = 4;
     public static TerrianManager TerrianManager;
     public static SpawnManager SpawnManager;
@@ -13,6 +14,7 @@ public class Managers : MonoBehaviour
     public static ScoreManager ScoreManager;
     public static DestroyManager DestroyManager;
     public static WeaponsCombo WeaponManager;
+    public static ModesCombo ModesManager;
     public static MapManager MapsManager;
     public static Managers Me;
 
@@ -27,6 +29,7 @@ public class Managers : MonoBehaviour
         ScoreManager = transform.FindChild("DamageAndScoreManager").GetComponent<ScoreManager>();
         DestroyManager = transform.FindChild("DestroyManager").GetComponent<DestroyManager>();
         WeaponManager = transform.FindChild("WeaponsManager").GetComponent<WeaponsCombo>();
+        ModesManager = transform.FindChild("ModesManager").GetComponent<ModesCombo>();
         MapsManager = transform.FindChild("MapManager").GetComponent<MapManager>();
 
         MapsManager.StartMap(MapManager.Maps.Volcano);
@@ -34,6 +37,7 @@ public class Managers : MonoBehaviour
         TurnManager.Begin();
         Wind.StartWind();
         WeaponsClass.InitiallizeWeaponsQuantities();
+        ModesClass.InitiallizeWeaponsQuantities();
 
         //begin clouds
         GameObject.Find("Cloud").GetComponent<Cload_Movement>().Begin();
@@ -48,5 +52,22 @@ public class Managers : MonoBehaviour
         GameObject.Find("StrenghSlider").GetComponent<CanvasGroup>().interactable = active;
         GameObject.Find("AngleSlider").GetComponent<CanvasGroup>().alpha = System.Convert.ToInt32(active);
         GameObject.Find("AngleSlider").GetComponent<CanvasGroup>().interactable = active;
+
+        GameObject.Find("RightMovement").GetComponent<CanvasGroup>().alpha = System.Convert.ToInt32(active);
+        GameObject.Find("RightMovement").GetComponent<CanvasGroup>().interactable = active;
+        GameObject.Find("LeftMovement").GetComponent<CanvasGroup>().alpha = System.Convert.ToInt32(active);
+        GameObject.Find("LeftMovement").GetComponent<CanvasGroup>().interactable = active;
+    }
+
+    public static void ResetTimescale()
+    {
+        Time.timeScale = 1;
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
+    }
+
+    public static void SlowDownTimescale(float value)
+    {
+        Time.timeScale = value;
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
     }
 }

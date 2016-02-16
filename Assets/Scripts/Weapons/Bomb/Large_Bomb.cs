@@ -14,16 +14,18 @@ public class Large_Bomb : MonoBehaviour , IWeapon
             Strength = 25,
             BombObj = this.gameObject,
             Drag = this.Drag,
-            SizeInital = new Vector3(0.06799684f, 0.06799684f, 0.06799684f),
-            SizeFinal = new Vector3(0.15f, 0.15f, 0.15f),
-            ExplosionSize = new Vector3(1f, 1f, 1f),
-            RadiusOfExplosion = 1f,
+            SizeInital = new Vector3(0.04715929f, 0.04715929f, 0.04715929f),
+            SizeFinal = new Vector3(0.09457242f, 0.09457242f, 0.09457242f),
+            ExplosionSize = new Vector3(0.9f, 0.9f, 0.9f),
+            RadiusOfExplosion = 2f,
             IntialPeriod = 0.5f,
             SpriteColor = new Color32(191, 0, 0, 255),
             Sprite = sprite,
             ExplosionPrefap = explosion,
             Mass = 0.5f,
             FireSpeed = fireStrengh,
+            SoruceTank = tank
+
         };
         
     }
@@ -47,14 +49,13 @@ public class Large_Bomb : MonoBehaviour , IWeapon
     void LateUpdate()
     {
         //destroy bomb when it's leaves the screen and set turn to the next tank
-        if (-(SpawnManager.CameraWidth / 2) >= this.transform.position.x ||
-            (SpawnManager.CameraWidth / 2) <= this.transform.position.x)
+        if (-(SpawnManager.CameraWidth / 2) >= this.transform.position.x + 1 ||
+            (SpawnManager.CameraWidth / 2) <= this.transform.position.x - 1)
         {
             if (!Bomb.BombObjectDestroyed)
             {
                 SetAlTankHit(null);
-                Destroy(this.gameObject);
-                Managers.TurnManager.SetTurnToNextTank();
+                Bomb.PlayExplosionEffect();
             }
         }
     }
@@ -68,7 +69,7 @@ public class Large_Bomb : MonoBehaviour , IWeapon
 
     public int GameObjectSpriteIndex
     {
-        get { return 1; }
+        get { return 6; }
     }
 
     public GameObject WeaponObj { get; set; }
@@ -77,5 +78,9 @@ public class Large_Bomb : MonoBehaviour , IWeapon
     public void Fire(GameObject tank)
     {
         Bomb.Fire(tank);
+    }
+    public void FireCluster(GameObject mainBomb, float strength, WeaponData.Direction direction)
+    {
+        Bomb.FireCluster(mainBomb, strength,direction);
     }
 }

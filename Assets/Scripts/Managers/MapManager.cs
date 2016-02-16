@@ -25,6 +25,8 @@ public class MapManager : MonoBehaviour
                 GameObject.Find("BackGround").GetComponent<SpriteRenderer>().sprite = Background_Forest;
                 transform.FindChild("Forest").gameObject.SetActive(true);
                 float[] xPos = GetChilds(transform.FindChild("Forest"), "Pistons").Select(g => g.transform.position.x).ToArray();
+                for (int i = 0; i < xPos.Length; i++)
+                    xPos[i] -= 0.15f;
                 Managers.SpawnManager.CustomPositionX.AddRange(xPos);
                 break;
             case Maps.Ice:

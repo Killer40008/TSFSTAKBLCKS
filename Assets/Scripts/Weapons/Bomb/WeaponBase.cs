@@ -25,11 +25,13 @@ public interface IWeapon
     int ExplosionSpriteIndex { get;}
     int GameObjectSpriteIndex { get; }
     GameObject WeaponObj { get; set; }
+    WeaponData Bomb { get; set; }
     void Fire(GameObject tank);
+    void FireCluster(GameObject mainBomb, float strength, WeaponData.Direction direction);
     void Create( Sprite sprite, Object explosion, float fireStrengh, GameObject tank);
 }
 
-public class WeaponData 
+public class WeaponData
 {
     public GameObject BombObj { get; set; }
     public float Damage { get; set; }
@@ -52,6 +54,8 @@ public class WeaponData
     public bool BombObjectDestroyed { private set; get; }
     public bool DontUseStandardRigitRadius { get; set; }
     public bool DontUseAngularDrag { get; set; }
+    public GameObject SoruceTank { get; set; }
+    public static GameObject LastPlayerCollide { get; private set; }
 
 
     public void PlayerHit(GameObject hit)
@@ -59,10 +63,15 @@ public class WeaponData
 
         if (!BombObjectDestroyed)
         {
+
+            if (AntiStrikeSlider.allow)
+                AntiStrikeSlider.DeActive();
+
             Managers.DamageManager.SubstractHealth(hit, Damage);
             Managers.DamageManager.SubstractStrength(hit, Strength);
             Managers.DestroyManager.CheckAndDestroy(hit);
             //
+            LastPlayerCollide = hit.gameObject;
             PlayExplosionEffect();
             BombObjectDestroyed = true;
         }
@@ -71,6 +80,7 @@ public class WeaponData
 
     public void FloorHit(GameObject bomb)
     {
+        Debug.Log(bomb.transform.position);
         if (!BombObjectDestroyed)
         {
             //Set damage to nearby tanks
@@ -83,6 +93,7 @@ public class WeaponData
                 SphareTriggerHit st = sphareTrigger.AddComponent<SphareTriggerHit>();
                 st.Weapon = this;
                 st.transform.position = BombObj.transform.position;
+                st.CollisionPosisiton = BombObj.transform.position;
                 collider.isTrigger = true;
             }
 
@@ -98,6 +109,7 @@ public class WeaponData
 
     public void Fire(GameObject tank)
     {
+
         //set sprites and size , position , collider
 
         BombObj.transform.position = tank.GetComponent<Tank>().BurrellPosition;
@@ -113,20 +125,67 @@ public class WeaponData
         //set force and position 
         float direction = Mathf.Sign(BombObj.transform.right.x);
         Rigidbody rigit = BombObj.transform.gameObject.AddComponent<Rigidbody>();
-        rigit.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX| RigidbodyConstraints.FreezeRotationY ;
+        rigit.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
         rigit.mass = Mass;
         rigit.drag = Drag;
-        if(!DontUseAngularDrag) rigit.angularDrag = direction == 1 ? 1.7f : 1.3f;
+        if (!DontUseAngularDrag) rigit.angularDrag = direction == 1 ? 1.7f : 1.3f;
         rigit.useGravity = true;
         rigit.AddForce(BombObj.transform.right * FireSpeed, ForceMode.VelocityChange);
-        if(!DontUseAngularDrag) rigit.AddTorque(new Vector3(0, 0, direction));
-     
+        if (!DontUseAngularDrag) rigit.AddTorque(new Vector3(0, 0, direction));
+
+
         //set audio
         //AudioSource source = BombObj.transform.gameObject.AddComponent<AudioSource>();
         //source.clip = LunchClip;
         //source.Play();
 
+    }
 
+    public enum Direction{Up=1,Down=-1}
+    public static int ShellCount = 1;
+    public void FireCluster(GameObject mainBomb, float strength, Direction yDirection = Direction.Up)
+    {
+        //set sprites and size , position , collider
+
+        BombObj.transform.position = new Vector3(mainBomb.transform.position.x, mainBomb.transform.position.y + 1, 0);
+        BombObj.transform.gameObject.AddComponent<SpriteRenderer>().sprite = Sprite;
+        BombObj.transform.gameObject.GetComponent<SpriteRenderer>().color = SpriteColor;
+        BombObj.transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
+        BombObj.transform.localScale = SizeInital;
+        var colider = BombObj.AddComponent<SphereCollider>();
+        if (!DontUseStandardRigitRadius) colider.radius = 0.1f;
+        Managers.Me.StartCoroutine(InitalPeriodEnd());
+
+        //set force and position 
+        float direction = Mathf.Sign(mainBomb.transform.position.x - SoruceTank.transform.position.x);
+        Rigidbody rigit = BombObj.transform.gameObject.AddComponent<Rigidbody>();
+        rigit.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
+        rigit.mass = Mass;
+        rigit.useGravity = true;
+        if (yDirection == Direction.Up)
+            rigit.AddForce(new Vector3(direction, Random.Range(2 * (int)yDirection, 6 * (int)yDirection), 0), ForceMode.VelocityChange);
+        else
+            rigit.AddForce(new Vector3(direction * ShellCount++ * 0.5f, 0, 0), ForceMode.VelocityChange);
+
+    }
+
+    public void DropAirstrike(GameObject plane)
+    {
+
+        BombObj.transform.position = plane.transform.position;
+        BombObj.transform.gameObject.AddComponent<SpriteRenderer>().sprite = Sprite;
+        BombObj.transform.gameObject.GetComponent<SpriteRenderer>().color = SpriteColor;
+        BombObj.transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
+        BombObj.transform.localScale = SizeInital;
+        var colider = BombObj.AddComponent<SphereCollider>();
+        if (!DontUseStandardRigitRadius) colider.radius = 0.1f;
+        Managers.Me.StartCoroutine(InitalPeriodEnd());
+
+        //set force and position 
+        Rigidbody rigit = BombObj.transform.gameObject.AddComponent<Rigidbody>();
+        rigit.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
+        rigit.mass = Mass;
+        rigit.useGravity = true;
     }
 
     public IEnumerator InitalPeriodEnd()
@@ -159,13 +218,28 @@ public class WeaponData
 
     public GameObject PlayExplosionEffect(bool Destroy = true)
     {
+        DestroyWhenFinished.AllowNextTurn = true;
         GameObject explosion = (GameObject)MonoBehaviour.Instantiate(ExplosionPrefap, BombObj.transform.position, Quaternion.identity);
         explosion.transform.localScale = ExplosionSize;
-        explosion.AddComponent<DestroyWhenFinished>();
+        DestroyWhenFinished dwf = explosion.AddComponent<DestroyWhenFinished>();
+        dwf.tankSource = SoruceTank;
         AnimationClip clip = explosion.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip;
         AnimationEvent ev = new AnimationEvent() { functionName = "ExplosionAnimationFinished", time = clip.length, intParameter = System.Convert.ToInt32(Destroy) };
         clip.AddEvent(ev);
         if (Destroy) MonoBehaviour.Destroy(BombObj);
+        return explosion;
+    }
+
+    public GameObject PlayAntiStrikeCollisionEffect()
+    {
+        DestroyWhenFinished.AllowNextTurn = true;
+        GameObject explosion = (GameObject)MonoBehaviour.Instantiate(Managers.SpawnManager.BombCollisionEffect, BombObj.transform.position, Quaternion.identity);
+        explosion.transform.localScale = ExplosionSize;
+        explosion.AddComponent<DestroyWhenFinished>();
+        AnimationClip clip = explosion.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip;
+        AnimationEvent ev = new AnimationEvent() { functionName = "DestroyAnimationFinished", time = clip.length, intParameter = 0 };
+        clip.AddEvent(ev);
+        MonoBehaviour.Destroy(BombObj);
         return explosion;
     }
 
@@ -187,6 +261,12 @@ public class WeaponData
             FloorHit(other.gameObject);
             SetAlTankHit(fireTank, null);
         }
+        else if (other.gameObject.tag == "Bomb")
+        {
+            //play effect
+            PlayAntiStrikeCollisionEffect();
+            SetAlTankHit(fireTank, null);
+        }
     }
 
     void SetAlTankHit(GameObject fireTank, GameObject hit)
@@ -195,4 +275,5 @@ public class WeaponData
             fireTank.GetComponent<Tank_AI>().LastTankHit = hit;
 
     }
+
 }

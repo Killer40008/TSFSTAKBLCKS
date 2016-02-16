@@ -7,6 +7,7 @@ using System.Collections.Generic;
 public class TurnManager : MonoBehaviour 
 {
     public GameObject PlayerTank;
+    public GameObject CurrentTank;
     public Object SelectorArrow;
     public List<GameObject> tanks;
     public int Selector = 0;
@@ -32,10 +33,11 @@ public class TurnManager : MonoBehaviour
 
              if (tanks[Selector].activeSelf)
              {
-
                  TankEnabled(Selector, firstTime);
                  ShowArrowAboveTank(Selector);
                  SetController(Selector);
+                 CurrentTank = tanks[Selector];
+
                  Selector++;
              }
              else
@@ -52,7 +54,6 @@ public class TurnManager : MonoBehaviour
         GameObject[] tanksToDisabled =   tanks.Where(t => t.GetComponent<Tank>().CanDisabled == true).ToArray();
         for (int i = 0; i < tanks.Count; i++)
         {
-            //active tank by index
             if (i == index)
             {
                 var burrell = tanksToDisabled[i].transform.FindChild("Burrell").GetComponent<Burrell_Movement>();
@@ -99,6 +100,7 @@ public class TurnManager : MonoBehaviour
         }
         else
         {
+            GameObject.Find("PlayerTimer").GetComponent<Timer>().StopTimer();
             ShowHUD(false);
             tanks[selector].GetComponent<Tank_AI>().IsAlTank = true;
             tanks[selector].GetComponent<Tank_AI>().AimBurrellToRandomTank(tanks.Where(t => t != tanks[selector]).ToArray());
@@ -119,9 +121,17 @@ public class TurnManager : MonoBehaviour
     {
 
         if (show)
-            GameObject.Find("Canvas").GetComponent<CanvasGroup>().alpha = 1;
+        {
+            GameObject.Find("Canvas").transform.FindChild("HUD").GetComponent<CanvasGroup>().alpha = 1;
+            GameObject.Find("HUDMasterButtons").GetComponent<RectTransform>().anchoredPosition =
+                new Vector3(GameObject.Find("HUDMasterButtons").GetComponent<RectTransform>().anchoredPosition.x, -85, 0);
+        }
         else
-            GameObject.Find("Canvas").GetComponent<CanvasGroup>().alpha = 0;
+        {
+            GameObject.Find("Canvas").transform.FindChild("HUD").GetComponent<CanvasGroup>().alpha = 0;
+            GameObject.Find("HUDMasterButtons").GetComponent<RectTransform>().anchoredPosition =
+                      new Vector3(GameObject.Find("HUDMasterButtons").GetComponent<RectTransform>().anchoredPosition.x, -22, 0);
+        }
     }
 
 }

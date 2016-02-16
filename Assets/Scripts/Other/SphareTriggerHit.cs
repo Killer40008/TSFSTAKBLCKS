@@ -16,11 +16,13 @@ public class SphareTriggerHit : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         
-        if (other.tag == "Player" && !triggeredList.Contains(other.gameObject))
+        if (other.tag == "Player" && other.GetComponent<Tank>().ArmorActivate == false && !triggeredList.Contains(other.gameObject))
         {
-            float deltaPosition = Mathf.Abs(CollisionPosisiton.x - other.transform.position.x);
-            Managers.DamageManager.SubstractHealth(other.gameObject, Weapon.Damage / deltaPosition);
-            Managers.DamageManager.SubstractStrength(other.gameObject, Weapon.Strength / deltaPosition);
+            float direction = Mathf.Sign(CollisionPosisiton.x - other.transform.position.x);
+            float deltaPosition = Vector3.Distance(CollisionPosisiton, other.transform.position);
+            Debug.Log(deltaPosition);
+            Managers.DamageManager.SubstractHealth(other.gameObject, Weapon.Damage / (int)deltaPosition);
+            Managers.DamageManager.SubstractStrength(other.gameObject, Weapon.Strength / (int)deltaPosition);
             Managers.DestroyManager.CheckAndDestroy(other.gameObject);
             triggeredList.Add(other.gameObject);
         }

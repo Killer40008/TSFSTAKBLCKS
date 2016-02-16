@@ -24,6 +24,8 @@ public class Molotove : MonoBehaviour, IWeapon
             ExplosionPrefap = explosion,
             Mass = 0.5f,
             FireSpeed = fireStrengh,
+            SoruceTank = tank
+
         };
 
     }
@@ -33,16 +35,15 @@ public class Molotove : MonoBehaviour, IWeapon
 
     public void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Terrain" || other.gameObject.tag == "Pistons" || other.gameObject.tag == "ForestFloor")
-        {
-            Bomb.OnCollide(Tank, other);
-        }
-        else if (other.gameObject.tag == "Player")
+
+        if (other.gameObject.tag == "Player")
         {
             GameObject burnObj = Bomb.PlayExplosionEffect(false);
             Destroy(Bomb.BombObj);
-           Managers.Me. StartCoroutine(SubtractHealth(other.gameObject, burnObj));
+            Managers.Me.StartCoroutine(SubtractHealth(other.gameObject, burnObj));
         }
+        else
+            Bomb.OnCollide(Tank, other);
 
     }
 
@@ -50,6 +51,7 @@ public class Molotove : MonoBehaviour, IWeapon
     {
         while (Managers.DamageManager.GetHealth(tank) > 0)
         {
+            if (Mathf.Abs(tank.transform.position.x - burnObject.transform.position.x) > 1) break; 
             yield return new WaitForSeconds(1);
             Managers.DamageManager.SubstractHealth(tank, Bomb.Damage);
             Managers.DamageManager.SubstractStrength(tank, Bomb.Strength);
@@ -57,6 +59,8 @@ public class Molotove : MonoBehaviour, IWeapon
             Managers.DamageManager.CalculatePlayerStrenghInUI();
         }
         Managers.DestroyManager.CheckAndDestroy(tank);
+
+        yield return new WaitForSeconds(3);
         Destroy(burnObject);
     }
 
@@ -70,14 +74,13 @@ public class Molotove : MonoBehaviour, IWeapon
     void LateUpdate()
     {
         //destroy bomb when it's leaves the screen and set turn to the next tank
-        if (-(SpawnManager.CameraWidth / 2) >= this.transform.position.x ||
-            (SpawnManager.CameraWidth / 2) <= this.transform.position.x)
+        if (-(SpawnManager.CameraWidth / 2) >= this.transform.position.x + 1 ||
+            (SpawnManager.CameraWidth / 2) <= this.transform.position.x - 1)
         {
             if (!Bomb.BombObjectDestroyed)
             {
                 SetAlTankHit(null);
-                Destroy(this.gameObject);
-                Managers.TurnManager.SetTurnToNextTank();
+                Bomb.PlayExplosionEffect();
             }
         }
     }
@@ -100,5 +103,9 @@ public class Molotove : MonoBehaviour, IWeapon
     public void Fire(GameObject tank)
     {
         Bomb.Fire(tank);
+    }
+    public void FireCluster(GameObject mainBomb, float strength, WeaponData.Direction direction)
+    {
+        Bomb.FireCluster(mainBomb, strength,direction);
     }
 }

@@ -12,17 +12,19 @@ public class Cluster_Bomb : MonoBehaviour, IWeapon
         Tank = tank;
         Bomb = new WeaponData()
         {
-            Damage = 20,
-            Strength = 10,
+            Damage = 40,
+            Strength = 5,
            BombObj = this.gameObject,Drag = this.Drag,
-            SizeInital = new Vector3(0.1523757f, 0.1523757f, 0.1523757f),
-            SizeFinal = new Vector3(0.25f, 0.25f, 0.25f),
+            SizeInital = new Vector3(0.7f, 0.7f, 0.7f),
+            SizeFinal = new Vector3(0.7f, 0.7f, 0.7f),
+            ExplosionSize = new Vector3(0.4f, 0.4f, 0.4f),
             IntialPeriod = 0.5f,
             SpriteColor = Color.black,
             Sprite = sprite,
             ExplosionPrefap = explosion,
             Mass = 0.5f,
             FireSpeed = fireStrengh,
+            SoruceTank = tank
         };
         
     }
@@ -30,11 +32,25 @@ public class Cluster_Bomb : MonoBehaviour, IWeapon
     public WeaponData Bomb { get; set; }
 
 
-
     public void OnCollisionEnter(Collision other)
     {
-        Bomb.OnCollide(Tank, other);
 
+        if (other.gameObject.tag == "Player" || other.gameObject.layer == LayerMask.NameToLayer("AntiBomb"))
+        {
+            Bomb.OnCollide(Tank, other);
+        }
+        else
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                GameObject wObj = new GameObject() { layer = 9 };
+                wObj.tag = "Bomb";
+                WeaponsCombo.CurrentWeapon = wObj.AddComponent<Normal_Bomb>();
+                WeaponsCombo.CurrentWeapon.Create(Bomb.Sprite, Bomb.ExplosionPrefap, Bomb.Strength, Bomb.SoruceTank);
+                WeaponsCombo.CurrentWeapon.FireCluster(Bomb.BombObj, 10, WeaponData.Direction.Up);
+            }
+            Bomb.OnCollide(Tank, other);
+        }
     }
 
 
@@ -49,14 +65,13 @@ public class Cluster_Bomb : MonoBehaviour, IWeapon
     void LateUpdate()
     {
         //destroy bomb when it's leaves the screen and set turn to the next tank
-        if (-(SpawnManager.CameraWidth / 2) >= this.transform.position.x ||
-            (SpawnManager.CameraWidth / 2) <= this.transform.position.x)
+        if (-(SpawnManager.CameraWidth / 2) >= this.transform.position.x + 1 ||
+            (SpawnManager.CameraWidth / 2) <= this.transform.position.x - 1)
         {
             if (!Bomb.BombObjectDestroyed)
             {
                 SetAlTankHit(null);
-                Destroy(this.gameObject);
-                Managers.TurnManager.SetTurnToNextTank();
+                Bomb.PlayExplosionEffect();
             }
         }
     }
@@ -79,6 +94,10 @@ public class Cluster_Bomb : MonoBehaviour, IWeapon
     public void Fire(GameObject tank)
     {
         Bomb.Fire(tank);
+    }
+    public void FireCluster(GameObject mainBomb, float strength, WeaponData.Direction direction)
+    {
+        Bomb.FireCluster(mainBomb, strength,direction);
     }
 
 }

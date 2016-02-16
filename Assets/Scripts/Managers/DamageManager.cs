@@ -2,8 +2,11 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class DamageManager : MonoBehaviour 
+public class DamageManager : MonoBehaviour
 {
+
+    public float DamageMultiply = 1;
+
     public void CalculatePlayerHealthInUI()
     {
         float health = GetHealth(Managers.TurnManager.PlayerTank);
@@ -33,12 +36,28 @@ public class DamageManager : MonoBehaviour
 
     public float GetHealth(GameObject tank)
     {
-       return tank.GetComponent<Tank>().Health;
+        return tank.GetComponent<Tank>().Health;
     }
-    public void SubstractHealth(GameObject tank, float newHealth)
+    public void SubstractHealth(GameObject tank, float damage)
     {
-        tank.GetComponent<Tank>().Health -= newHealth;
+        if (GetHealth(tank) - damage > 0)
+        {
+            if (Managers.TurnManager.CurrentTank == Managers.TurnManager.PlayerTank)
+                tank.GetComponent<Tank>().Health -= (damage * DamageMultiply);
+            else
+                tank.GetComponent<Tank>().Health -= (damage);
+        }
+        else
+            tank.GetComponent<Tank>().Health = 0;
     }
+
+    public void AddHealth(GameObject tank, float newHealth)
+    {
+        if (GetHealth(tank) < 100)
+            tank.GetComponent<Tank>().Health += newHealth;
+    }
+    //
+
 
     public float GetStrength(GameObject tank)
     {
@@ -46,6 +65,31 @@ public class DamageManager : MonoBehaviour
     }
     public void SubstractStrength(GameObject tank, float newStrength)
     {
-        tank.GetComponent<Tank>().Strength -= newStrength;
-    } 
+        if (GetStrength(tank) - newStrength > 0)
+            tank.GetComponent<Tank>().Strength -= newStrength;
+        else
+            tank.GetComponent<Tank>().Strength = 0;
+    }
+    public void AddStrength(GameObject tank, float newStrength)
+    {
+        if (GetStrength(tank) < 100)
+            tank.GetComponent<Tank>().Strength += newStrength;
+    }
+
+
+    //
+    public void SetHealth(GameObject tank, float newHealth)
+    {
+        if (newHealth > 0)
+            tank.GetComponent<Tank>().Health = newHealth;
+        else
+            tank.GetComponent<Tank>().Health = 0;
+    }
+    public void SetStrength(GameObject tank, float newStrength)
+    {
+        if (newStrength > 0)
+            tank.GetComponent<Tank>().Strength = newStrength;
+        else
+            tank.GetComponent<Tank>().Strength = 0;
+    }
 }

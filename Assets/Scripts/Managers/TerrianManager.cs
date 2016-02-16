@@ -64,7 +64,7 @@ public class TerrianManager : MonoBehaviour
             Cupe.Create(Resoultion, 3, 2, angle, 100, ref mesh);
 
             //Initiallize mesh
-            gPiece = new GameObject() { tag = "Terrain" };
+            gPiece = new GameObject() { tag = "Terrain" ,layer = LayerMask.NameToLayer("Floor")};
             gPiece.AddComponent<MeshFilter>().mesh = mesh;
             MeshRenderer rend = gPiece.AddComponent<MeshRenderer>();
             rend.sharedMaterials = materials; //assign material 

@@ -8,6 +8,8 @@ public class SpawnManager : MonoBehaviour
     public Sprite[] BombSprites;
     public Object[] BombExplosions;
     public Object RocketEffect;
+    public Object BombCollisionEffect;
+    public Object AirstrikePrefap;
     public ArrayList CustomPositionX = new ArrayList();
 
     public void Spawn(int Count ,string playername, int playerrand, int playerscore)
@@ -35,6 +37,7 @@ public class SpawnManager : MonoBehaviour
         tData.CanDisabled = true;
         tData.Health = 100;
         tData.Strength = 100;
+        tData.Oil = 500;
         tData.PlayerName = "Mohammed";
         tData.PlayerRank = playerrand;
         tData.PlayerScore = playerscore;

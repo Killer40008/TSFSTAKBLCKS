@@ -17,12 +17,14 @@ public class Mega_Bomb : MonoBehaviour, IWeapon
             SizeFinal = new Vector3(0.25f, 0.25f, 0.25f),
             ExplosionSize = new Vector3(1.5f, 1.5f, 1.5f),
             IntialPeriod = 0.5f,
-            RadiusOfExplosion = 1.6f,
+            RadiusOfExplosion =3,
             SpriteColor = Color.white,
             Sprite = sprite,
             ExplosionPrefap = explosion,
             Mass = 0.5f,
             FireSpeed = fireStrengh,
+            SoruceTank = tank
+
         };
         
     }
@@ -45,14 +47,13 @@ public class Mega_Bomb : MonoBehaviour, IWeapon
     void LateUpdate()
     {
         //destroy bomb when it's leaves the screen and set turn to the next tank
-        if (-(SpawnManager.CameraWidth / 2) >= this.transform.position.x ||
-            (SpawnManager.CameraWidth / 2) <= this.transform.position.x)
+        if (-(SpawnManager.CameraWidth / 2) >= this.transform.position.x + 1 ||
+            (SpawnManager.CameraWidth / 2) <= this.transform.position.x - 1)
         {
             if (!Bomb.BombObjectDestroyed)
             {
                 SetAlTankHit(null);
-                Destroy(this.gameObject);
-                Managers.TurnManager.SetTurnToNextTank();
+                Bomb.PlayExplosionEffect();
             }
         }
     }
@@ -75,5 +76,9 @@ public class Mega_Bomb : MonoBehaviour, IWeapon
     public void Fire(GameObject tank)
     {
         Bomb.Fire(tank);
+    }
+    public void FireCluster(GameObject mainBomb, float strength, WeaponData.Direction direction)
+    {
+        Bomb.FireCluster(mainBomb, strength,direction);
     }
 }

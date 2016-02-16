@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class Tank_Movement : MonoBehaviour, IPointerDownHandler
+public class Tank_Movement : MonoBehaviour
 {
 
     bool IsGrounded = false;
-    public float Speed = 0.03f;
+    public float Speed = 1;
     Rigidbody rigit;
 
     void Start()
@@ -14,9 +15,6 @@ public class Tank_Movement : MonoBehaviour, IPointerDownHandler
         rigit = GetComponent<Rigidbody>();
     }
 
-    public void OnPointerDown(PointerEventData data)
-    {
-    }
 
 
     public void MoveLeft()
@@ -28,15 +26,17 @@ public class Tank_Movement : MonoBehaviour, IPointerDownHandler
             if (translation != 0 && IsGrounded)
             {
                 //if (rInfo.g.
-                this.transform.Translate(translation, 0, 0);
+                this.transform.Translate(translation * Time.fixedDeltaTime, 0, 0);
             }
 
             //apply tank gravity
             rigit.AddForce(Physics.gravity * 0.3f, ForceMode.VelocityChange);
 
             ClampPosition();
+            SuptractOil();
         }
     }
+
 
     public void MoveRight()
     {
@@ -47,13 +47,14 @@ public class Tank_Movement : MonoBehaviour, IPointerDownHandler
             if (translation != 0 && IsGrounded)
             {
                 //if (rInfo.g.
-                this.transform.Translate(translation, 0, 0);
+                this.transform.Translate(translation * Time.fixedDeltaTime, 0, 0);
             }
 
             //apply tank gravity
             rigit.AddForce(Physics.gravity * 0.3f, ForceMode.VelocityChange);
 
             ClampPosition();
+            SuptractOil();
         }
     }
 
@@ -65,6 +66,24 @@ public class Tank_Movement : MonoBehaviour, IPointerDownHandler
         this.transform.position = new Vector3(xClamped, this.transform.position.y, this.transform.position.z);
             
     }
+
+    private void SuptractOil()
+    {
+       float oil = GetComponent<Tank>().Oil -= 1;
+       if (oil <= 0)
+       {
+           GameObject.Find("RightMovement").GetComponent<Button>().interactable = false;
+           GameObject.Find("LeftMovement").GetComponent<Button>().interactable = false;
+           this.enabled = false;
+           NotifyMessage.ShowMessage("Need More Oil", 3);
+       }
+       else
+       {
+           GameObject.Find("RightMovement").GetComponent<Button>().interactable = true;
+           GameObject.Find("LeftMovement").GetComponent<Button>().interactable = true;
+       }
+    }
+
 
     void OnCollisionEnter(Collision theCollision)
     {
