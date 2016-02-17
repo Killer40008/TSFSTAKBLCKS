@@ -1,0 +1,1187 @@
+fileFormatVersion: 2
+guid: 84dab9b8b62f8c24ab164d75637ffa8d
+timeCreated: 1455695389
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: armorshield_0
+    21300002: armorshield_1
+    21300004: armorshield_2
+    21300006: armorshield_3
+    21300008: armorshield_4
+    21300010: armorshield_5
+    21300012: armorshield_6
+    21300014: armorshield_7
+    21300016: armorshield_8
+    21300018: armorshield_9
+    21300020: armorshield_10
+    21300022: armorshield_11
+    21300024: armorshield_12
+    21300026: armorshield_13
+    21300028: armorshield_14
+    21300030: armorshield_15
+    21300032: armorshield_16
+    21300034: armorshield_17
+    21300036: armorshield_18
+    21300038: armorshield_19
+    21300040: armorshield_20
+    21300042: armorshield_21
+    21300044: armorshield_22
+    21300046: armorshield_23
+    21300048: armorshield_24
+    21300050: armorshield_25
+    21300052: armorshield_26
+    21300054: armorshield_27
+    21300056: armorshield_28
+    21300058: armorshield_29
+    21300060: armorshield_30
+    21300062: armorshield_31
+    21300064: armorshield_32
+    21300066: armorshield_33
+    21300068: armorshield_34
+    21300070: armorshield_35
+    21300072: armorshield_36
+    21300074: armorshield_37
+    21300076: armorshield_38
+    21300078: armorshield_39
+    21300080: armorshield_40
+    21300082: armorshield_41
+    21300084: armorshield_42
+    21300086: armorshield_43
+    21300088: armorshield_44
+    21300090: armorshield_45
+    21300092: armorshield_46
+    21300094: armorshield_47
+    21300096: armorshield_48
+    21300098: armorshield_49
+    21300100: armorshield_50
+    21300102: armorshield_51
+    21300104: armorshield_52
+    21300106: armorshield_53
+    21300108: armorshield_54
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: armorshield_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1580
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 38, y: 55}
+        - {x: -30, y: 55}
+        - {x: -56, y: 28}
+        - {x: -56, y: -52}
+        - {x: -51, y: -65}
+        - {x: 38, y: -65}
+        - {x: 59, y: -52}
+        - {x: 64, y: -29}
+        - {x: 64, y: 28}
+    - name: armorshield_1
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 1580
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -30, y: 55}
+        - {x: -56, y: 31}
+        - {x: -56, y: -52}
+        - {x: -26, y: -65}
+        - {x: 48, y: -65}
+        - {x: 64, y: -42}
+        - {x: 64, y: 42}
+        - {x: 23, y: 55}
+    - name: armorshield_2
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 1580
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -29, y: 55}
+        - {x: -56, y: 25}
+        - {x: -56, y: -53}
+        - {x: -15, y: -65}
+        - {x: 45, y: -65}
+        - {x: 64, y: -53}
+        - {x: 64, y: 39}
+        - {x: 20, y: 55}
+    - name: armorshield_3
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 1580
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -52, y: 55}
+        - {x: -56, y: 47}
+        - {x: -56, y: -53}
+        - {x: -46, y: -65}
+        - {x: 43, y: -65}
+        - {x: 64, y: -50}
+        - {x: 64, y: 55}
+    - name: armorshield_4
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 1580
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -43, y: 55}
+        - {x: -56, y: 42}
+        - {x: -56, y: -62}
+        - {x: -55, y: -65}
+        - {x: 57, y: -65}
+        - {x: 64, y: -49}
+        - {x: 64, y: 22}
+        - {x: 55, y: 55}
+    - name: armorshield_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1422
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -22, y: 55}
+        - {x: -56, y: 32}
+        - {x: -56, y: -54}
+        - {x: -23, y: -65}
+        - {x: 45, y: -65}
+        - {x: 64, y: -52}
+        - {x: 64, y: 42}
+        - {x: 30, y: 55}
+    - name: armorshield_6
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 1422
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -42, y: 55}
+        - {x: -56, y: 27}
+        - {x: -56, y: -47}
+        - {x: -51, y: -52}
+        - {x: -19, y: -65}
+        - {x: 44, y: -65}
+        - {x: 64, y: -48}
+        - {x: 64, y: 21}
+        - {x: 48, y: 55}
+    - name: armorshield_7
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 1422
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 40, y: 55}
+        - {x: -29, y: 55}
+        - {x: -56, y: 32}
+        - {x: -56, y: -39}
+        - {x: -40, y: -65}
+        - {x: 39, y: -65}
+        - {x: 64, y: -36}
+        - {x: 64, y: 27}
+        - {x: 51, y: 49}
+    - name: armorshield_8
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 1422
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 40, y: 55}
+        - {x: -21, y: 55}
+        - {x: -56, y: 35}
+        - {x: -56, y: -42}
+        - {x: -26, y: -59}
+        - {x: -8, y: -65}
+        - {x: 22, y: -65}
+        - {x: 47, y: -64}
+        - {x: 64, y: -39}
+        - {x: 64, y: 26}
+    - name: armorshield_9
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 1422
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -31, y: 55}
+        - {x: -56, y: 25}
+        - {x: -56, y: -32}
+        - {x: -53, y: -39}
+        - {x: -21, y: -65}
+        - {x: 51, y: -65}
+        - {x: 64, y: -30}
+        - {x: 64, y: 45}
+        - {x: 46, y: 55}
+    - name: armorshield_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1264
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -29, y: 55}
+        - {x: -56, y: 47}
+        - {x: -56, y: -54}
+        - {x: -33, y: -65}
+        - {x: 52, y: -65}
+        - {x: 64, y: -54}
+        - {x: 64, y: 34}
+        - {x: 48, y: 55}
+    - name: armorshield_11
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 1264
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -39, y: 55}
+        - {x: -56, y: 42}
+        - {x: -56, y: -48}
+        - {x: -55, y: -54}
+        - {x: -28, y: -65}
+        - {x: 35, y: -65}
+        - {x: 64, y: -52}
+        - {x: 64, y: 54}
+        - {x: 61, y: 55}
+    - name: armorshield_12
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 1264
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -40, y: 55}
+        - {x: -56, y: 49}
+        - {x: -56, y: -65}
+        - {x: 64, y: -65}
+        - {x: 64, y: 50}
+        - {x: 52, y: 55}
+    - name: armorshield_13
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 1264
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -37, y: 55}
+        - {x: -42, y: 53}
+        - {x: -56, y: 27}
+        - {x: -56, y: -45}
+        - {x: -39, y: -65}
+        - {x: 33, y: -65}
+        - {x: 59, y: -58}
+        - {x: 64, y: -39}
+        - {x: 64, y: 39}
+        - {x: 28, y: 55}
+    - name: armorshield_14
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 1264
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -56, y: 55}
+        - {x: -56, y: -63}
+        - {x: -49, y: -65}
+        - {x: 30, y: -65}
+        - {x: 64, y: -54}
+        - {x: 64, y: 42}
+        - {x: 38, y: 55}
+    - name: armorshield_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1106
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -24, y: 55}
+        - {x: -39, y: 52}
+        - {x: -56, y: 23}
+        - {x: -56, y: -26}
+        - {x: -52, y: -45}
+        - {x: -17, y: -65}
+        - {x: 61, y: -65}
+        - {x: 64, y: -52}
+        - {x: 64, y: 54}
+        - {x: 59, y: 55}
+    - name: armorshield_16
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 1106
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -33, y: 55}
+        - {x: -39, y: 52}
+        - {x: -56, y: 37}
+        - {x: -56, y: -40}
+        - {x: -46, y: -65}
+        - {x: 48, y: -65}
+        - {x: 64, y: -47}
+        - {x: 64, y: 28}
+        - {x: 45, y: 55}
+    - name: armorshield_17
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 1106
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -30, y: 55}
+        - {x: -56, y: 26}
+        - {x: -56, y: -57}
+        - {x: -30, y: -65}
+        - {x: 64, y: -65}
+        - {x: 64, y: 41}
+        - {x: 30, y: 55}
+    - name: armorshield_18
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 1106
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 30, y: 55}
+        - {x: -26, y: 55}
+        - {x: -56, y: 31}
+        - {x: -56, y: -33}
+        - {x: -46, y: -63}
+        - {x: -35, y: -65}
+        - {x: 32, y: -65}
+        - {x: 58, y: -51}
+        - {x: 64, y: -32}
+        - {x: 64, y: 27}
+    - name: armorshield_19
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 1106
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -31, y: 55}
+        - {x: -56, y: 38}
+        - {x: -56, y: -45}
+        - {x: -28, y: -65}
+        - {x: 31, y: -65}
+        - {x: 60, y: -53}
+        - {x: 64, y: -36}
+        - {x: 64, y: 27}
+        - {x: 42, y: 55}
+    - name: armorshield_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 948
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -40, y: 55}
+        - {x: -56, y: 38}
+        - {x: -56, y: -43}
+        - {x: -31, y: -65}
+        - {x: 44, y: -65}
+        - {x: 64, y: -36}
+        - {x: 64, y: 47}
+        - {x: 35, y: 55}
+    - name: armorshield_21
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 948
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 43, y: 49}
+        - {x: 36, y: 55}
+        - {x: -56, y: 55}
+        - {x: -56, y: -49}
+        - {x: -42, y: -58}
+        - {x: -17, y: -65}
+        - {x: 26, y: -65}
+        - {x: 57, y: -43}
+        - {x: 64, y: -26}
+        - {x: 64, y: 17}
+    - name: armorshield_22
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 948
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -32, y: 55}
+        - {x: -56, y: 36}
+        - {x: -56, y: -37}
+        - {x: -41, y: -65}
+        - {x: 64, y: -65}
+        - {x: 64, y: 45}
+        - {x: 23, y: 55}
+    - name: armorshield_23
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 948
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -26, y: 55}
+        - {x: -56, y: 22}
+        - {x: -56, y: -43}
+        - {x: -35, y: -65}
+        - {x: 39, y: -65}
+        - {x: 64, y: -47}
+        - {x: 64, y: 29}
+        - {x: 30, y: 55}
+    - name: armorshield_24
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 948
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -37, y: 55}
+        - {x: -56, y: 50}
+        - {x: -56, y: -32}
+        - {x: -31, y: -65}
+        - {x: 49, y: -65}
+        - {x: 64, y: -30}
+        - {x: 64, y: 40}
+        - {x: 58, y: 55}
+    - name: armorshield_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 790
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -35, y: 55}
+        - {x: -54, y: 48}
+        - {x: -56, y: 38}
+        - {x: -56, y: -49}
+        - {x: -31, y: -65}
+        - {x: 42, y: -65}
+        - {x: 64, y: -40}
+        - {x: 64, y: 23}
+        - {x: 46, y: 55}
+    - name: armorshield_26
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 790
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -56, y: 55}
+        - {x: -56, y: -57}
+        - {x: -22, y: -65}
+        - {x: 57, y: -65}
+        - {x: 64, y: -62}
+        - {x: 64, y: 55}
+    - name: armorshield_27
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 790
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 33, y: 55}
+        - {x: -48, y: 55}
+        - {x: -56, y: 51}
+        - {x: -56, y: -65}
+        - {x: 30, y: -65}
+        - {x: 64, y: -45}
+        - {x: 64, y: 29}
+        - {x: 51, y: 51}
+    - name: armorshield_28
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 790
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -53, y: 55}
+        - {x: -56, y: 39}
+        - {x: -56, y: -46}
+        - {x: -28, y: -65}
+        - {x: 39, y: -65}
+        - {x: 64, y: -35}
+        - {x: 64, y: 31}
+        - {x: 33, y: 55}
+    - name: armorshield_29
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 790
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -22, y: 55}
+        - {x: -56, y: 42}
+        - {x: -56, y: -23}
+        - {x: -41, y: -65}
+        - {x: 50, y: -65}
+        - {x: 64, y: -34}
+        - {x: 64, y: 27}
+        - {x: 41, y: 55}
+    - name: armorshield_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 632
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -37, y: 55}
+        - {x: -56, y: 35}
+        - {x: -56, y: -49}
+        - {x: -33, y: -65}
+        - {x: 36, y: -65}
+        - {x: 64, y: -57}
+        - {x: 64, y: 41}
+        - {x: 41, y: 55}
+    - name: armorshield_31
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 632
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -56, y: -31}
+        - {x: -41, y: -65}
+        - {x: 45, y: -65}
+        - {x: 64, y: -60}
+        - {x: 64, y: 55}
+        - {x: -32, y: 55}
+        - {x: -56, y: 31}
+    - name: armorshield_32
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 632
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -39, y: 55}
+        - {x: -40, y: 54}
+        - {x: -56, y: 33}
+        - {x: -56, y: -30}
+        - {x: -41, y: -65}
+        - {x: 39, y: -65}
+        - {x: 64, y: -49}
+        - {x: 64, y: 24}
+        - {x: 49, y: 55}
+    - name: armorshield_33
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 632
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 49, y: 55}
+        - {x: -29, y: 55}
+        - {x: -56, y: 42}
+        - {x: -56, y: -48}
+        - {x: -22, y: -65}
+        - {x: 36, y: -65}
+        - {x: 64, y: -43}
+        - {x: 64, y: 37}
+    - name: armorshield_34
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 632
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 49, y: 55}
+        - {x: -29, y: 55}
+        - {x: -56, y: 42}
+        - {x: -56, y: -48}
+        - {x: -22, y: -65}
+        - {x: 36, y: -65}
+        - {x: 64, y: -43}
+        - {x: 64, y: 37}
+    - name: armorshield_35
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 474
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 24, y: 55}
+        - {x: -27, y: 55}
+        - {x: -56, y: 37}
+        - {x: -56, y: -50}
+        - {x: -32, y: -65}
+        - {x: 34, y: -65}
+        - {x: 62, y: -57}
+        - {x: 64, y: -48}
+        - {x: 64, y: 18}
+        - {x: 51, y: 48}
+    - name: armorshield_36
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 474
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -28, y: 55}
+        - {x: -56, y: 41}
+        - {x: -56, y: -41}
+        - {x: -34, y: -59}
+        - {x: -22, y: -65}
+        - {x: 33, y: -65}
+        - {x: 64, y: -39}
+        - {x: 64, y: 26}
+        - {x: 34, y: 55}
+    - name: armorshield_37
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 474
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 42, y: 55}
+        - {x: -37, y: 55}
+        - {x: -56, y: 19}
+        - {x: -56, y: -55}
+        - {x: -27, y: -65}
+        - {x: 51, y: -65}
+        - {x: 64, y: -50}
+        - {x: 64, y: 20}
+        - {x: 55, y: 52}
+    - name: armorshield_38
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 474
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -30, y: 55}
+        - {x: -34, y: 54}
+        - {x: -56, y: 37}
+        - {x: -56, y: -40}
+        - {x: -42, y: -65}
+        - {x: 41, y: -65}
+        - {x: 64, y: -43}
+        - {x: 64, y: 24}
+        - {x: 44, y: 55}
+    - name: armorshield_39
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 474
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -56, y: -57}
+        - {x: -44, y: -65}
+        - {x: 37, y: -65}
+        - {x: 64, y: -48}
+        - {x: 64, y: 17}
+        - {x: 50, y: 50}
+        - {x: 25, y: 55}
+        - {x: -33, y: 55}
+        - {x: -56, y: 43}
+    - name: armorshield_40
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 316
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 29, y: 55}
+        - {x: -33, y: 55}
+        - {x: -56, y: 34}
+        - {x: -56, y: -40}
+        - {x: -45, y: -65}
+        - {x: 56, y: -65}
+        - {x: 64, y: -41}
+        - {x: 64, y: 32}
+        - {x: 49, y: 49}
+    - name: armorshield_41
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 316
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -26, y: 55}
+        - {x: -56, y: 44}
+        - {x: -56, y: -34}
+        - {x: -29, y: -65}
+        - {x: 39, y: -65}
+        - {x: 48, y: -63}
+        - {x: 64, y: -51}
+        - {x: 64, y: 48}
+        - {x: 48, y: 55}
+    - name: armorshield_42
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 316
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -46, y: 55}
+        - {x: -56, y: 22}
+        - {x: -56, y: -46}
+        - {x: -26, y: -65}
+        - {x: 37, y: -65}
+        - {x: 48, y: -61}
+        - {x: 64, y: -37}
+        - {x: 64, y: 35}
+        - {x: 44, y: 55}
+    - name: armorshield_43
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 316
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -46, y: 55}
+        - {x: -56, y: 44}
+        - {x: -56, y: -28}
+        - {x: -38, y: -65}
+        - {x: 36, y: -65}
+        - {x: 64, y: -47}
+        - {x: 64, y: 41}
+        - {x: 43, y: 55}
+    - name: armorshield_44
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 316
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -44, y: 55}
+        - {x: -56, y: 27}
+        - {x: -56, y: -49}
+        - {x: -24, y: -65}
+        - {x: 61, y: -65}
+        - {x: 64, y: -64}
+        - {x: 64, y: 55}
+    - name: armorshield_45
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 158
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -37, y: 55}
+        - {x: -56, y: 38}
+        - {x: -56, y: -30}
+        - {x: -38, y: -65}
+        - {x: 39, y: -65}
+        - {x: 48, y: -62}
+        - {x: 64, y: -48}
+        - {x: 64, y: 32}
+        - {x: 59, y: 55}
+    - name: armorshield_46
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 158
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -13, y: 55}
+        - {x: -38, y: 50}
+        - {x: -56, y: 32}
+        - {x: -56, y: -30}
+        - {x: -43, y: -65}
+        - {x: 34, y: -65}
+        - {x: 64, y: -46}
+        - {x: 64, y: 21}
+        - {x: 32, y: 55}
+    - name: armorshield_47
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 158
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -40, y: 55}
+        - {x: -56, y: 46}
+        - {x: -56, y: -40}
+        - {x: -45, y: -65}
+        - {x: 51, y: -65}
+        - {x: 64, y: -52}
+        - {x: 64, y: 32}
+        - {x: 49, y: 55}
+    - name: armorshield_48
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 158
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -42, y: 55}
+        - {x: -51, y: 39}
+        - {x: -55, y: 24}
+        - {x: -55, y: -45}
+        - {x: -33, y: -65}
+        - {x: 28, y: -65}
+        - {x: 63, y: -47}
+        - {x: 64, y: -37}
+        - {x: 64, y: 44}
+        - {x: 39, y: 55}
+    - name: armorshield_49
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 158
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -54, y: 55}
+        - {x: -55, y: 54}
+        - {x: -55, y: -65}
+        - {x: 56, y: -65}
+        - {x: 64, y: -42}
+        - {x: 64, y: 43}
+        - {x: 35, y: 55}
+    - name: armorshield_50
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -28, y: 55}
+        - {x: -55, y: 36}
+        - {x: -55, y: -40}
+        - {x: -25, y: -65}
+        - {x: 34, y: -65}
+        - {x: 64, y: -33}
+        - {x: 64, y: 33}
+        - {x: 45, y: 55}
+    - name: armorshield_51
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 0
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 34, y: 55}
+        - {x: -16, y: 55}
+        - {x: -38, y: 49}
+        - {x: -55, y: 18}
+        - {x: -55, y: -39}
+        - {x: -25, y: -65}
+        - {x: 33, y: -65}
+        - {x: 64, y: -35}
+        - {x: 64, y: 22}
+        - {x: 60, y: 36}
+    - name: armorshield_52
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 0
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -51, y: 55}
+        - {x: -55, y: 39}
+        - {x: -55, y: -65}
+        - {x: 63, y: -65}
+        - {x: 64, y: -64}
+        - {x: 64, y: 21}
+        - {x: 52, y: 55}
+    - name: armorshield_53
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 0
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 42, y: 55}
+        - {x: -23, y: 55}
+        - {x: -40, y: 52}
+        - {x: -55, y: 16}
+        - {x: -55, y: -38}
+        - {x: -36, y: -61}
+        - {x: -13, y: -65}
+        - {x: 36, y: -65}
+        - {x: 48, y: -62}
+        - {x: 64, y: -29}
+        - {x: 64, y: 29}
+    - name: armorshield_54
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 0
+        width: 138
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 22, y: 54}
+        - {x: 12, y: 55}
+        - {x: -18, y: 55}
+        - {x: -50, y: 37}
+        - {x: -55, y: 15}
+        - {x: -55, y: -34}
+        - {x: -50, y: -43}
+        - {x: -18, y: -65}
+        - {x: 33, y: -65}
+        - {x: 48, y: -63}
+        - {x: 64, y: -26}
+        - {x: 64, y: 21}
+        - {x: 41, y: 47}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -33,8 +33,7 @@ public class SphareAntistrike : MonoBehaviour
                 Managers.WeaponManager.WeaponType = Weapons.Normal_Bomb;
                 Managers.SlowDownTimescale(other.gameObject.GetComponent<Missile>() != null ? 0.01f : 0.035f);
                 //show fade
-                GameObject gm = Instantiate(Managers.Me.FadePanel) as GameObject;
-                gm.transform.SetParent(GameObject.Find("Canvas").transform, false);
+                GameObject gm = Fade.CreateFade();
                 gm.GetComponent<Fade>().ShowAntistrike();
             }
         }

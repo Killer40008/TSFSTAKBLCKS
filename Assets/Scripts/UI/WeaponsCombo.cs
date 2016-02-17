@@ -14,6 +14,12 @@ public class WeaponsCombo : MonoBehaviour
     {
         GameObject.Find("WeaponsCombo").transform.FindChild("Border").gameObject.SetActive(true);
 
+        WeaponConfigWhenComboOpened();
+    }
+
+    private void WeaponConfigWhenComboOpened()
+    {
+        Managers.ShowSliders(true);
         if (WeaponType == Weapons.Auto_Missile || WeaponType == Weapons.Airstike)
         {
             if (Missile.highlightCoroutines.Count > 0)
@@ -23,9 +29,26 @@ public class WeaponsCombo : MonoBehaviour
                 Missile.highlightCoroutines.Clear();
             }
 
-            Managers.ShowSliders(true);
             Managers.TurnManager.tanks.ToList().ForEach(e => e.GetComponent<Tank>().Color = e.GetComponent<Tank>().OrginalColor);
             Managers.TurnManager.tanks.Where(t => t.activeSelf == true).ToList().ForEach(e => e.GetComponent<Focus>().DeActive());
+        }
+    }
+    private void WeaponConfigWhenComboSelected()
+    {
+        #region Normal bomb always infinity
+        if (WeaponType != Weapons.Normal_Bomb)
+            GameObject.Find("WeaponsCombo").transform.FindChild("Count").GetComponent<Text>().text
+                = WeaponsClass.WeaponsQuantities[WeaponType].ToString();
+        else
+            GameObject.Find("WeaponsCombo").transform.FindChild("Count").GetComponent<Text>().text = "∞";
+        #endregion
+
+        //config for some weapons
+        if (WeaponType == Weapons.Auto_Missile || WeaponType == Weapons.Airstike) Missile.Selected();
+        else if (WeaponType == Weapons.Lighting)
+        {
+            NotifyMessage.ShowMessage("Press Fire Button...", 4);
+            Managers.ShowSliders(false);
         }
     }
 
@@ -33,22 +56,14 @@ public class WeaponsCombo : MonoBehaviour
     {
         WeaponType = button.GetComponent<WeaponsClass>().weapon;
 
-        GameObject.Find("WeaponsCombo").transform.FindChild("Text").GetComponent<Text>().text
-            = WeaponType.ToString().Replace("_", " ");
-
-        if (WeaponType != Weapons.Normal_Bomb)
-            GameObject.Find("WeaponsCombo").transform.FindChild("Count").GetComponent<Text>().text
-                = WeaponsClass.WeaponsQuantities[WeaponType].ToString();
-        else
-            GameObject.Find("WeaponsCombo").transform.FindChild("Count").GetComponent<Text>().text = "∞";
-
-        //call selected if magnit bomb
-        if (WeaponType == Weapons.Auto_Missile || WeaponType == Weapons.Airstike) Missile.Selected();
-
-        lastButton = button;
+        GameObject.Find("WeaponsCombo").transform.FindChild("Text").GetComponent<Text>().text= WeaponType.ToString().Replace("_", " ");
         GameObject.Find("WeaponsCombo").transform.FindChild("Border").gameObject.SetActive(false);
+        lastButton = button;
 
+
+        WeaponConfigWhenComboSelected();
     }
+
 
     public void DrawWeaponInfoInUI()
     {
@@ -69,7 +84,7 @@ public class WeaponsCombo : MonoBehaviour
             case Weapons.Airstike: CurrentWeapon = wObj.AddComponent<Airstike>(); break;
             case Weapons.Cluster_Bomb: CurrentWeapon = wObj.AddComponent<Cluster_Bomb>(); break;
             case Weapons.Large_Bomb: CurrentWeapon = wObj.AddComponent<Large_Bomb>(); break;
-            case Weapons.Laser: CurrentWeapon = wObj.AddComponent<Laser>(); break;
+            case Weapons.Lighting: CurrentWeapon = wObj.AddComponent<Lighting>(); break;
             case Weapons.Auto_Missile: CurrentWeapon = wObj.AddComponent<Missile>(); break;
             case Weapons.Mega_Bomb: CurrentWeapon = wObj.AddComponent<Mega_Bomb>(); break;
             case Weapons.Mega_Shell: CurrentWeapon = wObj.AddComponent<MegaShell_bomb>(); ; break;

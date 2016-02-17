@@ -112,7 +112,8 @@ public class ModesCombo : MonoBehaviour
         if (!Managers.TurnManager.PlayerTank.GetComponent<Tank>().ArmorActivate)
         {
             Vector3 pos = Managers.TurnManager.PlayerTank.transform.position;
-            pos.y += 0.45f;
+            pos.y -= 0.1f;
+            pos.x -= 0.1f;
             pos.z = 0.05f;
             GameObject gm = Instantiate(ArmorPrefap, pos, Quaternion.identity) as GameObject;
             gm.transform.SetParent(Managers.TurnManager.PlayerTank.transform);

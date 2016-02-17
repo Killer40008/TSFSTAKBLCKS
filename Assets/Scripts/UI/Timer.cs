@@ -6,7 +6,7 @@ public class Timer : MonoBehaviour
 {
 
 
-    const int TIME = 20;
+    const int TIME = 30;
 
 
 

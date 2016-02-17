@@ -15,7 +15,7 @@ public enum Weapons
     Airstike,
     Shell,
     Mega_Shell,
-    Laser,
+    Lighting,
     Molotove
 }
 
@@ -214,19 +214,29 @@ public class WeaponData
             }
         }
 
+        if (BombObj != null)
+        {
+            if (!(WeaponsCombo.CurrentWeapon is Missile) && !(WeaponsCombo.CurrentWeapon is Airstike))
+            {
+                MonoBehaviour.Destroy(BombObj.GetComponent<SphereCollider>());
+                BombObj.AddComponent<SphereCollider>();
+            }
+        }
     }
 
-    public GameObject PlayExplosionEffect(bool Destroy = true)
+    public GameObject PlayExplosionEffect(bool Destroy = true, Vector3? position = null)
     {
         DestroyWhenFinished.AllowNextTurn = true;
-        GameObject explosion = (GameObject)MonoBehaviour.Instantiate(ExplosionPrefap, BombObj.transform.position, Quaternion.identity);
+
+        Vector3 instantiatePos = position == null ? BombObj.transform.position : (Vector3)position;
+        GameObject explosion = (GameObject)MonoBehaviour.Instantiate(ExplosionPrefap, instantiatePos, Quaternion.identity);
         explosion.transform.localScale = ExplosionSize;
         DestroyWhenFinished dwf = explosion.AddComponent<DestroyWhenFinished>();
         dwf.tankSource = SoruceTank;
         AnimationClip clip = explosion.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip;
         AnimationEvent ev = new AnimationEvent() { functionName = "ExplosionAnimationFinished", time = clip.length, intParameter = System.Convert.ToInt32(Destroy) };
         clip.AddEvent(ev);
-        if (Destroy) MonoBehaviour.Destroy(BombObj);
+        MonoBehaviour.Destroy(BombObj);
         return explosion;
     }
 

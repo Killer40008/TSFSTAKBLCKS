@@ -10,6 +10,7 @@ public class SpawnManager : MonoBehaviour
     public Object RocketEffect;
     public Object BombCollisionEffect;
     public Object AirstrikePrefap;
+    public Object LightingPrefap;
     public ArrayList CustomPositionX = new ArrayList();
 
     public void Spawn(int Count ,string playername, int playerrand, int playerscore)

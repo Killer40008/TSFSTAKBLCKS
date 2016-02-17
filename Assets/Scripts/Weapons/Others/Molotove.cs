@@ -38,8 +38,9 @@ public class Molotove : MonoBehaviour, IWeapon
 
         if (other.gameObject.tag == "Player")
         {
-            GameObject burnObj = Bomb.PlayExplosionEffect(false);
-            Destroy(Bomb.BombObj);
+            Vector3 position = other.transform.position;
+            position.y += 0.3f;
+            GameObject burnObj = Bomb.PlayExplosionEffect(false, position);
             Managers.Me.StartCoroutine(SubtractHealth(other.gameObject, burnObj));
         }
         else
@@ -51,7 +52,7 @@ public class Molotove : MonoBehaviour, IWeapon
     {
         while (Managers.DamageManager.GetHealth(tank) > 0)
         {
-            if (Mathf.Abs(tank.transform.position.x - burnObject.transform.position.x) > 1) break; 
+            if (burnObject == null || tank == null || Mathf.Abs(tank.transform.position.x - burnObject.transform.position.x) > 1) break; 
             yield return new WaitForSeconds(1);
             Managers.DamageManager.SubstractHealth(tank, Bomb.Damage);
             Managers.DamageManager.SubstractStrength(tank, Bomb.Strength);

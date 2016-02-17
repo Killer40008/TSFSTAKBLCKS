@@ -20,7 +20,7 @@ public class WeaponsClass  : MonoBehaviour
         WeaponsQuantities.Add(Weapons.Nuclear_bomb, 5);
         WeaponsQuantities.Add(Weapons.Shell, 5);
         WeaponsQuantities.Add(Weapons.Airstike, 5);
-        WeaponsQuantities.Add(Weapons.Laser, 0);
+        WeaponsQuantities.Add(Weapons.Lighting, 5);
         WeaponsQuantities.Add(Weapons.Auto_Missile, 5);
         WeaponsQuantities.Add(Weapons.Molotove, 5);
     }

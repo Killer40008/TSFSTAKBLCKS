@@ -8,7 +8,7 @@ public class DestroyManager : MonoBehaviour
     public Object DestroyEffect1;
     public bool Win = false;
 
-    public void CheckAndDestroy(GameObject tank)
+    public bool CheckAndDestroy(GameObject tank)
     {
        float health = Managers.DamageManager.GetHealth(tank);
        if (health <= 0)
@@ -19,7 +19,9 @@ public class DestroyManager : MonoBehaviour
 
            //check if there we have a winner
            CheckForWinner();
+           return true;
        }
+       return false;
     }
 
     private void DestroyEffect(GameObject tank)

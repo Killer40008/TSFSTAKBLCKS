@@ -1,0 +1,390 @@
+fileFormatVersion: 2
+guid: b5fbc5b8e56e99c489bc93fb0a8f0fb5
+timeCreated: 1455627776
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: lightingsheet_0
+    21300002: lightingsheet_1
+    21300004: lightingsheet_2
+    21300006: lightingsheet_3
+    21300008: lightingsheet_4
+    21300010: lightingsheet_5
+    21300012: lightingsheet_6
+    21300014: lightingsheet_7
+    21300016: lightingsheet_8
+    21300018: lightingsheet_9
+    21300020: lightingsheet_10
+    21300022: lightingsheet_11
+    21300024: lightingsheet_12
+    21300026: lightingsheet_13
+    21300028: lightingsheet_14
+    21300030: lightingsheet_15
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: lightingsheet_0
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 2109
+        width: 114
+        height: 678
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -23.59375, y: 496.09998}
+        - {x: -41.59375, y: 484.09998}
+        - {x: -41.59375, y: 0.099975586}
+        - {x: 39.40625, y: 0.099975586}
+        - {x: 43.40625, y: 25.099976}
+        - {x: 43.40625, y: 468.09998}
+        - {x: 28.40625, y: 496.09998}
+    - name: lightingsheet_1
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 2108
+        width: 105
+        height: 681
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 39.69374, y: 466.96558}
+        - {x: 26.69374, y: 498.96558}
+        - {x: -17.30626, y: 498.96558}
+        - {x: -38.30626, y: 261.96558}
+        - {x: -38.30626, y: 85.965576}
+        - {x: -29.30626, y: 41.965576}
+        - {x: -13.306259, y: 5.965576}
+        - {x: -2.3062592, y: -0.034423828}
+        - {x: 17.69374, y: -0.034423828}
+        - {x: 24.69374, y: 10.965576}
+        - {x: 26.69374, y: 55.965576}
+        - {x: 39.69374, y: 176.96558}
+    - name: lightingsheet_2
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 2109
+        width: 113
+        height: 684
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -30.450012, y: 500.7937}
+        - {x: -41.450012, y: 478.7937}
+        - {x: -41.450012, y: 107.7937}
+        - {x: 2.5499878, y: -0.20629883}
+        - {x: 37.549988, y: -0.20629883}
+        - {x: 41.549988, y: 13.793701}
+        - {x: 41.549988, y: 311.7937}
+        - {x: 30.549988, y: 500.7937}
+    - name: lightingsheet_3
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 2103
+        width: 95
+        height: 685
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 14.3125, y: 502.27185}
+        - {x: -18.6875, y: 502.27185}
+        - {x: -34.6875, y: 486.27185}
+        - {x: -34.6875, y: 2.2718506}
+        - {x: -29.6875, y: 0.2718506}
+        - {x: 24.3125, y: 0.2718506}
+        - {x: 35.3125, y: 17.27185}
+        - {x: 35.3125, y: 400.27185}
+        - {x: 24.3125, y: 499.27185}
+    - name: lightingsheet_4
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 1408
+        width: 76
+        height: 683
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 22.0625, y: 500.8219}
+        - {x: -1.9375, y: 500.8219}
+        - {x: -10.9375, y: 496.8219}
+        - {x: -22.9375, y: 459.8219}
+        - {x: -20.9375, y: 442.8219}
+        - {x: -19.9375, y: 404.8219}
+        - {x: -15.9375, y: 387.8219}
+        - {x: -23.9375, y: 351.8219}
+        - {x: -27.9375, y: 294.8219}
+        - {x: -27.9375, y: 26.8219}
+        - {x: -25.9375, y: 0.8218994}
+        - {x: -20.9375, y: -0.17810059}
+        - {x: 29.0625, y: -0.17810059}
+        - {x: 29.0625, y: 470.8219}
+        - {x: 28.0625, y: 493.8219}
+    - name: lightingsheet_5
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 1407
+        width: 123
+        height: 681
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -17.80626, y: 499.35938}
+        - {x: -20.80626, y: 496.35938}
+        - {x: -44.80626, y: 401.35938}
+        - {x: -44.80626, y: 142.35938}
+        - {x: -34.80626, y: 34.359375}
+        - {x: -13.806259, y: 0.359375}
+        - {x: 46.19374, y: 0.359375}
+        - {x: 46.19374, y: 455.35938}
+        - {x: 23.19374, y: 499.35938}
+    - name: lightingsheet_6
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 1407
+        width: 111
+        height: 680
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -40.23752, y: 498.99377}
+        - {x: -40.23752, y: 26.993774}
+        - {x: -31.237518, y: -0.006225586}
+        - {x: 14.762482, y: -0.006225586}
+        - {x: 41.76248, y: 100.993774}
+        - {x: 41.76248, y: 389.99377}
+        - {x: 10.762482, y: 498.99377}
+    - name: lightingsheet_7
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 1407
+        width: 107
+        height: 680
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -14.84375, y: 498.99377}
+        - {x: -23.84375, y: 483.99377}
+        - {x: -38.84375, y: 462.99377}
+        - {x: -38.84375, y: 115.993774}
+        - {x: -30.84375, y: -0.006225586}
+        - {x: 40.15625, y: -0.006225586}
+        - {x: 40.15625, y: 498.99377}
+    - name: lightingsheet_8
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 710
+        width: 99
+        height: 677
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -17.09375, y: 495.71564}
+        - {x: -36.09375, y: 474.71564}
+        - {x: -36.09375, y: -0.2843628}
+        - {x: 29.90625, y: -0.2843628}
+        - {x: 37.90625, y: 5.715637}
+        - {x: 37.90625, y: 450.71564}
+        - {x: 24.90625, y: 495.71564}
+    - name: lightingsheet_9
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 706
+        width: 119
+        height: 681
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -19.78125, y: 498.7531}
+        - {x: -43.78125, y: 440.7531}
+        - {x: -43.78125, y: 122.75311}
+        - {x: -4.78125, y: -0.2468872}
+        - {x: 44.21875, y: -0.2468872}
+        - {x: 44.21875, y: 498.7531}
+    - name: lightingsheet_10
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 707
+        width: 108
+        height: 680
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -16.056244, y: 499.1187}
+        - {x: -39.056244, y: 460.1187}
+        - {x: -39.056244, y: 222.11871}
+        - {x: -18.056244, y: 20.118713}
+        - {x: -3.056244, y: 0.11871338}
+        - {x: 35.943756, y: 0.11871338}
+        - {x: 40.943756, y: 1.1187134}
+        - {x: 40.943756, y: 444.1187}
+        - {x: 17.943756, y: 499.1187}
+    - name: lightingsheet_11
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 706
+        width: 95
+        height: 682
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 4.25, y: 499.11877}
+        - {x: -34.75, y: 499.11877}
+        - {x: -34.75, y: 3.1187744}
+        - {x: -26.75, y: 0.118774414}
+        - {x: 0.25, y: 0.118774414}
+        - {x: 32.25, y: 25.118774}
+        - {x: 35.25, y: 57.118774}
+        - {x: 35.25, y: 473.11877}
+    - name: lightingsheet_12
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 4
+        width: 125
+        height: 683
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -2.7000008, y: 501.14688}
+        - {x: -41.7, y: 501.14688}
+        - {x: -45.7, y: 484.14688}
+        - {x: -45.7, y: 287.14688}
+        - {x: -39.7, y: 204.14688}
+        - {x: -42.7, y: 12.146878}
+        - {x: -35.7, y: 0.146878}
+        - {x: -3.7000008, y: 0.146878}
+        - {x: 38.3, y: 24.146877}
+        - {x: 47.3, y: 76.14688}
+        - {x: 47.3, y: 329.14688}
+        - {x: 7.299999, y: 498.14688}
+    - name: lightingsheet_13
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 6
+        width: 115
+        height: 681
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 15.506241, y: 498.8781}
+        - {x: -28.49376, y: 498.8781}
+        - {x: -42.49376, y: 452.8781}
+        - {x: -42.49376, y: 217.87811}
+        - {x: -31.49376, y: 13.878116}
+        - {x: -17.49376, y: -0.121884346}
+        - {x: 20.50624, y: -0.121884346}
+        - {x: 42.50624, y: 88.87811}
+        - {x: 42.50624, y: 426.8781}
+        - {x: 24.50624, y: 495.8781}
+    - name: lightingsheet_14
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 10
+        width: 94
+        height: 677
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -29.700012, y: 495.84064}
+        - {x: -34.700012, y: 464.84064}
+        - {x: -34.700012, y: -0.15937805}
+        - {x: 18.299988, y: -0.15937805}
+        - {x: 35.299988, y: 34.840622}
+        - {x: 35.299988, y: 383.84064}
+        - {x: 19.299988, y: 495.84064}
+    - name: lightingsheet_15
+      rect:
+        serializedVersion: 2
+        x: 658
+        y: 7
+        width: 105
+        height: 680
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -27.337494, y: 497.74374}
+        - {x: -38.337494, y: 460.74374}
+        - {x: -38.337494, y: 39.74375}
+        - {x: -24.337494, y: -0.2562499}
+        - {x: 15.662506, y: -0.2562499}
+        - {x: 38.662506, y: 14.74375}
+        - {x: 38.662506, y: 420.74374}
+        - {x: 9.662506, y: 497.74374}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

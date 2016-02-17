@@ -37,6 +37,34 @@ public class Armor : MonoBehaviour
         }
     }
 
+    public void OnLightingEnter()
+    {
+
+        float damage = Lighting.Damage;
+        currentStrength -= damage;
+        Color color = GetComponent<SpriteRenderer>().color;
+        if (currentStrength <= 0)
+        {
+            color.a = 0;
+            Managers.DamageManager.SubstractHealth(Tank, Mathf.Abs(currentStrength));
+            Managers.DamageManager.SubstractStrength(Tank, Mathf.Abs(currentStrength));
+            Managers.DestroyManager.CheckAndDestroy(Tank);
+
+            if (Tank.activeSelf)
+            {
+                StartCoroutine(DeactiveArmor());
+            }
+        }
+        else
+        {
+            color.a = currentStrength / ArmorStrength;
+        }
+
+        GetComponent<SpriteRenderer>().color = color;
+    }
+
+    
+
 
     IEnumerator DeactiveArmor()
     {
@@ -44,9 +72,19 @@ public class Armor : MonoBehaviour
         if (Tank.activeSelf)
         {
             Tank.GetComponent<Tank>().ArmorActivate = false;
+            Destroy(this.gameObject);
         }
         Managers.ModesManager.OnNoneSelected();
     }
+
+    void Start()
+    {
+        if (Tank.activeSelf)
+        {
+            this.transform.eulerAngles = this.transform.parent.eulerAngles;
+        }
+    }
+
 
     public void SetStrength(float strength)
     {

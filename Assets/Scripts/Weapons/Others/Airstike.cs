@@ -5,7 +5,6 @@ using System.Linq;
 
 public class Airstike : MonoBehaviour, IWeapon
 {
-    public static List<IEnumerator> highlightCoroutines = new List<IEnumerator>();
     GameObject Tank;
 
     public void Create( Sprite sprite, Object explosion, float fireStrengh, GameObject tank)
@@ -13,8 +12,8 @@ public class Airstike : MonoBehaviour, IWeapon
         Tank = tank;
         Bomb = new WeaponData()
         {
-            Damage = 150,
-            Strength = 100,
+            Damage = 200,
+            Strength = 200,
            BombObj = this.gameObject,Drag = this.Drag,
             SizeInital = new Vector3(0.1523757f, 0.1523757f, 0.1523757f),
             SizeFinal = new Vector3(0.7389345f, 0.7389345f, 0.7389345f),
@@ -42,49 +41,6 @@ public class Airstike : MonoBehaviour, IWeapon
         f.Active();
         f.OnMouseDown();
     }
-
-
-    public static void Selected()
-    {
-        Managers.ShowSliders(false);
-        Managers.TurnManager.tanks.ToList().ForEach(e =>
-        {
-            if (e != Managers.TurnManager.PlayerTank && e.activeSelf == true)
-            {
-                e.GetComponent<Focus>().Active();
-                highlightCoroutines.Add(Highlight(e.transform));
-                Managers.Me.StartCoroutine(highlightCoroutines[highlightCoroutines.Count - 1]);
-            }
-        });
-    }
-
-
-    public static IEnumerator Highlight(Transform trns)
-    {
-        Tank sprite = trns.GetComponent<Tank>();
-        Color orginal = sprite.Color;
-        sprite.OrginalColor = orginal;
-        float t = 0.05f;
-
-        while (true)
-        {
-            while (t < 1)
-            {
-                sprite.Color = Color.Lerp(sprite.Color, Color.white, t);
-                t += 0.05f;
-                yield return new WaitForEndOfFrame();
-            }
-            while (t > 0)
-            {
-                sprite.Color = Color.Lerp(orginal, Color.white, t);
-                t -= 0.05f;
-                yield return new WaitForEndOfFrame();
-            }
-
-        }
-
-    }
-
 
 
     public void OnCollisionEnter(Collision other)
