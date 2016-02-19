@@ -13,7 +13,7 @@ public class SphareAntistrike : MonoBehaviour
 
 
 
-    void OnTriggerStay(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (Triggered == false && Managers.TurnManager.CurrentTank != MyTank && other.gameObject.layer == LayerMask.NameToLayer("Bomb"))
         {

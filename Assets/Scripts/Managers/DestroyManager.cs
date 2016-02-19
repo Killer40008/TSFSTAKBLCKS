@@ -34,7 +34,14 @@ public class DestroyManager : MonoBehaviour
         if (Managers.TurnManager.tanks.Count(t => t.activeSelf == true) == 1)
         {
             //winner
-            Instantiate(new GameObject() { name = "ddddddddddddddd" }, Vector3.zero, Quaternion.identity);
+            Managers.Me.StopAllCoroutines();
+            foreach (GameObject gm in GameObject.FindGameObjectsWithTag("Bomb"))
+                Destroy(gm);
+
+            Fade fp = Fade.CreateFade().GetComponent<Fade>();
+            fp.FadeIn();
+            fp.ShowWinPanel();
+            
             Win = true;
         }
     }

@@ -25,6 +25,7 @@ public class Tank : MonoBehaviour
     public bool ArmorActivate;
     public Vector3 BurrellPosition;
     public Vector3 BurrellRotation;
+    public int BurrellCount = 1;
 
 
     //player

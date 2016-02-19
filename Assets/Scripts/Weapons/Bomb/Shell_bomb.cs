@@ -14,7 +14,7 @@ public class Shell_bomb : MonoBehaviour, IWeapon {
             Strength = 100,
             BombObj = this.gameObject,
             Drag = this.Drag,
-            SizeInital = new Vector3(0.9f, 0.9f, 0.9f),
+            SizeInital = new Vector3(0.7f, 0.7f, 0.7f),
             SizeFinal = new Vector3(0.9f, 0.9f, 0.9f),
             ExplosionSize = new Vector3(0.4f, 0.4f, 0.4f),
             IntialPeriod = 0.5f,

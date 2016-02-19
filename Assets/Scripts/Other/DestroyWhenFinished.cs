@@ -16,16 +16,16 @@ public class DestroyWhenFinished : MonoBehaviour
             float bombCount = GameObject.FindGameObjectsWithTag("Bomb").Length;
             if (bombCount == 0 && tankSource != null)
             {
-                Tank_Fire tf = tankSource.transform.FindChild("Burrell").GetComponent<Tank_Fire>();
-                if (tf.FireCount == 1 || Managers.DamageManager.GetHealth(Managers.TurnManager.CurrentTank) <= 0) //for double burrell
+                Tank tf = tankSource.GetComponent<Tank>();
+                if (tf.BurrellCount == 1 || Managers.DamageManager.GetHealth(Managers.TurnManager.CurrentTank) <= 0) //for double burrell
                 {
-                    tf.FireCount = 1;
+                    tf.BurrellCount = 1;
                     if (AllowNextTurn)
                         Managers.TurnManager.SetTurnToNextTank();
 
                     AllowNextTurn = false;
                 }
-                else if (tf.FireCount == 2)
+                else if (tf.BurrellCount == 2)
                 {
                     //double burrell
                     if (Managers.WeaponManager.lastButton != null)

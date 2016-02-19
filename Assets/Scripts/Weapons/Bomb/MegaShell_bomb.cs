@@ -14,8 +14,8 @@ public class MegaShell_bomb : MonoBehaviour, IWeapon
             Strength = 100,
             BombObj = this.gameObject,
             Drag = this.Drag,
-            SizeInital = new Vector3(0.9f, 0.9f, 0.9f),
-            SizeFinal = new Vector3(0.9f, 0.9f, 0.9f),
+            SizeInital = new Vector3(0.04715929f, 0.04715929f, 0.04715929f),
+            SizeFinal = new Vector3(0.04715929f, 0.04715929f, 0.04715929f),
             ExplosionSize = new Vector3(0.4f, 0.4f, 0.4f),
             IntialPeriod = 0.5f,
             SpriteColor = Color.red,
@@ -72,7 +72,7 @@ public class MegaShell_bomb : MonoBehaviour, IWeapon
 
     public int GameObjectSpriteIndex
     {
-        get { return 0; }
+        get { return 6; }
     }
 
     public GameObject WeaponObj { get; set; }

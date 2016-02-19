@@ -30,6 +30,14 @@ public class Fade : MonoBehaviour
         transform.Find("AntiStrikePanel").GetComponent<CanvasGroup>().interactable = true;
     }
 
+    public void ShowWinPanel()
+    {
+        transform.Find("RoundCompleted").GetComponent<CanvasGroup>().alpha = 1;
+        transform.Find("RoundCompleted").GetComponent<CanvasGroup>().interactable = true;
+        //
+        transform.Find("RoundCompleted").GetComponent<Animator>().SetBool("Do", true);
+    }
+
 
 
     public void DestroyFade()

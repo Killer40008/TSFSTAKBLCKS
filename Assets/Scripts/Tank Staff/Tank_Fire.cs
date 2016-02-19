@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Linq;
 
 public class Tank_Fire : MonoBehaviour
 {
-    public int FireCount = 1;
+
 
     public GameObject Fire(float strength = 0, bool AI = false)
     {
@@ -12,6 +13,9 @@ public class Tank_Fire : MonoBehaviour
         if (enabled)
         {
             if (strength == 0) strength = StrenghSlider.Strengh;
+
+            if (AI) AIWeaponsConfig();
+
 
             Managers.WeaponManager.GenerateGameObject();
             IWeapon weapon = (IWeapon)WeaponsCombo.CurrentWeapon;
@@ -22,7 +26,6 @@ public class Tank_Fire : MonoBehaviour
             weapon.Create(sprites[weapon.GameObjectSpriteIndex], Explosions[weapon.ExplosionSpriteIndex],
                 strength, this.transform.parent.gameObject);
 
-            if(AI) AIWeaponsConfig();
 
             weapon.Fire(this.transform.parent.gameObject);
             this.GetComponent<Burrell_Movement>().OnFire();
@@ -32,26 +35,53 @@ public class Tank_Fire : MonoBehaviour
         return null;
     }
 
+    private bool IsPlayerConfigured()
+    {
+
+
+        if (Managers.WeaponManager.WeaponType == Weapons.Auto_Missile || Managers.WeaponManager.WeaponType == Weapons.Airstike)
+        {
+            if (Managers.TurnManager.tanks.Where(t => t.GetComponent<Focus>().TankSelected != null).FirstOrDefault() == null)
+            {
+                NotifyMessage.ShowMessage("Please Select Tank", 3);
+                return false;
+            }
+        }
+        return true;
+    }
+
     private void AIWeaponsConfig()
     {
-        if (WeaponsCombo.CurrentWeapon is Missile)
+        //select random weapon
+        int weaponsCount = System.Enum.GetNames(typeof(Weapons)).Length;
+        Managers.WeaponManager.WeaponType = (Weapons)Random.Range(0, weaponsCount);
+
+
+
+        if (Managers.WeaponManager.WeaponType == Weapons.Auto_Missile)
             Missile.SelectRandomTankForAI(this.transform.parent.gameObject);
-        else if (WeaponsCombo.CurrentWeapon is Airstike)
+        else if (Managers.WeaponManager.WeaponType == Weapons.Airstike)
             Airstike.SelectRandomTankForAI(this.transform.parent.gameObject);
 
     }
 
+    public static bool FireButtonEnabled = false;
     public void FireButtonClicked()
     {
-        if (CheckIfWeaponsValid() && Managers.DestroyManager.Win == false)
+        if (CheckIfWeaponsValid() && FireButtonEnabled && Managers.DestroyManager.Win == false)
         {
+
+            if (!IsPlayerConfigured()) return;
+
+
             GameObject.Find("PlayerTimer").GetComponent<Timer>().StopTimer();
 
-            if (FireCount == 1)
+
+            if (Managers.TurnManager.CurrentTank.GetComponent<Tank>().BurrellCount == 1)
             {
                 Managers.TurnManager.PlayerTank.transform.FindChild("Burrell").GetComponent<Tank_Fire>().Fire();
                 if (CheckIfHasSecondBurrell())
-                    FireCount = 2;
+                    Managers.TurnManager.CurrentTank.GetComponent<Tank>().BurrellCount = 2;
                 
             }
             else
@@ -59,7 +89,7 @@ public class Tank_Fire : MonoBehaviour
                 Managers.TurnManager.PlayerTank.transform.FindChild("Burrell2").GetComponent<Tank_Fire>().Fire();
                 Managers.TurnManager.PlayerTank.transform.FindChild("Burrell2").GetComponent<Burrell_Movement>().enabled = false;
                 Managers.TurnManager.PlayerTank.transform.FindChild("Burrell2").GetComponent<Tank_Fire>().enabled = false;
-                FireCount = 1;
+                Managers.TurnManager.CurrentTank.GetComponent<Tank>().BurrellCount = 1;
             }
 
 
@@ -67,6 +97,8 @@ public class Tank_Fire : MonoBehaviour
             //decrease count
             if (Managers.WeaponManager.WeaponType != Weapons.Normal_Bomb)
                 WeaponsClass.WeaponsQuantities[Managers.WeaponManager.WeaponType]--;
+
+            Tank_Fire.FireButtonEnabled = false;
         }
     }
 
@@ -74,7 +106,7 @@ public class Tank_Fire : MonoBehaviour
     {
         for (int i = 0; i < Managers.TurnManager.PlayerTank.transform.childCount; i++)
         {
-            if (Managers.TurnManager.PlayerTank.transform.GetChild(i).tag == "SecondBurrell" && FireCount == 1)
+            if (Managers.TurnManager.PlayerTank.transform.GetChild(i).tag == "SecondBurrell" && Managers.TurnManager.CurrentTank.GetComponent<Tank>().BurrellCount == 1)
             {
                 return true;
             }
