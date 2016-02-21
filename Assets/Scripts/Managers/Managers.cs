@@ -16,6 +16,7 @@ public class Managers : MonoBehaviour
     public static WeaponsCombo WeaponManager;
     public static ModesCombo ModesManager;
     public static MapManager MapsManager;
+    public static PlayerInfo PlayerInfos;
     public static Managers Me;
 
     void Start()
@@ -31,6 +32,7 @@ public class Managers : MonoBehaviour
         WeaponManager = transform.FindChild("WeaponsManager").GetComponent<WeaponsCombo>();
         ModesManager = transform.FindChild("ModesManager").GetComponent<ModesCombo>();
         MapsManager = transform.FindChild("MapManager").GetComponent<MapManager>();
+        PlayerInfos = SpawnManager.GetComponent<PlayerInfo>();
 
         MapsManager.StartMap(MapManager.Maps.Volcano);
         SpawnManager.Spawn(TanksStaringCount);
@@ -38,7 +40,7 @@ public class Managers : MonoBehaviour
         Wind.StartWind();
         WeaponsClass.InitiallizeWeaponsQuantities();
         ModesClass.InitiallizeWeaponsQuantities();
-        PlayerInfo.DrawPlayerInfoInUI();
+        PlayerInfos.DrawPlayerInfoInUI_SinglePlayer();
 
         //begin clouds
         GameObject.Find("Cloud").GetComponent<Cload_Movement>().Begin();

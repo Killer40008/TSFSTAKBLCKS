@@ -22,6 +22,12 @@ public class Welcome : MonoBehaviour
     {
 
         string textboxText = GameObject.Find("Welcome").transform.Find("InputField").GetComponent<InputField>().text;
+
+        if (textboxText.Length > 9) {
+            GameObject.Find("Welcome").transform.Find("InputField").GetComponent<InputField>().text = "Must be less than 9 letters";
+            return;
+        }
+
         if (textboxText.Trim() != "")
         {
             PlayerData dt = ScoreModule.CreateNewPlayerData();
