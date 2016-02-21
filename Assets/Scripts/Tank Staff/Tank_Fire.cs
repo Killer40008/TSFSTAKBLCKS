@@ -65,16 +65,16 @@ public class Tank_Fire : MonoBehaviour
 
     }
 
-    public static bool FireButtonEnabled = false;
     public void FireButtonClicked()
     {
-        if (CheckIfWeaponsValid() && FireButtonEnabled && Managers.DestroyManager.Win == false)
+        if (CheckIfWeaponsValid()  && Managers.DestroyManager.Win == false)
         {
 
             if (!IsPlayerConfigured()) return;
 
 
             GameObject.Find("PlayerTimer").GetComponent<Timer>().StopTimer();
+            GameObject.Find("Canvas").transform.FindChild("HUD").FindChild("DisabledPanel").GetComponent<CanvasGroup>().blocksRaycasts = true;
 
 
             if (Managers.TurnManager.CurrentTank.GetComponent<Tank>().BurrellCount == 1)
@@ -98,7 +98,6 @@ public class Tank_Fire : MonoBehaviour
             if (Managers.WeaponManager.WeaponType != Weapons.Normal_Bomb)
                 WeaponsClass.WeaponsQuantities[Managers.WeaponManager.WeaponType]--;
 
-            Tank_Fire.FireButtonEnabled = false;
         }
     }
 

@@ -36,7 +36,8 @@ public class Timer : MonoBehaviour
         }
         StopCoroutine(HighLight(img, orginal));
         img.color = orginal;
-        Managers.TurnManager.SetTurnToNextTank();
+
+        TimerFinished();
     }
 
     IEnumerator HighLight(Image img, Color orginal)
@@ -56,5 +57,9 @@ public class Timer : MonoBehaviour
         StopAllCoroutines();
     }
 
-
+    void TimerFinished()
+    {
+        Managers.TurnManager.SetTurnToNextTank();
+        Managers.WeaponManager.WeaponConfigWhenComboOpened();
+    }
 }

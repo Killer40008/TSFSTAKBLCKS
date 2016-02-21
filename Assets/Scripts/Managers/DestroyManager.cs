@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class DestroyManager : MonoBehaviour
 {
@@ -41,8 +42,17 @@ public class DestroyManager : MonoBehaviour
             Fade fp = Fade.CreateFade().GetComponent<Fade>();
             fp.FadeIn();
             fp.ShowWinPanel();
+
+            StartCoroutine(ShowRoundScene());
             
             Win = true;
         }
     }
+
+    IEnumerator ShowRoundScene()
+    {
+        yield return new WaitForSeconds(3.5f);
+        SceneManager.LoadScene("Round");    
+    }
+
 }

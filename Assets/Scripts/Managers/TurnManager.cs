@@ -96,7 +96,6 @@ public class TurnManager : MonoBehaviour
             if (Managers.WeaponManager.lastButton != null)
                 Managers.WeaponManager.OnWeaponsSelected(Managers.WeaponManager.lastButton);
             GameObject.Find("PlayerTimer").GetComponent<Timer>().StartTimer();
-            Tank_Fire.FireButtonEnabled = true;
             
         }
         else

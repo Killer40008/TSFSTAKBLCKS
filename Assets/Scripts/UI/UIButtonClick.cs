@@ -70,6 +70,8 @@ public class UIButtonClick : MonoBehaviour
     public void OnSucicdeClicked(GameObject button)
     {
         Managers.TurnManager.SetTurnToNextTank();
+        Managers.WeaponManager.WeaponConfigWhenComboOpened();
+
     }
 
 

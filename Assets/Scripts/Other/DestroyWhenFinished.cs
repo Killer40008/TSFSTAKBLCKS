@@ -38,6 +38,9 @@ public class DestroyWhenFinished : MonoBehaviour
                     tankSource.transform.FindChild("Burrell").GetComponent<Burrell_Movement>().enabled = false;
                     NotifyMessage.ShowMessage("Second Burrell Activated!", 2);
                 }
+
+
+                GameObject.Find("Canvas").transform.FindChild("HUD").FindChild("DisabledPanel").GetComponent<CanvasGroup>().blocksRaycasts = false;
                 _localDestroyed = true;
             }
         }

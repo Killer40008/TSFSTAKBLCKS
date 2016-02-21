@@ -62,8 +62,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Armor.cs" />
-    <Compile Include="Assets\Fade.cs" />
     <Compile Include="Assets\GooglePlayGames\BasicApi\Achievement.cs" />
     <Compile Include="Assets\GooglePlayGames\BasicApi\CommonStatusCodes.cs" />
     <Compile Include="Assets\GooglePlayGames\BasicApi\CommonTypes.cs" />
@@ -237,6 +235,9 @@
     <Compile Include="Assets\GooglePlayGames\PluginVersion.cs" />
     <Compile Include="Assets\MultiPlayerConstants.cs" />
     <Compile Include="Assets\ResizeToScreen.cs" />
+    <Compile Include="Assets\Score\PlayerData.cs" />
+    <Compile Include="Assets\Score\ScoreModule.cs" />
+    <Compile Include="Assets\Score\XmlSerialization.cs" />
     <Compile Include="Assets\Scripts\AI\Tank_AI.cs" />
     <Compile Include="Assets\Scripts\Framerate.cs" />
     <Compile Include="Assets\Scripts\Managers\DamageManager.cs" />
@@ -260,6 +261,7 @@
     <Compile Include="Assets\Scripts\Other\SphareTriggerHit.cs" />
     <Compile Include="Assets\Scripts\Other\Teleportation.cs" />
     <Compile Include="Assets\Scripts\Other\Wind.cs" />
+    <Compile Include="Assets\Scripts\Tank Staff\Armor.cs" />
     <Compile Include="Assets\Scripts\Tank Staff\Burrell_Movement.cs" />
     <Compile Include="Assets\Scripts\Tank Staff\Focus.cs" />
     <Compile Include="Assets\Scripts\Tank Staff\SphareAntistrike.cs" />
@@ -267,6 +269,7 @@
     <Compile Include="Assets\Scripts\Tank Staff\Tank_Fire.cs" />
     <Compile Include="Assets\Scripts\Tank Staff\Tank_Movement.cs" />
     <Compile Include="Assets\Scripts\UI\AntiStrikeSlider.cs" />
+    <Compile Include="Assets\Scripts\UI\Fade.cs" />
     <Compile Include="Assets\Scripts\UI\LeftMovementButton.cs" />
     <Compile Include="Assets\Scripts\UI\ModesClass.cs" />
     <Compile Include="Assets\Scripts\UI\ModesCombo.cs" />

@@ -17,7 +17,7 @@ public class WeaponsCombo : MonoBehaviour
         WeaponConfigWhenComboOpened();
     }
 
-    private void WeaponConfigWhenComboOpened()
+    public void WeaponConfigWhenComboOpened()
     {
         Managers.ShowSliders(true);
         if (WeaponType == Weapons.Auto_Missile || WeaponType == Weapons.Airstike)
