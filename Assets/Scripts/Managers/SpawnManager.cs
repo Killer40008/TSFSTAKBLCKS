@@ -13,7 +13,7 @@ public class SpawnManager : MonoBehaviour
     public Object LightingPrefap;
     public ArrayList CustomPositionX = new ArrayList();
 
-    public void Spawn(int Count ,string playername, int playerrand, int playerscore)
+    public void Spawn(int Count)
     {
         float eachX = (CameraWidth / Count );
         float lastX = (-CameraWidth * .5f) - (eachX - 1f);
@@ -25,12 +25,13 @@ public class SpawnManager : MonoBehaviour
 
 
             GameObject obj = Instantiate(TankPrefap, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
-            SetPropertiesToTank(obj, i, playername, playerrand, playerscore);
+            SetPropertiesToTank(obj, i);
         }
     }
 
-    private void SetPropertiesToTank(GameObject obj, int counter, string playername, int playerrand, int playerscore)
+    private void SetPropertiesToTank(GameObject obj, int counter)
     {
+        PlayerData pd = ScoreModule.GetPlayerData();
         Color color = ColorRandom.GetRandomColors(counter);
         obj.tag = "Player";
         Tank tData = obj.GetComponent<Tank>();
@@ -39,9 +40,9 @@ public class SpawnManager : MonoBehaviour
         tData.Health = 100;
         tData.Strength = 100;
         tData.Oil = 500;
-        tData.PlayerName = "Mohammed";
-        tData.PlayerRank = playerrand;
-        tData.PlayerScore = playerscore;
+        tData.PlayerName = pd.PlayerName ;
+        tData.PlayerRank = pd.PlayerRank;
+        tData.PlayerMoney = pd.PlayerMoney;
         obj.GetComponent<Rigidbody>().centerOfMass = new Vector3(0f, -0.5f, 0);
     }
 
@@ -67,6 +68,16 @@ public class SpawnManager : MonoBehaviour
             float width = height * cam.aspect;
             return width;
         }
+    }
+
+    public static void SetPropertiesToPlayerTank()
+    {
+        PlayerData pd = ScoreModule.GetPlayerData();
+        Tank tData = Managers.TurnManager.PlayerTank.GetComponent<Tank>();
+        tData.PlayerName = pd.PlayerName;
+        tData.PlayerRank = pd.PlayerRank;
+        tData.PlayerMoney = pd.PlayerMoney;
+
     }
 
 

@@ -36,4 +36,32 @@ public class MenuBase : MonoBehaviour {
     {
         Application.Quit();
     }
+
+
+    //
+    public static void HideAndShow(MonoBehaviour sender ,string panelHide, string panelShow)
+    {
+
+        //hide menu
+        GameObject.Find(panelHide).GetComponent<CanvasGroup>().interactable = false;
+        sender.StartCoroutine(MenuBase.FadeHide(GameObject.Find(panelHide).GetComponent<CanvasGroup>()));
+
+
+        //show
+        GameObject diffObj = GameObject.Find(panelShow);
+        diffObj.GetComponent<CanvasGroup>().interactable = true;
+        sender.StartCoroutine(MenuBase.FadeShow(diffObj.GetComponent<CanvasGroup>()));
+        MenuBase.BringToFront(diffObj);
+    }
+
+    public static void Show(MonoBehaviour sender, string panelShow)
+    {
+
+    
+        //show
+        GameObject diffObj = GameObject.Find(panelShow);
+        diffObj.GetComponent<CanvasGroup>().interactable = true;
+        sender.StartCoroutine(MenuBase.FadeShow(diffObj.GetComponent<CanvasGroup>()));
+        MenuBase.BringToFront(diffObj);
+    }
 }

@@ -10,7 +10,7 @@ public static class ScoreModule
     {
         PlayerData pd = new PlayerData();
 
-        string data = XmlSerialization.SerializeToString(pd);
+        string data = BinatySerialization.SerializeToString(pd);
         PlayerPrefs.SetString(DATA_KEY, data);
         return pd;
     }
@@ -23,12 +23,18 @@ public static class ScoreModule
            return false;
     }
 
-    public static PlayerData LoadPlayerData()
+    public static void SavePlayerData(PlayerData data)
+    {
+        string datastr = BinatySerialization.SerializeToString(data);
+        PlayerPrefs.SetString(DATA_KEY, datastr);
+    }
+
+    public static PlayerData GetPlayerData()
     {
         if (IsPlayerDataExist())
         {
             string data = PlayerPrefs.GetString(DATA_KEY);
-            PlayerData pd = XmlSerialization.DeserializeToObject(data);
+            PlayerData pd = BinatySerialization.DeserializeToObject(data);
 
             return pd;
         }

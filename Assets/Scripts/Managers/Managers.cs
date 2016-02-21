@@ -33,11 +33,12 @@ public class Managers : MonoBehaviour
         MapsManager = transform.FindChild("MapManager").GetComponent<MapManager>();
 
         MapsManager.StartMap(MapManager.Maps.Volcano);
-        SpawnManager.Spawn(TanksStaringCount, "", 1, 2);
+        SpawnManager.Spawn(TanksStaringCount);
         TurnManager.Begin();
         Wind.StartWind();
         WeaponsClass.InitiallizeWeaponsQuantities();
         ModesClass.InitiallizeWeaponsQuantities();
+        PlayerInfo.DrawPlayerInfoInUI();
 
         //begin clouds
         GameObject.Find("Cloud").GetComponent<Cload_Movement>().Begin();

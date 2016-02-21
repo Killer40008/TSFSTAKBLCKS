@@ -10,17 +10,7 @@ public class SinglePlayer : MonoBehaviour
 
     public void OnSigleButtonClick()
     {
-        //hide menu
-        GameObject.Find("Menu").GetComponent<CanvasGroup>().interactable = false;
-        StartCoroutine(MenuBase.FadeHide(GameObject.Find("Menu").GetComponent<CanvasGroup>()));
-
-
-        //show diffcult
-        GameObject diffObj = GameObject.Find("Difficulty");
-        diffObj.GetComponent<CanvasGroup>().interactable = true;
-        StartCoroutine(MenuBase.FadeShow(diffObj.GetComponent<CanvasGroup>()));
-        MenuBase.BringToFront(diffObj);
-
+        MenuBase.HideAndShow(this, "Menu", "Difficulty");
     }
 
     public void OnEasyClick()

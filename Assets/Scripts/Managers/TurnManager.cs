@@ -18,6 +18,7 @@ public class TurnManager : MonoBehaviour
          int playerIndex = Random.Range(0, Managers.TanksStaringCount);
         // PlayerTank = tanks[playerIndex];
          PlayerTank = tanks[0];
+         SpawnManager.SetPropertiesToPlayerTank();
 
          SetTurnToNextTank(true);
      }

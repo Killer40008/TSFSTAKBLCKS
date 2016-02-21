@@ -31,7 +31,7 @@ public class Tank : MonoBehaviour
     //player
     public string PlayerName;
     public int PlayerRank;
-    public int PlayerScore;
+    public int PlayerMoney;
 
 
 
