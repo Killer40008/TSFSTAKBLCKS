@@ -35,6 +35,7 @@ public class SpawnManager : MonoBehaviour
         Color color = ColorRandom.GetRandomColors(counter);
         obj.tag = "Player";
         Tank tData = obj.GetComponent<Tank>();
+        tData.Index = counter;
         tData.Color = tData.OrginalColor = color;
         tData.CanDisabled = true;
         tData.Health = 100;

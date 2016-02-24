@@ -18,6 +18,7 @@ public class Tank : MonoBehaviour
     }
     #endregion
 
+    public int Index;
     public float Health; //100.0 to 0.0
     public float Strength; //100 to 0.0;
     public float Oil;

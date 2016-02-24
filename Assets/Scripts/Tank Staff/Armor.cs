@@ -29,7 +29,7 @@ public class Armor : MonoBehaviour
             }
             else
             {
-                color.a = currentStrength / ArmorStrength;
+                color.a = Mathf.Clamp(currentStrength / ArmorStrength, 0, 0.5843f);
                 other.gameObject.GetComponent<IWeapon>().Bomb.FloorHit(other.gameObject);
             }
 

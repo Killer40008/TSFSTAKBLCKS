@@ -61,9 +61,12 @@ public class Lighting : MonoBehaviour, IWeapon
                 armor.GetComponent<Armor>().OnLightingEnter();
             else
             {
+                Managers.PlayerInfos.AddMoneyToPlayer(tank, 200);
                 Managers.DamageManager.SubstractHealth(cTank, Damage);
                 Managers.DamageManager.SubstractStrength(cTank, Strength);
             }
+
+            //-----------------
 
             if (Managers.DestroyManager.CheckAndDestroy(cTank) && nextTurn)
                 Managers.TurnManager.SetTurnToNextTank();

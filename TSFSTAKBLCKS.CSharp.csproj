@@ -55,12 +55,6 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
@@ -239,9 +233,6 @@
     <Compile Include="Assets\GooglePlayGames\PluginVersion.cs" />
     <Compile Include="Assets\MultiPlayerConstants.cs" />
     <Compile Include="Assets\ResizeToScreen.cs" />
-    <Compile Include="Assets\Score\BinatySerialization.cs" />
-    <Compile Include="Assets\Score\PlayerData.cs" />
-    <Compile Include="Assets\Score\ScoreModule.cs" />
     <Compile Include="Assets\Scripts\AI\Tank_AI.cs" />
     <Compile Include="Assets\Scripts\Framerate.cs" />
     <Compile Include="Assets\Scripts\Managers\DamageManager.cs" />
@@ -266,6 +257,10 @@
     <Compile Include="Assets\Scripts\Other\SphareTriggerHit.cs" />
     <Compile Include="Assets\Scripts\Other\Teleportation.cs" />
     <Compile Include="Assets\Scripts\Other\Wind.cs" />
+    <Compile Include="Assets\Scripts\Score\BinatySerialization.cs" />
+    <Compile Include="Assets\Scripts\Score\PlayerData.cs" />
+    <Compile Include="Assets\Scripts\Score\RoundScore.cs" />
+    <Compile Include="Assets\Scripts\Score\ScoreModule.cs" />
     <Compile Include="Assets\Scripts\Tank Staff\Armor.cs" />
     <Compile Include="Assets\Scripts\Tank Staff\Burrell_Movement.cs" />
     <Compile Include="Assets\Scripts\Tank Staff\Focus.cs" />

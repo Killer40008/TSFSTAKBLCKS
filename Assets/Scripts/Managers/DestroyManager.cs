@@ -39,6 +39,9 @@ public class DestroyManager : MonoBehaviour
             foreach (GameObject gm in GameObject.FindGameObjectsWithTag("Bomb"))
                 Destroy(gm);
 
+            //set score
+            SetScoreToRoundScene();
+
             Fade fp = Fade.CreateFade().GetComponent<Fade>();
             fp.FadeIn();
             fp.ShowWinPanel();
@@ -46,6 +49,19 @@ public class DestroyManager : MonoBehaviour
             StartCoroutine(ShowRoundScene());
             
             Win = true;
+        }
+    }
+
+
+    void SetScoreToRoundScene()
+    {
+        RoundScore.Name_Money.Clear();
+        foreach (GameObject gm in Managers.TurnManager.tanks)
+        {
+            string name = gm.GetComponent<Tank>().PlayerName;
+            int money = gm.GetComponent<Tank>().PlayerMoney;
+
+            RoundScore.Name_Money.Add(name, money);
         }
     }
 

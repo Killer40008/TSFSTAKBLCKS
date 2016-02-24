@@ -7,6 +7,7 @@ public class PlayerInfo : MonoBehaviour
     public Sprite RankSprite;
     public Sprite AISprite;
 
+
     public void DrawPlayerInfoInUI_SinglePlayer()
     {
         //player
@@ -17,7 +18,26 @@ public class PlayerInfo : MonoBehaviour
         SetNameAndRank(GameObject.Find("PlayersInfo").transform.Find("PlayerTwo").transform, "Comp 1", 0, true);
         SetNameAndRank(GameObject.Find("PlayersInfo").transform.Find("PlayerThree").transform, "Comp 2", 0, true);
         SetNameAndRank(GameObject.Find("PlayersInfo").transform.Find("PlayerFour").transform, "Comp 3", 0, true);
+        for (int i = 0; i < Managers.TurnManager.tanks.Count; i++)
+        {
+            if (Managers.TurnManager.tanks[i] != Managers.TurnManager.PlayerTank)
+                Managers.TurnManager.tanks[i].GetComponent<Tank>().PlayerName = "Comp " + (i + 1);
+        }
+    }
 
+    public void AddMoneyToPlayer(GameObject tank, int money)
+    {
+        int total = tank.GetComponent<Tank>().PlayerMoney += money;
+        if (tank == Managers.TurnManager.PlayerTank)
+        {
+            GameObject.Find("HUDMasterButtons").transform.Find("ScorePanel").transform.Find("Text").GetComponent<Text>().text = total.ToString();
+        }
+    }
+
+
+    public void SetPlayerMoneyText(int money)
+    {
+        GameObject.Find("HUDMasterButtons").transform.Find("ScorePanel").transform.Find("Text").GetComponent<Text>().text = money.ToString();
     }
 
 
@@ -62,5 +82,4 @@ public class PlayerInfo : MonoBehaviour
             imgObject.GetComponent<Image>().color = new Color32(255, 248, 0, 255);
         }
     }
-
 }

@@ -69,7 +69,15 @@ public class WeaponData
 
             Managers.DamageManager.SubstractHealth(hit, Damage);
             Managers.DamageManager.SubstractStrength(hit, Strength);
-            Managers.DestroyManager.CheckAndDestroy(hit);
+            bool destroyed = Managers.DestroyManager.CheckAndDestroy(hit);
+
+            //set money
+            if (destroyed)
+                Managers.PlayerInfos.AddMoneyToPlayer(SoruceTank, 500);
+            else
+                Managers.PlayerInfos.AddMoneyToPlayer(SoruceTank, 100);
+
+
             //
             LastPlayerCollide = hit.gameObject;
             PlayExplosionEffect();
@@ -273,6 +281,9 @@ public class WeaponData
         }
         else if (other.gameObject.tag == "Bomb")
         {
+            //set score
+            Managers.PlayerInfos.AddMoneyToPlayer(fireTank, 50);
+
             //play effect
             PlayAntiStrikeCollisionEffect();
             SetAlTankHit(fireTank, null);

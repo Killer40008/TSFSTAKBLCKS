@@ -11,13 +11,16 @@ public class TurnManager : MonoBehaviour
     public Object SelectorArrow;
     public List<GameObject> tanks;
     public int Selector = 0;
+    public int PlayerIndex;
 
      public void Begin()
      {
          tanks.AddRange(GameObject.FindGameObjectsWithTag("Player").OrderBy(x => Random.Range(0, 100)).ToArray());
-         int playerIndex = Random.Range(0, Managers.TanksStaringCount);
-        // PlayerTank = tanks[playerIndex];
+         int playerRnd = Random.Range(0, Managers.TanksStaringCount);
+         // PlayerTank = tanks[playerRnd];
          PlayerTank = tanks[0];
+         PlayerIndex = PlayerTank.GetComponent<Tank>().Index;
+
          SpawnManager.SetPropertiesToPlayerTank();
 
          SetTurnToNextTank(true);
@@ -126,12 +129,16 @@ public class TurnManager : MonoBehaviour
             GameObject.Find("Canvas").transform.FindChild("HUD").GetComponent<CanvasGroup>().alpha = 1;
             GameObject.Find("HUDMasterButtons").GetComponent<RectTransform>().anchoredPosition =
                 new Vector3(GameObject.Find("HUDMasterButtons").GetComponent<RectTransform>().anchoredPosition.x, -85, 0);
+            GameObject.Find("Canvas").transform.FindChild("HUD").FindChild("DisabledPanel").GetComponent<CanvasGroup>().blocksRaycasts = false;
+
         }
         else
         {
             GameObject.Find("Canvas").transform.FindChild("HUD").GetComponent<CanvasGroup>().alpha = 0;
             GameObject.Find("HUDMasterButtons").GetComponent<RectTransform>().anchoredPosition =
                       new Vector3(GameObject.Find("HUDMasterButtons").GetComponent<RectTransform>().anchoredPosition.x, -22, 0);
+            GameObject.Find("Canvas").transform.FindChild("HUD").FindChild("DisabledPanel").GetComponent<CanvasGroup>().blocksRaycasts = true;
+
         }
     }
 
