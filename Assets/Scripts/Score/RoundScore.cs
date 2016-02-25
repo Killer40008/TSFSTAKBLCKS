@@ -46,13 +46,13 @@ public class RoundScore : MonoBehaviour
 
     IEnumerator PrintAsCounter(Text obj, int money)
     {
-        int local = 0;
+        int current = int.Parse(obj.text);
+        int local = current;
 
 
         while (local < money)
         {
             yield return new WaitForSeconds(0.0005f);
-            int current = int.Parse(obj.text);
             obj.text = (current+=5).ToString();
             local = current;
         }

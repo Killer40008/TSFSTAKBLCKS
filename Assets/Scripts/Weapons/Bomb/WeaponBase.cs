@@ -238,6 +238,7 @@ public class WeaponData
 
         Vector3 instantiatePos = position == null ? BombObj.transform.position : (Vector3)position;
         GameObject explosion = (GameObject)MonoBehaviour.Instantiate(ExplosionPrefap, instantiatePos, Quaternion.identity);
+        explosion.GetComponent<SpriteRenderer>().sortingOrder = 3;
         explosion.transform.localScale = ExplosionSize;
         DestroyWhenFinished dwf = explosion.AddComponent<DestroyWhenFinished>();
         dwf.tankSource = SoruceTank;

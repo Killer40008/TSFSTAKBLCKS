@@ -17,7 +17,7 @@ public class TurnManager : MonoBehaviour
      {
          tanks.AddRange(GameObject.FindGameObjectsWithTag("Player").OrderBy(x => Random.Range(0, 100)).ToArray());
          int playerRnd = Random.Range(0, Managers.TanksStaringCount);
-         // PlayerTank = tanks[playerRnd];
+        // PlayerTank = tanks[playerRnd];
          PlayerTank = tanks[0];
          PlayerIndex = PlayerTank.GetComponent<Tank>().Index;
 
