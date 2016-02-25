@@ -218,15 +218,13 @@
      <Compile Include="Assets\GooglePlayGames\PluginVersion.cs" />
      <Compile Include="Assets\MultiPlayerConstants.cs" />
      <Compile Include="Assets\ResizeToScreen.cs" />
-     <Compile Include="Assets\Score\BinatySerialization.cs" />
-     <Compile Include="Assets\Score\PlayerData.cs" />
-     <Compile Include="Assets\Score\ScoreModule.cs" />
      <Compile Include="Assets\Scripts\AI\Tank_AI.cs" />
      <Compile Include="Assets\Scripts\Framerate.cs" />
      <Compile Include="Assets\Scripts\Managers\DamageManager.cs" />
      <Compile Include="Assets\Scripts\Managers\DestroyManager.cs" />
      <Compile Include="Assets\Scripts\Managers\Managers.cs" />
      <Compile Include="Assets\Scripts\Managers\MapManager.cs" />
+     <Compile Include="Assets\Scripts\Managers\RoundManager.cs" />
      <Compile Include="Assets\Scripts\Managers\ScoreManager.cs" />
      <Compile Include="Assets\Scripts\Managers\SpawnManager.cs" />
      <Compile Include="Assets\Scripts\Managers\TerrianManager.cs" />
@@ -245,6 +243,10 @@
      <Compile Include="Assets\Scripts\Other\SphareTriggerHit.cs" />
      <Compile Include="Assets\Scripts\Other\Teleportation.cs" />
      <Compile Include="Assets\Scripts\Other\Wind.cs" />
+     <Compile Include="Assets\Scripts\Score\BinatySerialization.cs" />
+     <Compile Include="Assets\Scripts\Score\PlayerData.cs" />
+     <Compile Include="Assets\Scripts\Score\RoundScore.cs" />
+     <Compile Include="Assets\Scripts\Score\ScoreModule.cs" />
      <Compile Include="Assets\Scripts\Tank Staff\Armor.cs" />
      <Compile Include="Assets\Scripts\Tank Staff\Burrell_Movement.cs" />
      <Compile Include="Assets\Scripts\Tank Staff\Focus.cs" />

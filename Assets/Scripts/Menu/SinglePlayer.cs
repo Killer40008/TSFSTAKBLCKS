@@ -42,7 +42,7 @@ public class SinglePlayer : MonoBehaviour
     void StartTheGame()
     {
         GameObject.Find("Loading").GetComponent<CanvasGroup>().alpha = 1;
-        SceneManager.LoadSceneAsync ("Game");
+        RoundManager.StartNextRound();
     }
 
 

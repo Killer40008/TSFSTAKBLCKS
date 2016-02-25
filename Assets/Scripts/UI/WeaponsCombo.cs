@@ -10,6 +10,11 @@ public class WeaponsCombo : MonoBehaviour
     public Weapons WeaponType;
     public GameObject lastButton;
 
+    void Start()
+    {
+        lastButton = GameObject.Find("NormalBomb");
+    }
+
     public void OnWeaponsComboOpen()
     {
         GameObject.Find("WeaponsCombo").transform.FindChild("Border").gameObject.SetActive(true);

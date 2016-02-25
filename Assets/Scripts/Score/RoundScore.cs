@@ -8,9 +8,13 @@ using System.Collections.Specialized;
 public class RoundScore : MonoBehaviour 
 {
     public static OrderedDictionary Name_Money = new OrderedDictionary();
+    private int ScoreFinished = 0;
 
     void Start()
     {
+        //set text
+        GameObject.Find("RoundNumber").GetComponent<Text>().text = RoundManager.CurrentRound.ToString();
+        //
         StartCoroutine(PrintScores());
     }
 
@@ -28,6 +32,16 @@ public class RoundScore : MonoBehaviour
             pName.transform.GetChild(j).GetComponent<Text>().text = (string)sortedDictionary.Keys.ToArray()[i];
             StartCoroutine(PrintAsCounter(pScore.transform.GetChild(j).GetComponent<Text>(), (int)sortedDictionary.Values.ToArray()[i]));
         }
+        yield return StartCoroutine(WaitForScoreCounters());
+        yield return new WaitForSeconds(3);
+        //
+        RoundManager.StartNextRound();
+    }
+
+    private IEnumerator WaitForScoreCounters()
+    {
+        while (ScoreFinished < 4)
+            yield return new WaitForEndOfFrame();
     }
 
     IEnumerator PrintAsCounter(Text obj, int money)
@@ -43,5 +57,6 @@ public class RoundScore : MonoBehaviour
             local = current;
         }
         obj.text = money.ToString();
+        ScoreFinished++;
     }
 }

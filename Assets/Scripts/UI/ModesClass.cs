@@ -23,6 +23,7 @@ public class ModesClass : MonoBehaviour
 
     public static void InitiallizeWeaponsQuantities()
     {
+        ModesQuantities.Clear();
         ModesQuantities.Add(Modes.AntiStrike, 3);
         ModesQuantities.Add(Modes.Double_Burrell, 1);
         ModesQuantities.Add(Modes.Double_Damage, 1);

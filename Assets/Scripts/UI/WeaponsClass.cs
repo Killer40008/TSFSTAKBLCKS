@@ -10,6 +10,7 @@ public class WeaponsClass  : MonoBehaviour
 
     public static void InitiallizeWeaponsQuantities()
     {
+        WeaponsQuantities.Clear();
         WeaponsQuantities.Add(Weapons.Normal_Bomb, 1);
         WeaponsQuantities.Add(Weapons.Cluster_Bomb, 5);
         WeaponsQuantities.Add(Weapons.Small_Bomb, 5);

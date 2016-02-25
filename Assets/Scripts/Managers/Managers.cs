@@ -34,7 +34,7 @@ public class Managers : MonoBehaviour
         MapsManager = transform.FindChild("MapManager").GetComponent<MapManager>();
         PlayerInfos = SpawnManager.GetComponent<PlayerInfo>();
 
-        MapsManager.StartMap(MapManager.Maps.Volcano);
+        MapsManager.StartMap((MapManager.Maps) RoundManager.RandomMap);
         SpawnManager.Spawn(TanksStaringCount);
         TurnManager.Begin();
         Wind.StartWind();
