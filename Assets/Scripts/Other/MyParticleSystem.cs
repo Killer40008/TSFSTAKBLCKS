@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MyParticleSystem : MonoBehaviour 
+public class MyParticleSystem : MonoBehaviour
 {
 
     void Start()
     {
+        this.transform.FindChild("sprite").GetComponent<Rigidbody>().isKinematic = true;
         StartCoroutine(Draw());
     }
     public void Stop()
@@ -24,6 +25,7 @@ public class MyParticleSystem : MonoBehaviour
             float sRnd = Random.Range(0.6f, 0.9f);
             float xRnd = Random.Range(-SpawnManager.CameraWidth, SpawnManager.CameraWidth);
             GameObject gm = (GameObject)Instantiate(snow, new Vector3(xRnd, 9.2f, 0), Quaternion.identity);
+            gm.GetComponent<Rigidbody>().isKinematic = false;
             gm.transform.localScale = new Vector3(sRnd, sRnd, sRnd);
             StartCoroutine(Dispose(gm));
         }
