@@ -67,7 +67,7 @@ public class Tank_Fire : MonoBehaviour
 
     public void FireButtonClicked()
     {
-        if (CheckIfWeaponsValid()  && Managers.DestroyManager.Win == false)
+        if (CheckIfWeaponsValid() && Managers.DestroyManager.Win == false)
         {
 
             if (!IsPlayerConfigured()) return;
@@ -82,7 +82,7 @@ public class Tank_Fire : MonoBehaviour
                 Managers.TurnManager.PlayerTank.transform.FindChild("Burrell").GetComponent<Tank_Fire>().Fire();
                 if (CheckIfHasSecondBurrell())
                     Managers.TurnManager.CurrentTank.GetComponent<Tank>().BurrellCount = 2;
-                
+
             }
             else
             {
@@ -95,8 +95,7 @@ public class Tank_Fire : MonoBehaviour
 
 
             //decrease count
-            if (Managers.WeaponManager.WeaponType != Weapons.Normal_Bomb)
-                WeaponsClass.WeaponsQuantities[Managers.WeaponManager.WeaponType]--;
+            WeaponsClass.SubtractWeaponQuantitie(Managers.WeaponManager.WeaponType);
 
         }
     }

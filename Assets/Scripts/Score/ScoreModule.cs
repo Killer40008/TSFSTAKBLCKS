@@ -23,11 +23,15 @@ public static class ScoreModule
            return false;
     }
 
+    
+
     public static void SavePlayerData(PlayerData data)
     {
         string datastr = BinatySerialization.SerializeToString(data);
         PlayerPrefs.SetString(DATA_KEY, datastr);
     }
+
+
 
     public static PlayerData GetPlayerData()
     {

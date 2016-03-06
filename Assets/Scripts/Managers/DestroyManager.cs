@@ -42,10 +42,15 @@ public class DestroyManager : MonoBehaviour
             //set score
             SetScoreToRoundScene();
 
+            //update playerscore
+            PlayerData dt = ScoreModule.GetPlayerData();
+            dt.PlayerMoney = Managers.TurnManager.PlayerTank.GetComponent<Tank>().PlayerMoney;
+            ScoreModule.SavePlayerData(dt);
+
+            //show win panel
             Fade fp = Fade.CreateFade().GetComponent<Fade>();
             fp.FadeIn();
             fp.ShowWinPanel();
-
             StartCoroutine(ShowRoundScene());
             
             Win = true;

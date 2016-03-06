@@ -4,6 +4,17 @@ using UnityEngine.UI;
 
 public class UIButtonClick : MonoBehaviour 
 {
+    public void InitilizeButtons()
+    {
+        if (ModesClass.ModesQuantities[ModesClass.Modes.HealthPlus] == 0)
+            transform.FindChild("Health+").GetComponent<Button>().interactable = false;
+        if (ModesClass.ModesQuantities[ModesClass.Modes.StrengthPlus] == 0)
+            transform.FindChild("Strength+").GetComponent<Button>().interactable = false;
+        if (ModesClass.ModesQuantities[ModesClass.Modes.OilPlus] == 0)
+            transform.FindChild("Oil+").GetComponent<Button>().interactable = false;
+        if (ModesClass.ModesQuantities[ModesClass.Modes.AntiStrike] == 0)
+            transform.FindChild("Antistrike").GetComponent<Button>().interactable = false;
+    }
 
     public void OnHealthPlusClicked(GameObject button)
     {
@@ -16,8 +27,10 @@ public class UIButtonClick : MonoBehaviour
 
             Managers.DamageManager.CalculatePlayerHealthInUI();
             NotifyMessage.ShowMessage("Health Increased", 3);
-            ModesClass.ModesQuantities[ModesClass.Modes.HealthPlus]--;
+            ModesClass.SubtractModeQuantitie(ModesClass.Modes.HealthPlus);
         }
+        if (ModesClass.ModesQuantities[ModesClass.Modes.HealthPlus] == 0)
+            button.GetComponent<Button>().interactable = false;
     }
     public void OnStrengthPlusClicked(GameObject button)
     {
@@ -30,9 +43,10 @@ public class UIButtonClick : MonoBehaviour
 
             Managers.DamageManager.CalculatePlayerStrenghInUI();
             NotifyMessage.ShowMessage("Strength Increased", 3);
-            ModesClass.ModesQuantities[ModesClass.Modes.StrengthPlus]--;
-
+            ModesClass.SubtractModeQuantitie(ModesClass.Modes.StrengthPlus);
         }
+        if (ModesClass.ModesQuantities[ModesClass.Modes.StrengthPlus] == 0)
+            button.GetComponent<Button>().interactable = false;
     }
     public void OnOilPlusClicked(GameObject button)
     {
@@ -41,8 +55,10 @@ public class UIButtonClick : MonoBehaviour
         GameObject.Find("LeftMovement").GetComponent<Button>().interactable = true;
         Managers.TurnManager.PlayerTank.GetComponent<Tank_Movement>().enabled = true;
         NotifyMessage.ShowMessage("Oil Increased", 3);
-        ModesClass.ModesQuantities[ModesClass.Modes.OilPlus]--;
+        ModesClass.SubtractModeQuantitie(ModesClass.Modes.OilPlus);
 
+        if (ModesClass.ModesQuantities[ModesClass.Modes.OilPlus] == 0)
+            button.GetComponent<Button>().interactable = false;
     }
     //
     public void OnTeleportionClicked(GameObject button)

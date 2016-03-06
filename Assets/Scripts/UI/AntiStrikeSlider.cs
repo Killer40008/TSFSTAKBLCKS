@@ -8,7 +8,7 @@ public class AntiStrikeSlider : MonoBehaviour
     public static bool allow;
     enum AdditionMode { Increase, Decrease }
     AdditionMode mode = AdditionMode.Increase;
-    const float VALUE = 1.8f;
+    const float VALUE = 2f;
 
     void Start()
     {
@@ -51,7 +51,7 @@ public class AntiStrikeSlider : MonoBehaviour
             indicator.GetComponent<Image>().color = Color.red;
         }
 
-        ModesClass.ModesQuantities[ModesClass.Modes.AntiStrike]--;
+        ModesClass.SubtractModeQuantitie(ModesClass.Modes.AntiStrike);
         DeActive();
     }
 

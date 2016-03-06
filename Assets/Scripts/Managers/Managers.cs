@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Linq;
 
 public class Managers : MonoBehaviour 
 {
@@ -39,13 +40,21 @@ public class Managers : MonoBehaviour
         TurnManager.Begin();
         Wind.StartWind();
         WeaponsClass.InitiallizeWeaponsQuantities();
-        ModesClass.InitiallizeWeaponsQuantities();
+        ModesClass.InitiallizeModesQuantities();
+
+
+
         PlayerInfos.DrawPlayerInfoInUI_SinglePlayer();
+
+
 
         //begin clouds
         GameObject.Find("Cloud").GetComponent<Cload_Movement>().Begin();
         GameObject.Find("Cloud (1)").GetComponent<Cload_Movement>().Begin();
         GameObject.Find("Cloud (2)").GetComponent<Cload_Movement>().Begin();
+
+        //
+        GameObject.Find("UIButtons").GetComponent<UIButtonClick>().InitilizeButtons();
     }
 
 

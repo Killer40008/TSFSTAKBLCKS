@@ -9,10 +9,40 @@ public class ModesCombo : MonoBehaviour
     public GameObject[] ArmorButtons;
 
 
+    ///
+
+    public void InitilizeButtons()
+    {
+        Transform border = GameObject.Find("ModesCombo").transform.FindChild("Border").transform;
+        for (int i = 0; i < border.childCount; i++)
+        {
+            Transform parent = border.GetChild(i);
+            for (int j = 0; j < parent.childCount; j++)
+            {
+                Button button = parent.GetChild(j).GetComponent<Button>();
+                string name = parent.GetChild(j).name;
+
+                if (name != "None")
+                {
+                    ModesClass.Modes mode = (ModesClass.Modes)System.Enum.Parse(typeof(ModesClass.Modes), name);
+                    if (ModesClass.ModesQuantities[mode] == 0)
+                    {
+                        button.interactable = false;
+                        parent.GetChild(j).GetComponent<CanvasGroup>().alpha = 0.5f;
+                    }
+                }
+            }
+        }
+    }
+
+    ///
     public void OnModesComboOpen()
     {
         if (!GameObject.Find("ModesCombo").transform.FindChild("Border").gameObject.activeSelf)
+        {
+            InitilizeButtons();
             GameObject.Find("ModesCombo").transform.FindChild("Border").gameObject.SetActive(true);
+        }
         else
             CloseCombo();
     }
@@ -39,30 +69,42 @@ public class ModesCombo : MonoBehaviour
         CloseCombo();
 
     }
-    public void OnDoubleDamageSelected()
+    public void OnDoubleDamageSelected(GameObject button)
     {
-        OnNoneSelected();
-        GameObject.Find("ModesCombo").transform.FindChild("Label").GetComponent<Text>().text = ModesClass.Modes.Double_Damage.ToString().Replace("_", " ");
+        if (ModesClass.ModesQuantities[ModesClass.Modes.Double_Damage] > 0)
+        {
+            OnNoneSelected();
+            GameObject.Find("ModesCombo").transform.FindChild("Label").GetComponent<Text>().text = ModesClass.Modes.Double_Damage.ToString().Replace("_", " ");
 
-        Managers.DamageManager.DamageMultiply = 2;
-        NotifyMessage.ShowMessage("Double Damage Activated!", 3);
-        CloseCombo();
+            Managers.DamageManager.DamageMultiply = 2;
+            NotifyMessage.ShowMessage("Double Damage Activated!", 3);
+            ModesClass.SubtractModeQuantitie(ModesClass.Modes.Double_Damage);
+            CloseCombo();
+        }
+        if (ModesClass.ModesQuantities[ModesClass.Modes.Double_Damage] == 0)
+            button.GetComponent<Button>().interactable = false;
     }
-    public void OnDoubleBurrellSelected()
+    public void OnDoubleBurrellSelected(GameObject button)
     {
-        OnNoneSelected();
-        GameObject.Find("ModesCombo").transform.FindChild("Label").GetComponent<Text>().text = ModesClass.Modes.Double_Burrell.ToString().Replace("_", " ");
+        if (ModesClass.ModesQuantities[ModesClass.Modes.Double_Burrell] > 0)
+        {
+            OnNoneSelected();
+            GameObject.Find("ModesCombo").transform.FindChild("Label").GetComponent<Text>().text = ModesClass.Modes.Double_Burrell.ToString().Replace("_", " ");
 
 
-        GameObject burrell = Managers.TurnManager.PlayerTank.transform.FindChild("Burrell").gameObject;
-        GameObject secondBurrell = (GameObject) Instantiate(burrell, burrell.transform.position, Quaternion.identity);
-        secondBurrell.tag = "SecondBurrell";
-        secondBurrell.name = "Burrell2";
-        secondBurrell.GetComponent<Burrell_Movement>().enabled = false;
-        secondBurrell.transform.SetParent(burrell.transform.parent,true);
-        secondBurrell.transform.localEulerAngles = new Vector3(0, 0, 180 - burrell.transform.eulerAngles.z);
-        secondBurrell.transform.localScale = burrell.transform.localScale;
-        CloseCombo();
+            GameObject burrell = Managers.TurnManager.PlayerTank.transform.FindChild("Burrell").gameObject;
+            GameObject secondBurrell = (GameObject)Instantiate(burrell, burrell.transform.position, Quaternion.identity);
+            secondBurrell.tag = "SecondBurrell";
+            secondBurrell.name = "Burrell2";
+            secondBurrell.GetComponent<Burrell_Movement>().enabled = false;
+            secondBurrell.transform.SetParent(burrell.transform.parent, true);
+            secondBurrell.transform.localEulerAngles = new Vector3(0, 0, 180 - burrell.transform.eulerAngles.z);
+            secondBurrell.transform.localScale = burrell.transform.localScale;
+            ModesClass.SubtractModeQuantitie(ModesClass.Modes.Double_Burrell);
+            CloseCombo();
+        }
+        if (ModesClass.ModesQuantities[ModesClass.Modes.Double_Burrell] == 0)
+            button.GetComponent<Button>().interactable = false;
     }
     public void OnMiniArmorSelected(GameObject button)
     {

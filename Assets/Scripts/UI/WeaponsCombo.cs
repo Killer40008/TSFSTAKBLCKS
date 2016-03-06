@@ -15,8 +15,35 @@ public class WeaponsCombo : MonoBehaviour
         lastButton = GameObject.Find("NormalBomb");
     }
 
+
+    public void InitilizeButtons()
+    {
+        Transform border = GameObject.Find("WeaponsCombo").transform.FindChild("Border").transform;
+        for (int i = 0; i < border.childCount; i++)
+        {
+            Transform parent = border.GetChild(i);
+            for (int j = 0; j < parent.childCount; j++)
+            {
+                Button button = parent.GetChild(j).GetComponent<Button>();
+                string name = parent.GetChild(j).name;
+
+                if (name != "None")
+                {
+                    Weapons weapon = (Weapons)System.Enum.Parse(typeof(Weapons), name);
+                    if (WeaponsClass.WeaponsQuantities[weapon] == 0)
+                    {
+                        button.interactable = false;
+                        parent.GetChild(j).GetComponent<CanvasGroup>().alpha = 0.5f;
+                    }
+                }
+            }
+        }
+    }
+
+
     public void OnWeaponsComboOpen()
     {
+        InitilizeButtons();
         GameObject.Find("WeaponsCombo").transform.FindChild("Border").gameObject.SetActive(true);
 
         WeaponConfigWhenComboOpened();

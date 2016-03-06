@@ -6,6 +6,7 @@ public class Welcome : MonoBehaviour
 {
     public void Start()
     {
+        //PlayerPrefs.DeleteAll();
         if (ScoreModule.IsPlayerDataExist())
         {
             MenuBase.Show(this, "Menu");
@@ -32,8 +33,8 @@ public class Welcome : MonoBehaviour
         {
             PlayerData dt = ScoreModule.CreateNewPlayerData();
             dt.PlayerName = textboxText;
-            dt.PlayerWeapons = new System.Collections.Generic.Dictionary<Weapons, int>();
-            dt.PlayerModes = new System.Collections.Generic.Dictionary<ModesClass.Modes, int>();
+            dt.PlayerWeapons = WeaponsClass.InitiallizeWeaponsQuantities(true);
+            dt.PlayerModes = ModesClass.InitiallizeModesQuantities(true);
             dt.PlayerRank = 1;
             dt.PlayerMoney = 0;
 

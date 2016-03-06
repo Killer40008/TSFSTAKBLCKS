@@ -41,6 +41,7 @@ public class Molotove : MonoBehaviour, IWeapon
             Vector3 position = other.transform.position;
             position.y += 0.3f;
             GameObject burnObj = Bomb.PlayExplosionEffect(false, position);
+            burnObj.GetComponent<SpriteRenderer>().sortingOrder = 100;
             Managers.Me.StartCoroutine(SubtractHealth(other.gameObject, burnObj));
         }
         else
