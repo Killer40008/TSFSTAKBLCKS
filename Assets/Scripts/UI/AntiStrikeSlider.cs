@@ -10,7 +10,7 @@ public class AntiStrikeSlider : MonoBehaviour
     AdditionMode mode = AdditionMode.Increase;
     const float VALUE = 2f;
 
-    void Start()
+    public void StartSlider()
     {
         allow = true;
         slider = GetComponent<Slider>();

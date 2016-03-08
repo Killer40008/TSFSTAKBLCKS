@@ -31,7 +31,6 @@ public class SpawnManager : MonoBehaviour
 
     private void SetPropertiesToTank(GameObject obj, int counter)
     {
-        PlayerData pd = ScoreModule.GetPlayerData();
         Color color = ColorRandom.GetRandomColors(counter);
         obj.tag = "Player";
         Tank tData = obj.GetComponent<Tank>();
@@ -41,9 +40,9 @@ public class SpawnManager : MonoBehaviour
         tData.Health = 100;
         tData.Strength = 100;
         tData.Oil = 500;
-        tData.PlayerName = pd.PlayerName ;
-        tData.PlayerRank = pd.PlayerRank;
-        tData.PlayerMoney = pd.PlayerMoney;
+        tData.PlayerName = "comp" ;
+        tData.PlayerRank = 0;
+        tData.PlayerMoney = 0;
         obj.GetComponent<Rigidbody>().centerOfMass = new Vector3(0f, -0.5f, 0);
     }
 
@@ -77,7 +76,7 @@ public class SpawnManager : MonoBehaviour
         Tank tData = Managers.TurnManager.PlayerTank.GetComponent<Tank>();
         tData.PlayerName = pd.PlayerName;
         tData.PlayerRank = pd.PlayerRank;
-        tData.PlayerMoney = pd.PlayerMoney;
+        tData.PlayerMoney = 0;
 
     }
 

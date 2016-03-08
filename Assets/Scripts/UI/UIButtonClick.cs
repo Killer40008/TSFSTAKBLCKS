@@ -83,6 +83,24 @@ public class UIButtonClick : MonoBehaviour
             SetAlphaToButton(button);
         }
     }
+
+    public void OnAntiStrikeLoadoutClicked(GameObject button)
+    {
+
+        GameObject sphareTrigger = new GameObject();
+        sphareTrigger.transform.position = Managers.TurnManager.PlayerTank.transform.position;
+        sphareTrigger.transform.SetParent(Managers.TurnManager.PlayerTank.transform);
+        SphereCollider collider = sphareTrigger.AddComponent<SphereCollider>();
+        collider.radius = 4;
+        SphareAntistrike st = sphareTrigger.AddComponent<SphareAntistrike>();
+        st.MyTank = Managers.TurnManager.PlayerTank;
+        collider.isTrigger = true;
+        NotifyMessage.ShowMessage("Anti Strike Activated!", 3);
+        SetAlphaToButton(GameObject.Find("Antistrike"));
+
+        button.GetComponent<Button>().interactable = false;
+    }
+
     public void OnSucicdeClicked(GameObject button)
     {
         Managers.TurnManager.SetTurnToNextTank();

@@ -42,7 +42,13 @@ public class Managers : MonoBehaviour
         WeaponsClass.InitiallizeWeaponsQuantities();
         ModesClass.InitiallizeModesQuantities();
 
+#if (!Debug)
+        for (int i = 0; i < WeaponsClass.WeaponsQuantities.Count; i++)
+            WeaponsClass.WeaponsQuantities[WeaponsClass.WeaponsQuantities.ElementAt(i).Key] = 99;
 
+        for (int i = 0; i < ModesClass.ModesQuantities.Count; i++)
+            ModesClass.ModesQuantities[ModesClass.ModesQuantities.ElementAt(i).Key] = 99;
+#endif
 
         PlayerInfos.DrawPlayerInfoInUI_SinglePlayer();
 
@@ -55,6 +61,18 @@ public class Managers : MonoBehaviour
 
         //
         GameObject.Find("UIButtons").GetComponent<UIButtonClick>().InitilizeButtons();
+
+        //show round loadout
+        GameObject fade = GameObject.Find("Fade");
+        fade.GetComponent<Fade>().ShowLoadout();
+        HideHUDS();
+    }
+
+
+    internal static void Play()
+    {
+        ShowHUDS();
+        Managers.TurnManager.SetTurnToNextTank(true);
     }
 
 
@@ -71,6 +89,25 @@ public class Managers : MonoBehaviour
         GameObject.Find("LeftMovement").GetComponent<CanvasGroup>().interactable = active;
     }
 
+
+    public static void HideHUDS()
+    {
+        GameObject.Find("HUD").GetComponent<CanvasGroup>().alpha = 0;
+        GameObject.Find("HUD").GetComponent<CanvasGroup>().interactable = false;
+        //
+        GameObject.Find("HUDMasterButtons").GetComponent<CanvasGroup>().alpha = 0;
+        GameObject.Find("HUDMasterButtons").GetComponent<CanvasGroup>().interactable = false;
+    }
+
+    public static void ShowHUDS()
+    {
+        GameObject.Find("HUD").GetComponent<CanvasGroup>().alpha = 1;
+        GameObject.Find("HUD").GetComponent<CanvasGroup>().interactable = true;
+        //
+        GameObject.Find("HUDMasterButtons").GetComponent<CanvasGroup>().alpha = 1;
+        GameObject.Find("HUDMasterButtons").GetComponent<CanvasGroup>().interactable = true;
+    }
+
     public static void ResetTimescale()
     {
         Time.timeScale = 1;
@@ -82,4 +119,16 @@ public class Managers : MonoBehaviour
         Time.timeScale = value;
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
     }
+
+    public static void PauseGame()
+    {
+        Time.timeScale = 0;
+    }
+
+    public static void ResumeGame()
+    {
+        Time.timeScale = 1;
+    }
+
+
 }

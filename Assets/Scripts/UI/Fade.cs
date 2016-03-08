@@ -28,6 +28,14 @@ public class Fade : MonoBehaviour
     {
         transform.Find("AntiStrikePanel").GetComponent<CanvasGroup>().alpha = 1;
         transform.Find("AntiStrikePanel").GetComponent<CanvasGroup>().interactable = true;
+        transform.Find("AntiStrikePanel").transform.Find("AntiStikeSlider").GetComponent<AntiStrikeSlider>().StartSlider();
+    }
+
+    public void ShowLoadout()
+    {
+        transform.Find("Loadout").GetComponent<CanvasGroup>().alpha = 1;
+        transform.Find("Loadout").GetComponent<CanvasGroup>().interactable = true;
+        transform.Find("Loadout").GetComponent<Loadout>().StartLoadout();
     }
 
     public void ShowWinPanel()

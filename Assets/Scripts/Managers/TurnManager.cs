@@ -22,8 +22,6 @@ public class TurnManager : MonoBehaviour
          PlayerIndex = PlayerTank.GetComponent<Tank>().Index;
 
          SpawnManager.SetPropertiesToPlayerTank();
-
-         SetTurnToNextTank(true);
      }
     
 
@@ -99,6 +97,11 @@ public class TurnManager : MonoBehaviour
             Managers.WeaponManager.DrawWeaponInfoInUI();
             if (Managers.WeaponManager.lastButton != null)
                 Managers.WeaponManager.OnWeaponsSelected(Managers.WeaponManager.lastButton);
+            else
+                Managers.WeaponManager.OnWeaponsSelected(GameObject.Find("WeaponsCombo").transform.FindChild("Border")
+                    .FindChild("ButtonsTop").transform.FindChild("Normal_Bomb").gameObject);
+
+
             GameObject.Find("PlayerTimer").GetComponent<Timer>().StartTimer();
             
         }

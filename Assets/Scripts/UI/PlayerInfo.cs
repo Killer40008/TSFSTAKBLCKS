@@ -7,6 +7,11 @@ public class PlayerInfo : MonoBehaviour
     public Sprite RankSprite;
     public Sprite AISprite;
 
+    void Start()
+    {
+        GameObject.Find("HUDMasterButtons").transform.Find("ScorePanel").transform.Find("Text").GetComponent<Text>().text = RoundScore.RoundsMoney.ToString();
+    }
+
 
     public void DrawPlayerInfoInUI_SinglePlayer()
     {
@@ -38,6 +43,10 @@ public class PlayerInfo : MonoBehaviour
     public void SetPlayerMoneyText(int money)
     {
         GameObject.Find("HUDMasterButtons").transform.Find("ScorePanel").transform.Find("Text").GetComponent<Text>().text = money.ToString();
+    }
+    public int GetPlayerMoney()
+    {
+        return int.Parse(GameObject.Find("HUDMasterButtons").transform.Find("ScorePanel").transform.Find("Text").GetComponent<Text>().text);
     }
 
 

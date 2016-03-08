@@ -41,10 +41,11 @@ public class DestroyManager : MonoBehaviour
 
             //set score
             SetScoreToRoundScene();
+            RoundScore.RoundsMoney += Managers.PlayerInfos.GetPlayerMoney();
 
             //update playerscore
             PlayerData dt = ScoreModule.GetPlayerData();
-            dt.PlayerMoney = Managers.TurnManager.PlayerTank.GetComponent<Tank>().PlayerMoney;
+            dt.PlayerMoney += Managers.TurnManager.PlayerTank.GetComponent<Tank>().PlayerMoney;
             ScoreModule.SavePlayerData(dt);
 
             //show win panel

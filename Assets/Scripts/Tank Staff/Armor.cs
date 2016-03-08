@@ -7,6 +7,17 @@ public class Armor : MonoBehaviour
     public float ArmorStrength;
     float currentStrength;
 
+    void Start()
+    {
+        if (Tank.activeSelf)
+        {
+            this.transform.eulerAngles = this.transform.parent.eulerAngles;
+        }
+        Color color = GetComponent<SpriteRenderer>().color;
+        color.a = Mathf.Clamp(currentStrength / ArmorStrength, 0, 0.4243f);
+        GetComponent<SpriteRenderer>().color = color;
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Bomb" && other.GetComponent<IWeapon>().Bomb.SoruceTank != Tank)
@@ -29,7 +40,8 @@ public class Armor : MonoBehaviour
             }
             else
             {
-                color.a = Mathf.Clamp(currentStrength / ArmorStrength, 0, 0.5843f);
+                color.a = Mathf.Clamp(currentStrength / ArmorStrength, 0, 0.4243f);
+                GetComponent<SpriteRenderer>().color = color;
                 other.gameObject.GetComponent<IWeapon>().Bomb.FloorHit(other.gameObject);
             }
 
@@ -77,13 +89,6 @@ public class Armor : MonoBehaviour
         Managers.ModesManager.OnNoneSelected();
     }
 
-    void Start()
-    {
-        if (Tank.activeSelf)
-        {
-            this.transform.eulerAngles = this.transform.parent.eulerAngles;
-        }
-    }
 
 
     public void SetStrength(float strength)

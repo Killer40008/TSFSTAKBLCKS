@@ -50,6 +50,11 @@ public class ModesCombo : MonoBehaviour
     public void CloseCombo()
     {
         GameObject.Find("ModesCombo").transform.FindChild("Border").gameObject.SetActive(false);
+        if (GameObject.Find("Loadout") != null)
+        {
+            GameObject.Find("HUD").transform.FindChild("Panel").transform.FindChild("ModesCombo").transform.FindChild("Label").GetComponent<Text>().text =
+                GameObject.Find("Loadout").transform.FindChild("ModesCombo").transform.FindChild("Label").GetComponent<Text>().text;
+        }
     }
 
 
