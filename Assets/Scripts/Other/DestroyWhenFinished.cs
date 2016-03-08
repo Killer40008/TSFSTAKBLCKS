@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class DestroyWhenFinished : MonoBehaviour
 {
     private bool _localDestroyed = false;
     public GameObject tankSource;
-    public static bool AllowNextTurn = true;
+    public bool AllowNextTurn = true;
 
     public void ExplosionAnimationFinished(int destroy)
     {
@@ -19,13 +20,17 @@ public class DestroyWhenFinished : MonoBehaviour
                 Tank tf = tankSource.GetComponent<Tank>();
                 if (tf.BurrellCount == 1 || Managers.DamageManager.GetHealth(Managers.TurnManager.CurrentTank) <= 0) //for double burrell
                 {
-                    tf.BurrellCount = 1;
                     if (AllowNextTurn)
+                    {
                         Managers.TurnManager.SetTurnToNextTank();
-
-                    AllowNextTurn = false;
+                        if (Managers.TurnManager.CurrentTank != Managers.TurnManager.PlayerTank)
+                        {
+                            tf.BurrellCount = 2;
+                        }
+                        AllowNextTurn = false;
+                    }
                 }
-                else if (tf.BurrellCount == 2)
+                else if (tf.BurrellCount == 2 && Managers.TurnManager.CurrentTank == Managers.TurnManager.PlayerTank)
                 {
                     //double burrell
                     if (Managers.WeaponManager.lastButton != null)
@@ -37,6 +42,19 @@ public class DestroyWhenFinished : MonoBehaviour
                     tankSource.transform.FindChild("Burrell2").GetComponent<Tank_Fire>().enabled = true;
                     tankSource.transform.FindChild("Burrell").GetComponent<Burrell_Movement>().enabled = false;
                     NotifyMessage.ShowMessage("Second Burrell Activated!", 2);
+                }
+                else if (tf.BurrellCount == 2)
+                {
+                    tf.BurrellCount = 1;
+
+                    Managers.TurnManager.CurrentTank.transform.FindChild("Burrell2").GetComponent<Burrell_Movement>().enabled = true;
+                    Managers.TurnManager.CurrentTank.transform.FindChild("Burrell2").GetComponent<Tank_Fire>().enabled = true;
+                    Managers.TurnManager.CurrentTank.transform.FindChild("Burrell").GetComponent<Burrell_Movement>().enabled = false;
+                    tankSource.GetComponent<Tank_AI>().LastTankHit = null;
+
+                    Managers.TurnManager.CurrentTank.GetComponent<Tank_AI>().AimBurrellToRandomTank(
+                        Managers.TurnManager.tanks.Where(t => t != Managers.TurnManager.CurrentTank).ToArray());
+
                 }
 
 

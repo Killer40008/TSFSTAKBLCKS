@@ -234,13 +234,12 @@ public class WeaponData
 
     public GameObject PlayExplosionEffect(bool Destroy = true, Vector3? position = null)
     {
-        DestroyWhenFinished.AllowNextTurn = true;
-
         Vector3 instantiatePos = position == null ? BombObj.transform.position : (Vector3)position;
         GameObject explosion = (GameObject)MonoBehaviour.Instantiate(ExplosionPrefap, instantiatePos, Quaternion.identity);
         explosion.GetComponent<SpriteRenderer>().sortingOrder = 3;
         explosion.transform.localScale = ExplosionSize;
         DestroyWhenFinished dwf = explosion.AddComponent<DestroyWhenFinished>();
+        dwf.AllowNextTurn = true;
         dwf.tankSource = SoruceTank;
         AnimationClip clip = explosion.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip;
         AnimationEvent ev = new AnimationEvent() { functionName = "ExplosionAnimationFinished", time = clip.length, intParameter = System.Convert.ToInt32(Destroy) };
@@ -251,10 +250,11 @@ public class WeaponData
 
     public GameObject PlayAntiStrikeCollisionEffect()
     {
-        DestroyWhenFinished.AllowNextTurn = true;
+        
         GameObject explosion = (GameObject)MonoBehaviour.Instantiate(Managers.SpawnManager.BombCollisionEffect, BombObj.transform.position, Quaternion.identity);
         explosion.transform.localScale = ExplosionSize;
-        explosion.AddComponent<DestroyWhenFinished>();
+        DestroyWhenFinished DS = explosion.AddComponent<DestroyWhenFinished>();
+        DS.AllowNextTurn = true;
         AnimationClip clip = explosion.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip;
         AnimationEvent ev = new AnimationEvent() { functionName = "DestroyAnimationFinished", time = clip.length, intParameter = 0 };
         clip.AddEvent(ev);

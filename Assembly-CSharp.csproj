@@ -216,6 +216,7 @@
      <Compile Include="Assets\GooglePlayGames\Platforms\PlayGamesClientFactory.cs" />
      <Compile Include="Assets\GooglePlayGames\Platforms\TokenClient.cs" />
      <Compile Include="Assets\GooglePlayGames\PluginVersion.cs" />
+     <Compile Include="Assets\Loadout.cs" />
      <Compile Include="Assets\MultiPlayerConstants.cs" />
      <Compile Include="Assets\ResizeToScreen.cs" />
      <Compile Include="Assets\Scripts\AI\Tank_AI.cs" />

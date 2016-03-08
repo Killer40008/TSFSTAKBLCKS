@@ -53,8 +53,20 @@ public class Tank_AI : MonoBehaviour
 
         strength -= 0.4f + (deltaY * 0.8f);
 
-        StartCoroutine(this.transform.FindChild("Burrell").GetComponent<Burrell_Movement>().
-            MoveToAngleAndFire(Quaternion.Euler(0, 0, angle), strength));
+
+
+
+        //for double Burrell
+        if (GetComponent<Tank>().BurrellCount == 2)
+        {
+            StartCoroutine(this.transform.FindChild("Burrell").GetComponent<Burrell_Movement>().
+                MoveToAngleAndFire(Quaternion.Euler(0, 0, angle), strength));
+        }
+        else
+        {
+            StartCoroutine(this.transform.FindChild("Burrell2").GetComponent<Burrell_Movement>().
+                MoveToAngleAndFire(Quaternion.Euler(0, 0, angle), strength));
+        }
 
         Destroy(virtulOtherTank);
         Destroy(virtulThisTank);

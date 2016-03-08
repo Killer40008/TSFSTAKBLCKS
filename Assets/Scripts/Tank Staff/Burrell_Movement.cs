@@ -36,7 +36,7 @@ public class Burrell_Movement : MonoBehaviour
                 this.transform.rotation = Quaternion.Slerp(transform.rotation, angle, Time.deltaTime * 2);
                 if (this.transform.localEulerAngles.z >= 180 || this.transform.localEulerAngles.z <= 0) break;
             }
-
+            Debug.Log("wfw");
             this.transform.parent.GetComponent<Tank>().BurrellPosition = this.transform.FindChild("Fire").transform.position;
             this.transform.parent.GetComponent<Tank>().BurrellRotation = this.transform.eulerAngles;
             this.transform.GetComponent<Tank_Fire>().Fire(strength, true);

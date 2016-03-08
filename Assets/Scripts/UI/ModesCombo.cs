@@ -2,11 +2,22 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Linq;
+using System.Collections.Generic;
 
 public class ModesCombo : MonoBehaviour
 {
     public Object ArmorPrefap;
     public GameObject[] ArmorButtons;
+    public static Dictionary<Color32, int> ColorStrength = new Dictionary<Color32, int>();
+
+    public ModesCombo()
+    {
+        ColorStrength.Clear();
+        ColorStrength.Add(new Color32(244, 227, 0, 180), 100);
+        ColorStrength.Add(new Color32(0, 244, 12, 180), 200);
+        ColorStrength.Add(new Color32(6, 0, 190, 180), 300);
+        ColorStrength.Add(new Color32(195, 0, 0, 180), 400);
+    }
 
 
     ///
@@ -116,8 +127,8 @@ public class ModesCombo : MonoBehaviour
         OnNoneSelected();
         GameObject.Find("ModesCombo").transform.FindChild("Label").GetComponent<Text>().text = ModesClass.Modes.Mini_Armor.ToString().Replace("_", " ");
 
-
-        CreateArmor(new Color32(244, 227, 0, 180), 100);
+        Color32 key = ColorStrength.ElementAt(0).Key;
+        CreateArmor(key, ColorStrength[key]);
         CloseCombo();
         DisableArmorButtons();
 
@@ -128,7 +139,8 @@ public class ModesCombo : MonoBehaviour
         GameObject.Find("ModesCombo").transform.FindChild("Label").GetComponent<Text>().text = ModesClass.Modes.Normal_Armor.ToString().Replace("_", " ");
 
 
-        CreateArmor(new Color32(0, 244, 12, 180), 200);
+        Color32 key = ColorStrength.ElementAt(1).Key;
+        CreateArmor(key, ColorStrength[key]);
         CloseCombo();
         DisableArmorButtons();
 
@@ -138,7 +150,8 @@ public class ModesCombo : MonoBehaviour
         OnNoneSelected();
         GameObject.Find("ModesCombo").transform.FindChild("Label").GetComponent<Text>().text = ModesClass.Modes.Strong_Armor.ToString().Replace("_", " ");
 
-        CreateArmor(new Color32(6, 0, 190, 180), 300);
+        Color32 key = ColorStrength.ElementAt(2).Key;
+        CreateArmor(key, ColorStrength[key]);
         CloseCombo();
         DisableArmorButtons();
 
@@ -149,7 +162,8 @@ public class ModesCombo : MonoBehaviour
         OnNoneSelected();
         GameObject.Find("ModesCombo").transform.FindChild("Label").GetComponent<Text>().text = ModesClass.Modes.Super_Armor.ToString().Replace("_", " ");
 
-        CreateArmor(new Color32(195, 0, 0, 180), 400);
+        Color32 key = ColorStrength.ElementAt(3).Key;
+        CreateArmor(key, ColorStrength[key]);
         CloseCombo();
         DisableArmorButtons();
     }
