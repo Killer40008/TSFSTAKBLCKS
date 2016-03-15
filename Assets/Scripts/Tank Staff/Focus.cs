@@ -51,14 +51,13 @@ public class Focus : MonoBehaviour
     }
     public void DeActive()
     {
-        if (_active)
-        {
-            TankSelected = null;
-            downed = false;
-            _active = false;
-            StopAllCoroutines();
-            Destroy(focusGameobject);
-        }
+
+        TankSelected = null;
+        downed = false;
+        _active = false;
+        StopAllCoroutines();
+        Destroy(focusGameobject);
+
     }
         
     public void JustDestroy()

@@ -75,7 +75,6 @@ public class SphareAntistrike : MonoBehaviour
         }
 
         if (this != null) Destroy(this.gameObject);
-        Managers.TurnManager.SetTurnToNextTank();
     }
 
 

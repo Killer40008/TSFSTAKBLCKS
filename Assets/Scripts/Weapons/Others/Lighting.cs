@@ -56,6 +56,7 @@ public class Lighting : MonoBehaviour, IWeapon
         bool nextTurn = true;
         foreach (GameObject cTank in Managers.TurnManager.tanks.Where(t => t != tank && t.activeSelf == true).ToArray())
         {
+            bool destroyed = false;
             GameObject armor = null;
             if ((armor = FindChildByLayer(cTank.transform, LayerMask.NameToLayer("Armor"))) != null)
                 armor.GetComponent<Armor>().OnLightingEnter();
@@ -64,13 +65,12 @@ public class Lighting : MonoBehaviour, IWeapon
                 Managers.PlayerInfos.AddMoneyToPlayer(tank, 200);
                 Managers.DamageManager.SubstractHealth(cTank, Damage);
                 Managers.DamageManager.SubstractStrength(cTank, Strength);
+                destroyed = Managers.DestroyManager.CheckAndDestroy(cTank);
             }
 
             //-----------------
 
-            if (Managers.DestroyManager.CheckAndDestroy(cTank) && nextTurn)
-                Managers.TurnManager.SetTurnToNextTank();
-            else
+            if (!destroyed && nextTurn)
             {
                 Managers.TurnManager.SetTurnToNextTank();
                 nextTurn = false;
@@ -78,7 +78,10 @@ public class Lighting : MonoBehaviour, IWeapon
         }
 
         yield return new WaitForSeconds(1);
+    
+
         Fade.BackGroundFadeOut();
+        Destroy(this.gameObject);
     }
 
     public GameObject FindChildByLayer(Transform parent, int layer)

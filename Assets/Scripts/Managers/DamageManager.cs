@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class DamageManager : MonoBehaviour
 {
 
-    public float DamageMultiply = 1;
 
     public void CalculatePlayerHealthInUI()
     {
@@ -42,8 +41,8 @@ public class DamageManager : MonoBehaviour
     {
         if (GetHealth(tank) - damage > 0)
         {
-            if (Managers.TurnManager.CurrentTank == Managers.TurnManager.PlayerTank)
-                tank.GetComponent<Tank>().Health -= (damage * DamageMultiply);
+            if (Managers.TurnManager.CurrentTank.GetComponent<Tank>().DoubleDamage)
+                tank.GetComponent<Tank>().Health -= (damage * 2);
             else
                 tank.GetComponent<Tank>().Health -= (damage);
         }

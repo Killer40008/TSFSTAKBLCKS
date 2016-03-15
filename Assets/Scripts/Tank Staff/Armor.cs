@@ -22,8 +22,9 @@ public class Armor : MonoBehaviour
     {
         if (other.gameObject.tag == "Bomb" && other.GetComponent<IWeapon>().Bomb.SoruceTank != Tank)
         {
-            float damage = (other.gameObject.GetComponent<IWeapon>().Bomb.Damage);
-            currentStrength -= damage;
+            int dMultiply = other.GetComponent<IWeapon>().Bomb.SoruceTank.GetComponent<Tank>().DoubleDamage == true ? 2 : 1;
+            float damage = (other.gameObject.GetComponent<IWeapon>().Bomb.Damage) * dMultiply;
+            currentStrength -=  damage;
             Color color = GetComponent<SpriteRenderer>().color;
             if (currentStrength <= 0)
             {
@@ -75,7 +76,7 @@ public class Armor : MonoBehaviour
         GetComponent<SpriteRenderer>().color = color;
     }
 
-    
+
 
 
     IEnumerator DeactiveArmor()
@@ -86,7 +87,10 @@ public class Armor : MonoBehaviour
             Tank.GetComponent<Tank>().ArmorActivate = false;
             Destroy(this.gameObject);
         }
-        Managers.ModesManager.OnNoneSelected();
+
+        if (Tank == Managers.TurnManager.PlayerTank)
+            Managers.ModesManager.OnNoneSelected();
+
     }
 
 

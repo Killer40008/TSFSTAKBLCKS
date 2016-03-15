@@ -233,7 +233,6 @@
     <Compile Include="Assets\GooglePlayGames\Platforms\PlayGamesClientFactory.cs" />
     <Compile Include="Assets\GooglePlayGames\Platforms\TokenClient.cs" />
     <Compile Include="Assets\GooglePlayGames\PluginVersion.cs" />
-    <Compile Include="Assets\Loadout.cs" />
     <Compile Include="Assets\MultiPlayerConstants.cs" />
     <Compile Include="Assets\ResizeToScreen.cs" />
     <Compile Include="Assets\Scripts\AI\Tank_AI.cs" />
@@ -274,10 +273,13 @@
     <Compile Include="Assets\Scripts\Tank Staff\Tank_Movement.cs" />
     <Compile Include="Assets\Scripts\UI\AntiStrikeSlider.cs" />
     <Compile Include="Assets\Scripts\UI\Fade.cs" />
+    <Compile Include="Assets\Scripts\UI\HUDMasterButtons.cs" />
     <Compile Include="Assets\Scripts\UI\LeftMovementButton.cs" />
+    <Compile Include="Assets\Scripts\UI\Loadout.cs" />
     <Compile Include="Assets\Scripts\UI\ModesClass.cs" />
     <Compile Include="Assets\Scripts\UI\ModesCombo.cs" />
     <Compile Include="Assets\Scripts\UI\NotifyMessage.cs" />
+    <Compile Include="Assets\Scripts\UI\PauseMenuButtons.cs" />
     <Compile Include="Assets\Scripts\UI\PlayerInfo.cs" />
     <Compile Include="Assets\Scripts\UI\RightMovementButton.cs" />
     <Compile Include="Assets\Scripts\UI\StrenghSlider.cs" />

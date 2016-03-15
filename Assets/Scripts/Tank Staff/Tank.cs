@@ -24,10 +24,11 @@ public class Tank : MonoBehaviour
     public float Oil;
     public bool CanDisabled;
     public bool ArmorActivate;
+    public bool DoubleDamage;
     public Vector3 BurrellPosition;
     public Vector3 BurrellRotation;
     public int BurrellCount = 1;
-
+    public bool DoubleBurrell;
 
     //player
     public string PlayerName;

@@ -57,13 +57,19 @@ public class Tank_AI : MonoBehaviour
 
 
         //for double Burrell
-        if (GetComponent<Tank>().BurrellCount == 2)
+        if (GetComponent<Tank>().BurrellCount == 1)
         {
+            this.transform.FindChild("Burrell").GetComponent<Burrell_Movement>().enabled = true;
+            this.transform.FindChild("Burrell").GetComponent<Tank_Fire>().enabled = true;
+
             StartCoroutine(this.transform.FindChild("Burrell").GetComponent<Burrell_Movement>().
                 MoveToAngleAndFire(Quaternion.Euler(0, 0, angle), strength));
         }
         else
         {
+            this.transform.FindChild("Burrell2").GetComponent<Burrell_Movement>().enabled = true;
+            this.transform.FindChild("Burrell2").GetComponent<Tank_Fire>().enabled = true;
+
             StartCoroutine(this.transform.FindChild("Burrell2").GetComponent<Burrell_Movement>().
                 MoveToAngleAndFire(Quaternion.Euler(0, 0, angle), strength));
         }

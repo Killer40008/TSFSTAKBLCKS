@@ -74,7 +74,7 @@ public class ModesCombo : MonoBehaviour
         GameObject.Find("ModesCombo").transform.FindChild("Label").GetComponent<Text>().text = "None";
 
         //reset double damage
-        Managers.DamageManager.DamageMultiply = 1;
+        Managers.TurnManager.PlayerTank.GetComponent<Tank>().DoubleDamage = false;
         //reset double Burrell
         if (Managers.TurnManager.PlayerTank.GetComponentsInChildren<Tank_Fire>().Length > 1)
             Destroy(Managers.TurnManager.PlayerTank.GetComponentsInChildren<Tank_Fire>().Where(t => t.gameObject.tag == "SecondBurrell").FirstOrDefault().gameObject);
@@ -92,7 +92,7 @@ public class ModesCombo : MonoBehaviour
             OnNoneSelected();
             GameObject.Find("ModesCombo").transform.FindChild("Label").GetComponent<Text>().text = ModesClass.Modes.Double_Damage.ToString().Replace("_", " ");
 
-            Managers.DamageManager.DamageMultiply = 2;
+            Managers.TurnManager.PlayerTank.GetComponent<Tank>().DoubleDamage = true;
             NotifyMessage.ShowMessage("Double Damage Activated!", 3);
             ModesClass.SubtractModeQuantitie(ModesClass.Modes.Double_Damage);
             CloseCombo();

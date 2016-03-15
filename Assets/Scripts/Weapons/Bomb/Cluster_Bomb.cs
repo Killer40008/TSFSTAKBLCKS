@@ -12,8 +12,8 @@ public class Cluster_Bomb : MonoBehaviour, IWeapon
         Tank = tank;
         Bomb = new WeaponData()
         {
-            Damage = 40,
-            Strength = 5,
+            Damage = 30,
+            Strength = 10,
            BombObj = this.gameObject,Drag = this.Drag,
             SizeInital = new Vector3(0.7f, 0.7f, 0.7f),
             SizeFinal = new Vector3(0.7f, 0.7f, 0.7f),

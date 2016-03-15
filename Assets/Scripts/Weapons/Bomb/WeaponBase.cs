@@ -57,6 +57,11 @@ public class WeaponData
     public GameObject SoruceTank { get; set; }
     public static GameObject LastPlayerCollide { get; private set; }
 
+    public WeaponData()
+    {
+        AllowNextTurn = true;
+    }
+
 
     public void PlayerHit(GameObject hit)
     {
@@ -239,13 +244,25 @@ public class WeaponData
         explosion.GetComponent<SpriteRenderer>().sortingOrder = 3;
         explosion.transform.localScale = ExplosionSize;
         DestroyWhenFinished dwf = explosion.AddComponent<DestroyWhenFinished>();
-        dwf.AllowNextTurn = true;
+        DestroyWhenFinished.AllowNextTurn = true;
         dwf.tankSource = SoruceTank;
-        AnimationClip clip = explosion.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip;
-        AnimationEvent ev = new AnimationEvent() { functionName = "ExplosionAnimationFinished", time = clip.length, intParameter = System.Convert.ToInt32(Destroy) };
-        clip.AddEvent(ev);
+      //  AnimationClip clip = explosion.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip;
+       // AnimationEvent ev = new AnimationEvent() { functionName = "ExplosionAnimationFinished", time = clip.length, intParameter = System.Convert.ToInt32(Destroy) };
+        //clip.AddEvent(ev);
+
+        if (BombObj.GetComponent<IWeapon>() is Molotove && Destroy)
+            Managers.Me.StartCoroutine(DestroyBurnObj(explosion));
+
         MonoBehaviour.Destroy(BombObj);
+        Managers.Me.StartCoroutine(CheckForNextStep());
+
+
         return explosion;
+    }
+    IEnumerator DestroyBurnObj(GameObject burnObj)
+    {
+        yield return new WaitForSeconds(1f);
+        MonoBehaviour.Destroy(burnObj);
     }
 
     public GameObject PlayAntiStrikeCollisionEffect()
@@ -254,12 +271,87 @@ public class WeaponData
         GameObject explosion = (GameObject)MonoBehaviour.Instantiate(Managers.SpawnManager.BombCollisionEffect, BombObj.transform.position, Quaternion.identity);
         explosion.transform.localScale = ExplosionSize;
         DestroyWhenFinished DS = explosion.AddComponent<DestroyWhenFinished>();
-        DS.AllowNextTurn = true;
+        DestroyWhenFinished.AllowNextTurn = true;
         AnimationClip clip = explosion.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip;
         AnimationEvent ev = new AnimationEvent() { functionName = "DestroyAnimationFinished", time = clip.length, intParameter = 0 };
         clip.AddEvent(ev);
         MonoBehaviour.Destroy(BombObj);
+        Managers.Me.StartCoroutine(CheckForNextStep());
         return explosion;
+    }
+
+    static bool AllowNextTurn = true;
+    IEnumerator CheckForNextStep()
+    {
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(0.5f);
+        if (GameObject.FindGameObjectsWithTag("Bomb").Length == 0)
+        {
+         
+            GameObject tankSource = this.SoruceTank;
+            if (tankSource != null)
+            {
+                Tank tf = tankSource.GetComponent<Tank>();
+                if (tf.BurrellCount == 1) //for double burrell
+                {
+                    if (AllowNextTurn)
+                    {
+                        Managers.TurnManager.SetTurnToNextTank();
+                        AllowNextTurn = false;
+                    }
+
+                    if (tankSource != Managers.TurnManager.PlayerTank && tf.DoubleBurrell)
+                    {
+                        tankSource.GetComponent<Tank>().BurrellCount = 2;
+                    }
+                }
+                else if (tf.BurrellCount == 2 && Managers.TurnManager.CurrentTank == Managers.TurnManager.PlayerTank)
+                {
+                    if (!CheckForDamageValue(tankSource)) yield break;
+
+
+                    //double burrell
+                    if (Managers.WeaponManager.lastButton != null)
+                        Managers.WeaponManager.OnWeaponsSelected(Managers.WeaponManager.lastButton);
+
+                    GameObject.Find("PlayerTimer").GetComponent<Timer>().StartTimer();
+
+                    tankSource.transform.FindChild("Burrell2").GetComponent<Burrell_Movement>().enabled = true;
+                    tankSource.transform.FindChild("Burrell2").GetComponent<Tank_Fire>().enabled = true;
+                    tankSource.transform.FindChild("Burrell").GetComponent<Burrell_Movement>().enabled = false;
+                    NotifyMessage.ShowMessage("Second Burrell Activated!", 2);
+                    GameObject.Find("Canvas").transform.FindChild("HUD").FindChild("DisabledPanel").GetComponent<CanvasGroup>().blocksRaycasts = false;
+                }
+                else if (tf.BurrellCount == 2)
+                {
+
+                    if (!CheckForDamageValue(tankSource)) yield break;
+
+                    tankSource.GetComponent<Tank>().BurrellCount = 1;
+                    tankSource.GetComponent<Tank_AI>().LastTankHit = null;
+
+                    Managers.TurnManager.CurrentTank.GetComponent<Tank_AI>().AimBurrellToRandomTank(
+                        Managers.TurnManager.tanks.Where(t => t != Managers.TurnManager.CurrentTank).ToArray());
+
+                }
+
+            }
+        }
+    }
+
+            
+    bool CheckForDamageValue(GameObject tankSource)
+    {
+        if (Managers.DamageManager.GetHealth(tankSource) <= 0)
+        {
+            if (AllowNextTurn)
+            {
+                Managers.TurnManager.SetTurnToNextTank();
+                AllowNextTurn = false;
+            }
+            return false;
+        }
+        return true;
     }
 
     public void OnCollide(GameObject fireTank, Collision other)

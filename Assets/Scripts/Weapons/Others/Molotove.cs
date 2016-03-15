@@ -38,16 +38,29 @@ public class Molotove : MonoBehaviour, IWeapon
 
         if (other.gameObject.tag == "Player")
         {
-            Vector3 position = other.transform.position;
-            position.y += 0.3f;
-            GameObject burnObj = Bomb.PlayExplosionEffect(false, position);
-            burnObj.GetComponent<SpriteRenderer>().sortingOrder = 100;
-            Managers.Me.StartCoroutine(SubtractHealth(other.gameObject, burnObj));
+            if (Managers.MapsManager.CurrentMap != MapManager.Maps.Forest)
+            {
+                Vector3 position = other.transform.position;
+                position.y += 0.3f;
+                GameObject burnObj = Bomb.PlayExplosionEffect(false, position);
+                burnObj.GetComponent<SpriteRenderer>().sortingOrder = 100;
+                Managers.Me.StartCoroutine(SubtractHealth(other.gameObject, burnObj));
+            }
+            else
+            {
+                var burnObj = Bomb.PlayExplosionEffect();
+                burnObj.GetComponent<SpriteRenderer>().sortingOrder = 100;
+                Bomb.Damage = 60;
+                Bomb.OnCollide(Tank, other);
+            }
         }
         else
+        {
             Bomb.OnCollide(Tank, other);
-
+        }
     }
+
+
 
     IEnumerator SubtractHealth(GameObject tank, GameObject burnObject)
     {

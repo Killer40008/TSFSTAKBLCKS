@@ -46,6 +46,14 @@ public class Fade : MonoBehaviour
         transform.Find("RoundCompleted").GetComponent<Animator>().SetBool("Do", true);
     }
 
+    public void ShowPausePanel()
+    {
+        transform.Find("Menu").GetComponent<CanvasGroup>().alpha = 1;
+        transform.Find("Menu").GetComponent<CanvasGroup>().interactable = true;
+        transform.Find("Menu").GetComponent<CanvasGroup>().blocksRaycasts = true;
+       
+    }
+
 
 
     public void DestroyFade()

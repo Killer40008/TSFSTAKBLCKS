@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class StoreMenu : MonoBehaviour
 {
@@ -15,8 +16,10 @@ public class StoreMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) &&  GameObject.Find("Store").GetComponent<CanvasGroup>().interactable)
         {
-            MenuBase.HideAndShow(this, "Store", "Menu");
-
+            if (SceneManager.GetActiveScene().name == "Menu")
+                MenuBase.HideAndShow(this, "Store", "Menu");
+            else
+                MenuBase.HideAndShowInGame(this, "Store", "Menu");
         }
     }
 }

@@ -54,7 +54,21 @@ public class Tank_Fire : MonoBehaviour
     {
         //select random weapon
         int weaponsCount = System.Enum.GetNames(typeof(Weapons)).Length;
-        Managers.WeaponManager.WeaponType = (Weapons)Random.Range(0, weaponsCount);
+
+
+        switch (SinglePlayer.GameDifficulty)
+        {
+            case SinglePlayer.GameDifficultyEnum.Easy:
+                Managers.WeaponManager.WeaponType = (Weapons)Random.Range(0, 7);
+                break;
+            case SinglePlayer.GameDifficultyEnum.Normal:
+                Managers.WeaponManager.WeaponType = (Weapons)Random.Range(0, 10);
+                break;
+            case SinglePlayer.GameDifficultyEnum.Hard:
+                Managers.WeaponManager.WeaponType = (Weapons)Random.Range(0, weaponsCount);
+                break;
+        }
+
 
 
 
