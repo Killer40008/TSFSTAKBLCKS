@@ -62,7 +62,6 @@ public class Armor : MonoBehaviour
             else
             {
                 color.a = Mathf.Clamp(currentStrength / ArmorStrength, 0, 0.4243f);
-                GetComponent<SpriteRenderer>().color = color;
                 other.gameObject.GetComponent<IWeapon>().Bomb.FloorHit(other.gameObject, true);
             }
 
@@ -83,6 +82,7 @@ public class Armor : MonoBehaviour
         if (currentStrength <= 0)
         {
             color.a = 0;
+
             Managers.DamageManager.SubstractHealth(Tank, Mathf.Abs(currentStrength));
             Managers.DamageManager.SubstractStrength(Tank, Mathf.Abs(currentStrength));
             Managers.DestroyManager.CheckAndDestroy(Tank);
@@ -104,16 +104,19 @@ public class Armor : MonoBehaviour
     }
     
 
-    public void OnLightingEnter(GameObject tank)
+    public void OnLightingEnter(GameObject tank, GameObject lightingGameobject)
     {
         int dMultiply = tank.GetComponent<Tank>().DoubleDamage == true ? 2 : 1;
 
         float damage = Lighting.Damage * dMultiply;
         currentStrength -= damage;
+
         Color color = GetComponent<SpriteRenderer>().color;
         if (currentStrength <= 0)
         {
             color.a = 0;
+            lightingGameobject.GetComponent<IWeapon>().Bomb.FloorHit(lightingGameobject, true);
+
             Managers.DamageManager.SubstractHealth(Tank, Mathf.Abs(currentStrength));
             Managers.DamageManager.SubstractStrength(Tank, Mathf.Abs(currentStrength));
             Managers.DestroyManager.CheckAndDestroy(Tank);
@@ -125,7 +128,9 @@ public class Armor : MonoBehaviour
         }
         else
         {
-            color.a = currentStrength / ArmorStrength;
+            color.a = Mathf.Clamp(currentStrength / ArmorStrength, 0, 0.4243f);
+            lightingGameobject.GetComponent<IWeapon>().Bomb.FloorHit(lightingGameobject, true);
+
         }
 
         GetComponent<SpriteRenderer>().color = color;

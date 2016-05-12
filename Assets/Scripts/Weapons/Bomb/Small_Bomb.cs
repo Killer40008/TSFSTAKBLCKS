@@ -35,7 +35,7 @@ public class Small_Bomb : MonoBehaviour, IWeapon
 
     public void OnCollisionEnter(Collision other)
     {
-        Bomb.OnCollide(Tank, other);
+        Bomb.OnCollide(Tank, other.gameObject);
 
     }
 

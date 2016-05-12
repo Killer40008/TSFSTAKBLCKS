@@ -48,7 +48,7 @@ public class Airstike : MonoBehaviour, IWeapon
     {
         Managers.TurnManager.tanks.ToList().ForEach(e => e.GetComponent<Focus>().DeActive());
 
-        Bomb.OnCollide(Tank, other);
+        Bomb.OnCollide(Tank, other.gameObject);
         if (Missile.highlightCoroutines.Count > 0)
         {
             Missile.highlightCoroutines.ForEach(c => Managers.Me.StopCoroutine(c));

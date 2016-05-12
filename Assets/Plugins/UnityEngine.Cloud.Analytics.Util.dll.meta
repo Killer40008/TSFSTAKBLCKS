@@ -80,7 +80,8 @@ PluginImporter:
       settings: {}
     WindowsStoreApps:
       enabled: 0
-      settings: {}
+      settings:
+        CPU: AnyCPU
     Xbox360:
       enabled: 1
       settings: {}

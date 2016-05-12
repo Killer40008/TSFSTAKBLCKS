@@ -64,8 +64,7 @@ public class WeaponData
 
         if (!BombObjectDestroyed)
         {
-            BombObjectDestroyed = true;
-
+         
 
             if (AntiStrikeSlider.allow)
                 AntiStrikeSlider.DeActive();
@@ -86,15 +85,20 @@ public class WeaponData
             //
             LastPlayerCollide = hit.gameObject;
             PlayExplosionEffect();
+
+            //
+            if (!(BombObj.GetComponent<IWeapon>() is Lighting))
+            {
+                BombObjectDestroyed = true;
+            }
         }
     }
 
 
     public void FloorHit(GameObject bomb, bool armorCall = false)
     {
-        if (!BombObjectDestroyed )
+        if (!BombObjectDestroyed)
         {
-            BombObjectDestroyed = true;
 
             //Set damage to nearby tanks
             if (RadiusOfExplosion > 0 && armorCall == false)
@@ -114,7 +118,12 @@ public class WeaponData
 
 
             //
-            MonoBehaviour.Destroy(BombObj);
+            if (!(BombObj.GetComponent<IWeapon>() is Lighting))
+            {
+                MonoBehaviour.Destroy(BombObj);
+                BombObjectDestroyed = true;
+            }
+
             PlayExplosionEffect();
         }
     }
@@ -240,21 +249,22 @@ public class WeaponData
 
     public GameObject PlayExplosionEffect(bool Destroy = true, Vector3? position = null)
     {
-        Vector3 instantiatePos = position == null ? BombObj.transform.position : (Vector3)position;
-        GameObject explosion = (GameObject)MonoBehaviour.Instantiate(ExplosionPrefap, instantiatePos, Quaternion.identity);
-        explosion.GetComponent<SpriteRenderer>().sortingOrder = 3;
-        explosion.transform.localScale = ExplosionSize;
-        DestroyWhenFinished dwf = explosion.AddComponent<DestroyWhenFinished>();
-        DestroyWhenFinished.AllowNextTurn = true;
-        dwf.tankSource = SoruceTank;
-      //  AnimationClip clip = explosion.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip;
-       // AnimationEvent ev = new AnimationEvent() { functionName = "ExplosionAnimationFinished", time = clip.length, intParameter = System.Convert.ToInt32(Destroy) };
-        //clip.AddEvent(ev);
+        GameObject explosion = null;
+        if (!(BombObj.GetComponent<IWeapon>() is Lighting))
+        {
+            Vector3 instantiatePos = position == null ? BombObj.transform.position : (Vector3)position;
+            explosion = (GameObject)MonoBehaviour.Instantiate(ExplosionPrefap, instantiatePos, Quaternion.identity);
+            explosion.GetComponent<SpriteRenderer>().sortingOrder = 3;
+            explosion.transform.localScale = ExplosionSize;
+            DestroyWhenFinished dwf = explosion.AddComponent<DestroyWhenFinished>();
+            DestroyWhenFinished.AllowNextTurn = true;
+            dwf.tankSource = SoruceTank;
 
-        if (BombObj.GetComponent<IWeapon>() is Molotove && Destroy)
-            Managers.WeaponManager.StartCoroutine(DestroyBurnObj(explosion));
+            if (BombObj.GetComponent<IWeapon>() is Molotove && Destroy)
+                Managers.WeaponManager.StartCoroutine(DestroyBurnObj(explosion));
 
-        MonoBehaviour.Destroy(BombObj);
+            MonoBehaviour.Destroy(BombObj);
+        }
         Managers.TurnManager.StartCoroutine(CheckForNextStep());
         return explosion;
     }
@@ -360,27 +370,28 @@ public class WeaponData
         return true;
     }
 
-    public void OnCollide(GameObject fireTank, Collision other)
+
+    public void OnCollide(GameObject fireTank, GameObject other)
     {
         if (!BombObjectDestroyed)
         {
-            if (other.gameObject.tag == "Player")
+            if (other.tag == "Player")
             {
-                PlayerHit(other.gameObject);
-                SetAlTankHit(fireTank, other.gameObject);
+                PlayerHit(other);
+                SetAlTankHit(fireTank, other);
             }
-            else if (other.gameObject.tag == "Terrain" || other.gameObject.tag == "Pistons" || other.gameObject.tag == "ForestFloor")
+            else if (other.tag == "Terrain" || other.tag == "Pistons" || other.tag == "ForestFloor")
             {
-                FloorHit(other.gameObject);
+                FloorHit(other);
                 SetAlTankHit(fireTank, null);
             }
-            else if (other.gameObject.tag == "Snow")
+            else if (other.tag == "Snow")
             {
-                MonoBehaviour.Destroy(other.gameObject);
-                FloorHit(other.gameObject);
+                MonoBehaviour.Destroy(other);
+                FloorHit(other);
                 SetAlTankHit(fireTank, null);
             }
-            else if (other.gameObject.tag == "Bomb")
+            else if (other.tag == "Bomb")
             {
                 //set score
                 Managers.PlayerInfos.AddMoneyToPlayer(fireTank, 50);

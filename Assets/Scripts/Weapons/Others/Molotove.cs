@@ -52,7 +52,7 @@ public class Molotove : MonoBehaviour, IWeapon
         }
         else
         {
-            Bomb.OnCollide(Tank, other);
+            Bomb.OnCollide(Tank, other.gameObject);
         }
     }
 

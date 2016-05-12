@@ -61,11 +61,11 @@ public class Cluster_Bomb : MonoBehaviour, IWeapon
 
         if (other.gameObject.tag == "Player" || other.gameObject.layer == LayerMask.NameToLayer("AntiBomb"))
         {
-            Bomb.OnCollide(Tank, other);
+            Bomb.OnCollide(Tank, other.gameObject);
         }
         else
         {
-            Bomb.OnCollide(Tank, other);
+            Bomb.OnCollide(Tank, other.gameObject);
         }
     }
 

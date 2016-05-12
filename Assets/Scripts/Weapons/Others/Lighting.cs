@@ -13,6 +13,15 @@ public class Lighting : MonoBehaviour, IWeapon
     public void Create( Sprite sprite, Object explosion, float fireStrengh, GameObject tank)
     {
         Tank = tank;
+        Bomb = new WeaponData()
+        {
+            Damage = Damage,
+            Strength = Strength,
+            BombObj = this.gameObject,
+            Sprite = null,
+            SoruceTank = tank
+
+        };
     }
 
     public WeaponData Bomb { get; set; }
@@ -42,11 +51,13 @@ public class Lighting : MonoBehaviour, IWeapon
     {
         Fade.BackGroundFadeIn();
         yield return new WaitForSeconds(1.5f);
+        GameObject[] attackingTanks = Managers.TurnManager.tanks.Where(t => t != tank && t.activeSelf == true).ToArray();
+
 
         //show Lighting
-        foreach (GameObject cTank in Managers.TurnManager.tanks.Where(t => t != tank && t.activeSelf == true).ToArray())
+        for (int i = 0; i < attackingTanks.Length; i++)
         {
-            Vector3 pos = cTank.transform.position;
+            Vector3 pos = attackingTanks[i].transform.position;
             pos.y -= 0.6f;
             pos.z = -7;
             Instantiate(Managers.SpawnManager.LightingPrefap, pos, Quaternion.identity);
@@ -54,31 +65,19 @@ public class Lighting : MonoBehaviour, IWeapon
 
         yield return new WaitForSeconds(0.6f);
 
-        //destroy
-        bool nextTurn = true;
-        foreach (GameObject cTank in Managers.TurnManager.tanks.Where(t => t != tank && t.activeSelf == true).ToArray())
+
+        for (int i = 0; i < attackingTanks.Length; i++)
         {
-            yield return new WaitForEndOfFrame();
-            bool destroyed = false;
-            GameObject armor = null;
-            if ((armor = FindChildByLayer(cTank.transform, LayerMask.NameToLayer("Armor"))) != null)
-                armor.GetComponent<Armor>().OnLightingEnter(tank);
-            else
-            {
-                Managers.PlayerInfos.AddMoneyToPlayer(tank, 200);
-                Managers.DamageManager.SubstractHealth(cTank, Damage);
-                Managers.DamageManager.SubstractStrength(cTank, Strength);
-                destroyed = Managers.DestroyManager.CheckAndDestroy(cTank);
-            }
 
-            //-----------------
+            GameObject armor = FindChildByLayer(attackingTanks[i].transform, LayerMask.NameToLayer("Armor"));
+            if (armor != null)
+                armor.GetComponent<Armor>().OnLightingEnter(tank, this.gameObject);
 
-            if (!destroyed && nextTurn)
-            {
-                Managers.TurnManager.SetTurnToNextTank();
-                nextTurn = false;
-            }
+
+
+            Bomb.PlayerHit(attackingTanks[i]);
         }
+
 
         yield return new WaitForSeconds(1);
     

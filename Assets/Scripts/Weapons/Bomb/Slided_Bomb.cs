@@ -45,7 +45,7 @@ public class Slided_Bomb : MonoBehaviour, IWeapon
         else
         {
             StopCoroutine(MoveToWindDirection());
-            Bomb.OnCollide(Tank, other);
+            Bomb.OnCollide(Tank, other.gameObject);
         }
     }
 
@@ -58,7 +58,7 @@ public class Slided_Bomb : MonoBehaviour, IWeapon
     private IEnumerator Timeout(Collision other)
     {
         yield return new WaitForSeconds(10);
-        Bomb.OnCollide(Tank, other);
+        Bomb.OnCollide(Tank, other.gameObject);
     }
 
     void SetAlTankHit(GameObject hit)

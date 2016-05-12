@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>Temp\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;UNITY_5_3_1;UNITY_5_3;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_SPRITE_POLYGON;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;ENABLE_EDITOR_TESTS_RUNNER;UNITY_WEBPLAYER;ENABLE_SUBSTANCE;WEBPLUG;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_MONO;DEVELOPMENT_BUILD;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_1;UNITY_5_3;UNITY_5;UNITY_PURCHASING;UNITY_ANALYTICS;ENABLE_NEW_BUGREPORTER;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_SPRITE_POLYGON;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;ENABLE_EDITOR_TESTS_RUNNER;UNITY_WEBPLAYER;ENABLE_SUBSTANCE;WEBPLUG;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_MONO;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
@@ -45,6 +45,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Billing.cs" />
+     <Compile Include="Assets\BuyButton.cs" />
+     <Compile Include="Assets\DestroyedPanel.cs" />
      <Compile Include="Assets\GooglePlayGames\BasicApi\Achievement.cs" />
      <Compile Include="Assets\GooglePlayGames\BasicApi\CommonStatusCodes.cs" />
      <Compile Include="Assets\GooglePlayGames\BasicApi\CommonTypes.cs" />
@@ -216,8 +219,10 @@
      <Compile Include="Assets\GooglePlayGames\Platforms\PlayGamesClientFactory.cs" />
      <Compile Include="Assets\GooglePlayGames\Platforms\TokenClient.cs" />
      <Compile Include="Assets\GooglePlayGames\PluginVersion.cs" />
-     <Compile Include="Assets\Loadout.cs" />
      <Compile Include="Assets\MultiPlayerConstants.cs" />
+     <Compile Include="Assets\NeedCoinsPanel.cs" />
+     <Compile Include="Assets\PinchZoom.cs" />
+     <Compile Include="Assets\PlayerInfoRoundPanel.cs" />
      <Compile Include="Assets\ResizeToScreen.cs" />
      <Compile Include="Assets\Scripts\AI\Tank_AI.cs" />
      <Compile Include="Assets\Scripts\Framerate.cs" />
@@ -236,6 +241,8 @@
      <Compile Include="Assets\Scripts\Menu\StoreMenu.cs" />
      <Compile Include="Assets\Scripts\Menu\Welcome.cs" />
      <Compile Include="Assets\Scripts\MultiPlayer\ConnectionTest.cs" />
+     <Compile Include="Assets\Scripts\Other\BuyModes.cs" />
+     <Compile Include="Assets\Scripts\Other\BuyWeapon.cs" />
      <Compile Include="Assets\Scripts\Other\Cload_Movement.cs" />
      <Compile Include="Assets\Scripts\Other\DestroyWhenFinished.cs" />
      <Compile Include="Assets\Scripts\Other\MyParticleSystem.cs" />
@@ -256,11 +263,16 @@
      <Compile Include="Assets\Scripts\Tank Staff\Tank_Fire.cs" />
      <Compile Include="Assets\Scripts\Tank Staff\Tank_Movement.cs" />
      <Compile Include="Assets\Scripts\UI\AntiStrikeSlider.cs" />
+     <Compile Include="Assets\Scripts\UI\Coins.cs" />
      <Compile Include="Assets\Scripts\UI\Fade.cs" />
+     <Compile Include="Assets\Scripts\UI\HUDMasterButtons.cs" />
      <Compile Include="Assets\Scripts\UI\LeftMovementButton.cs" />
+     <Compile Include="Assets\Scripts\UI\Loadout.cs" />
      <Compile Include="Assets\Scripts\UI\ModesClass.cs" />
      <Compile Include="Assets\Scripts\UI\ModesCombo.cs" />
+     <Compile Include="Assets\Scripts\UI\ModesCount.cs" />
      <Compile Include="Assets\Scripts\UI\NotifyMessage.cs" />
+     <Compile Include="Assets\Scripts\UI\PauseMenuButtons.cs" />
      <Compile Include="Assets\Scripts\UI\PlayerInfo.cs" />
      <Compile Include="Assets\Scripts\UI\RightMovementButton.cs" />
      <Compile Include="Assets\Scripts\UI\StrenghSlider.cs" />
@@ -269,6 +281,7 @@
      <Compile Include="Assets\Scripts\UI\UIButtonClick.cs" />
      <Compile Include="Assets\Scripts\UI\WeaponsClass.cs" />
      <Compile Include="Assets\Scripts\UI\WeaponsCombo.cs" />
+     <Compile Include="Assets\Scripts\UI\WeaponsCount.cs" />
      <Compile Include="Assets\Scripts\Weapons\Bomb\Cluster_Bomb.cs" />
      <Compile Include="Assets\Scripts\Weapons\Bomb\Large_Bomb.cs" />
      <Compile Include="Assets\Scripts\Weapons\Bomb\MegaShell_bomb.cs" />
@@ -283,6 +296,7 @@
      <Compile Include="Assets\Scripts\Weapons\Others\Airstike.cs" />
      <Compile Include="Assets\Scripts\Weapons\Others\Lighting.cs" />
      <Compile Include="Assets\Scripts\Weapons\Others\Molotove.cs" />
+     <Compile Include="Assets\StoreCounter.cs" />
      <None Include="Assets\Plugins\Android\MainLibProj\google-play-services_lib\res\values-tr\location_strings.xml" />
      <None Include="Assets\Plugins\Android\MainLibProj\google-play-services_lib\res\values\base_strings.xml" />
      <None Include="Assets\Plugins\Android\MainLibProj\google-play-services_lib\res\values-vi\common_strings.xml" />
@@ -419,6 +433,7 @@
      <None Include="Assets\Plugins\Android\MainLibProj\google-play-services_lib\res\values-pt-rBR\base_strings.xml" />
      <None Include="Assets\Plugins\Android\MainLibProj\google-play-services_lib\res\values-pa-rIN\location_strings.xml" />
      <None Include="Assets\Plugins\Android\MainLibProj\google-play-services_lib\res\values-es-rUS\base_strings.xml" />
+     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
      <None Include="Assets\Plugins\Android\MainLibProj\google-play-services_lib\res\values-fr\common_strings.xml" />
      <None Include="Assets\Plugins\Android\MainLibProj\google-play-services_lib\res\values-zu\common_strings.xml" />
      <None Include="Assets\Plugins\Android\MainLibProj\google-play-services_lib\res\values-nb\common_strings.xml" />
@@ -622,6 +637,40 @@
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Purchasing">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityPurchasing/UnityEngine.Purchasing.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Cloud.Analytics">
+ <HintPath>C:/Users/studentpcl/TSFSTAKBLCKS/Assets/Plugins/UnityEngine.Cloud.Analytics.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Cloud.Analytics.Util">
+ <HintPath>C:/Users/studentpcl/TSFSTAKBLCKS/Assets/Plugins/UnityEngine.Cloud.Analytics.Util.dll</HintPath>
+ </Reference>
+ <Reference Include="Common">
+ <HintPath>C:/Users/studentpcl/TSFSTAKBLCKS/Assets/Plugins/UnityPurchasing/Bin/Common.dll</HintPath>
+ </Reference>
+ <Reference Include="Editor">
+ <HintPath>C:/Users/studentpcl/TSFSTAKBLCKS/Assets/Plugins/UnityPurchasing/Bin/Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Security">
+ <HintPath>C:/Users/studentpcl/TSFSTAKBLCKS/Assets/Plugins/UnityPurchasing/Bin/Security.dll</HintPath>
+ </Reference>
+ <Reference Include="Stores">
+ <HintPath>C:/Users/studentpcl/TSFSTAKBLCKS/Assets/Plugins/UnityPurchasing/Bin/Stores.dll</HintPath>
+ </Reference>
+ <Reference Include="Apple">
+ <HintPath>C:/Users/studentpcl/TSFSTAKBLCKS/Assets/Plugins/UnityPurchasing/Bin/Apple/Apple.dll</HintPath>
+ </Reference>
+ <Reference Include="winrt">
+ <HintPath>C:/Users/studentpcl/TSFSTAKBLCKS/Assets/Plugins/UnityPurchasing/winrt/winrt.dll</HintPath>
+ </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{3108EADE-0CD4-7AC2-D8A7-3E969BF5B5C0}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
