@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Linq;
+using UnityEngine.UI;
 
 public class Tank : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class Tank : MonoBehaviour
     public Vector3 BurrellRotation;
     public int BurrellCount = 1;
     public bool DoubleBurrell;
+    public bool IsAI;
 
     //player
     public string PlayerName;
@@ -46,6 +48,50 @@ public class Tank : MonoBehaviour
 
     }
 
+    public void CalculateHealthAboveTank()
+    {
+        float health = Managers.DamageManager.GetHealth(this.gameObject);
+        Transform obj = transform.FindChild("Canvas").transform.FindChild("health").Find("Health");
+        obj.GetComponent<Image>().fillAmount = health / 100;
+        if (health <= 70 && health > 30)
+        {
+            obj.GetComponent<Image>().color = new Color(255, 255, 0);
+        }
+        else if (health <= 30)
+        {
+            obj.GetComponent<Image>().color = new Color(255, 0, 0);
+        }
+        else
+        {
+            obj.GetComponent<Image>().color = new Color(0, 255, 0);
+
+        }
+        if (this.gameObject.activeSelf)
+        StartCoroutine(ShowHealth());
+    }
+
+    public IEnumerator ShowHealth()
+    {
+        float t = 0;
+        while (t < 1)
+        {
+            transform.Find("Canvas").transform.FindChild("health").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0, 0.6f, t);
+            t += 0.1f;
+            yield return new WaitForEndOfFrame();
+        }
+
+        yield return new WaitForSeconds(2);
+        t = 0;
+        while (t <= 1)
+        {
+            transform.Find("Canvas").transform.FindChild("health").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0.6f, 0, t);
+            t += 0.1f;
+            yield return new WaitForEndOfFrame();
+        }
+        transform.Find("Canvas").transform.FindChild("health").GetComponent<CanvasGroup>().alpha = 0;
+    }
+
+   
     #endregion
 }
 

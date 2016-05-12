@@ -36,7 +36,9 @@ public class Burrell_Movement : MonoBehaviour
                 this.transform.rotation = Quaternion.Slerp(transform.rotation, angle, Time.deltaTime * 2);
                 if (this.transform.localEulerAngles.z >= 180 || this.transform.localEulerAngles.z <= 0) break;
             }
-            Debug.Log("wfw");
+            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForFixedUpdate();
+
             this.transform.parent.GetComponent<Tank>().BurrellPosition = this.transform.FindChild("Fire").transform.position;
             this.transform.parent.GetComponent<Tank>().BurrellRotation = this.transform.eulerAngles;
             this.transform.GetComponent<Tank_Fire>().Fire(strength, true);
@@ -66,8 +68,15 @@ public class Burrell_Movement : MonoBehaviour
 
     public void OnFire()
     {
-        this.transform.FindChild("tank-01_up").GetComponent<Animator>().enabled = true;
-        this.transform.FindChild("tank-01_up").GetComponent<Animator>().Play(0);
+        if (!(WeaponsCombo.CurrentWeapon is Airstike | WeaponsCombo.CurrentWeapon is Missile | WeaponsCombo.CurrentWeapon is Lighting))
+        {
+            this.transform.FindChild("tank-01_up").GetComponent<Animator>().enabled = true;
+            this.transform.FindChild("tank-01_up").GetComponent<Animator>().Play(0);
+
+            ParticleSystem sys = this.transform.FindChild("FireParticle").GetComponent<ParticleSystem>();
+            sys.Play();
+            sys.startLifetime = sys.startLifetime;
+        }
     }
 
   

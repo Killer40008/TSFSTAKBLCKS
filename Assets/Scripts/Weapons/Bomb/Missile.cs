@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public class Missile : MonoBehaviour, IWeapon
 {
+    public const int COST = 5000;
     GameObject Tank;
     public static List<IEnumerator> highlightCoroutines = new List<IEnumerator>();
 
@@ -143,7 +144,7 @@ public class Missile : MonoBehaviour, IWeapon
 
         StartCoroutine(FireMagnit(tank));
     }
-    public void FireCluster(GameObject mainBomb, float strength, WeaponData.Direction direction)
+    public void FireCluster(GameObject mainBomb, float strength, WeaponData.Direction direction,bool forward = true)
     {
         Bomb.FireCluster(mainBomb, strength,direction);
     }

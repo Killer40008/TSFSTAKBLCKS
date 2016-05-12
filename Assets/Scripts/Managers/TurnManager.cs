@@ -83,11 +83,11 @@ public class TurnManager : MonoBehaviour
 
     private void SetController(int selector)
     {
-
+        
         //deactive focus icon 
         #region FocusIcon
         Managers.TurnManager.tanks.ToList().ForEach(e => e.GetComponent<Tank>().Color = e.GetComponent<Tank>().OrginalColor);
-        Managers.TurnManager.tanks.Where(t => t.activeSelf == true).ToList().ForEach(e => e.GetComponent<Focus>().DeActive());
+        Managers.TurnManager.tanks.ToList().ForEach(e => e.GetComponent<Focus>().DeActive());
         if (Missile.highlightCoroutines.Count > 0)
         {
 

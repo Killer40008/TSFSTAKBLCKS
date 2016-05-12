@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Linq;
 
 public class Welcome : MonoBehaviour 
 {
@@ -10,13 +11,15 @@ public class Welcome : MonoBehaviour
         if (ScoreModule.IsPlayerDataExist())
         {
             MenuBase.Show(this, "Menu");
-
         }
         else
         {
             MenuBase.Show(this, "Welcome");
         }
 
+        var l = GameObject.FindGameObjectsWithTag("RM").ToList();
+        l.RemoveAt(0);
+        l.ForEach(r => Destroy(r));
     }
 
     public void OnNextButtonClicked()
@@ -37,7 +40,7 @@ public class Welcome : MonoBehaviour
             dt.PlayerModes = ModesClass.InitiallizeModesQuantities(true);
             dt.PlayerRank = 1;
             dt.PlayerMoney = 0;
-
+            dt.PlayerPoints = 0;
 
             ScoreModule.SavePlayerData(dt);
             MenuBase.HideAndShow(this, "Welcome", "Menu");

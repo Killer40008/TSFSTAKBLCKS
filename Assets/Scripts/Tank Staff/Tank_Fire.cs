@@ -17,6 +17,7 @@ public class Tank_Fire : MonoBehaviour
             if (AI) AIWeaponsConfig();
 
 
+            WeaponData.AllowNextTurn = true;
             Managers.WeaponManager.GenerateGameObject();
             IWeapon weapon = (IWeapon)WeaponsCombo.CurrentWeapon;
             if (!AI) weapon.Drag = (100 - Managers.DamageManager.GetStrength(this.transform.parent.gameObject)) / 100;
@@ -25,7 +26,6 @@ public class Tank_Fire : MonoBehaviour
             Object[] Explosions = Managers.SpawnManager.BombExplosions;
             weapon.Create(sprites[weapon.GameObjectSpriteIndex], Explosions[weapon.ExplosionSpriteIndex],
                 strength, this.transform.parent.gameObject);
-
 
             weapon.Fire(this.transform.parent.gameObject);
             this.GetComponent<Burrell_Movement>().OnFire();
@@ -71,11 +71,12 @@ public class Tank_Fire : MonoBehaviour
 
 
 
-
         if (Managers.WeaponManager.WeaponType == Weapons.Auto_Missile)
             Missile.SelectRandomTankForAI(this.transform.parent.gameObject);
         else if (Managers.WeaponManager.WeaponType == Weapons.Airstike)
             Airstike.SelectRandomTankForAI(this.transform.parent.gameObject);
+
+
 
     }
 
@@ -94,15 +95,16 @@ public class Tank_Fire : MonoBehaviour
             if (Managers.TurnManager.CurrentTank.GetComponent<Tank>().BurrellCount == 1)
             {
                 Managers.TurnManager.PlayerTank.transform.FindChild("Burrell").GetComponent<Tank_Fire>().Fire();
-                if (CheckIfHasSecondBurrell())
+                if (Managers.TurnManager.PlayerTank.GetComponent<Tank>().DoubleBurrell)
                     Managers.TurnManager.CurrentTank.GetComponent<Tank>().BurrellCount = 2;
 
             }
             else
             {
-                Managers.TurnManager.PlayerTank.transform.FindChild("Burrell2").GetComponent<Tank_Fire>().Fire();
-                Managers.TurnManager.PlayerTank.transform.FindChild("Burrell2").GetComponent<Burrell_Movement>().enabled = false;
-                Managers.TurnManager.PlayerTank.transform.FindChild("Burrell2").GetComponent<Tank_Fire>().enabled = false;
+                Transform burrell2 = Managers.TurnManager.PlayerTank.transform.FindChild("Burrell2");
+                burrell2.GetComponent<Tank_Fire>().Fire();
+                burrell2.GetComponent<Burrell_Movement>().enabled = false;
+                burrell2.GetComponent<Tank_Fire>().enabled = false;
                 Managers.TurnManager.CurrentTank.GetComponent<Tank>().BurrellCount = 1;
             }
 
@@ -110,21 +112,10 @@ public class Tank_Fire : MonoBehaviour
 
             //decrease count
             WeaponsClass.SubtractWeaponQuantitie(Managers.WeaponManager.WeaponType);
-
         }
     }
 
-    private bool CheckIfHasSecondBurrell()
-    {
-        for (int i = 0; i < Managers.TurnManager.PlayerTank.transform.childCount; i++)
-        {
-            if (Managers.TurnManager.PlayerTank.transform.GetChild(i).tag == "SecondBurrell" && Managers.TurnManager.CurrentTank.GetComponent<Tank>().BurrellCount == 1)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
+   
 
 
     private bool CheckIfWeaponsValid()

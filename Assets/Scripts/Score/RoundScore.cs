@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Linq;
 using System.Collections.Specialized;
+using UnityEngine.SceneManagement;
 
 public class RoundScore : MonoBehaviour 
 {
@@ -22,26 +23,50 @@ public class RoundScore : MonoBehaviour
     private IEnumerator PrintScores()
     {
         var sortedDictionary = Name_Money.Cast<DictionaryEntry>()
-                       .OrderBy(r => r.Value)
+                       .OrderByDescending(r => r.Value)
                        .ToDictionary(c => c.Key, d => d.Value);
        
         yield return new WaitForSeconds(1);
         GameObject pScore = GameObject.Find("PlayerScore");
         GameObject pName = GameObject.Find("PlayerNames");
-        for (int i = 0, j = pScore.transform.childCount - 1; i < pScore.transform.childCount && j >= 0; i++, j--)
+        for (int i = 0; i < pName.transform.childCount; i++)
         {
-            pName.transform.GetChild(j).GetComponent<Text>().text = (string)sortedDictionary.Keys.ToArray()[i];
-            StartCoroutine(PrintAsCounter(pScore.transform.GetChild(j).GetComponent<Text>(), (int)sortedDictionary.Values.ToArray()[i]));
-            CheckForWallet((string)sortedDictionary.Keys.ToArray()[i], j,(int)sortedDictionary.Values.ToArray()[i]);
+            pName.transform.GetChild(i).GetComponent<Text>().text = (string)sortedDictionary.Keys.ToArray()[i];
+            StartCoroutine(PrintAsCounter(pScore.transform.GetChild(i).GetComponent<Text>(), (int)sortedDictionary.Values.ToArray()[i]));
+            CheckForWallet((string)sortedDictionary.Keys.ToArray()[i], i,(int)sortedDictionary.Values.ToArray()[i]);
         }
         yield return StartCoroutine(WaitForScoreCounters());
 
         yield return new WaitForSeconds(1);
         StartCoroutine(SetRealWalletValue());
+        if (RoundManager.CurrentRound == 3) UpdateRank();
 
         yield return new WaitForSeconds(3);
         //
-        RoundManager.StartNextRound();
+        if (RoundManager.CurrentRound == 3)
+            SceneManager.LoadScene("Menu");
+        else
+            RoundManager.OpenBetweenRoandStore();
+    }
+
+    private void UpdateRank()
+    {
+        PlayerData dt = ScoreModule.GetPlayerData();
+        if (dt.PlayerRank < 19)
+        {
+            dt.PlayerPoints += RoundsMoney;
+            int rnk = dt.PlayerRank > 10 ? dt.PlayerRank - 10 : dt.PlayerRank;
+
+            if (dt.PlayerPoints / (1000 * rnk) >= 1)
+            {
+                dt.PlayerRank++;
+                if (dt.PlayerRank == 10)
+                    dt.PlayerRank++;
+            }
+
+            ScoreModule.SavePlayerData(dt);
+        }
+
     }
 
     private IEnumerator SetRealWalletValue()
@@ -95,7 +120,7 @@ public class RoundScore : MonoBehaviour
         while (local < money)
         {
             yield return new WaitForSeconds(0.0005f);
-            obj.text = (current+=5).ToString();
+            obj.text = (current+=20).ToString();
             local = current;
         }
         obj.text = money.ToString();

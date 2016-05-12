@@ -32,7 +32,8 @@ public class PlayerInfo : MonoBehaviour
 
     public void AddMoneyToPlayer(GameObject tank, int money)
     {
-        int total = tank.GetComponent<Tank>().PlayerMoney += money;
+        const int Multiply = 3;
+        int total = tank.GetComponent<Tank>().PlayerMoney += money * Multiply;
         if (tank == Managers.TurnManager.PlayerTank)
         {
             GameObject.Find("HUDMasterButtons").transform.Find("ScorePanel").transform.Find("Text").GetComponent<Text>().text = total.ToString();

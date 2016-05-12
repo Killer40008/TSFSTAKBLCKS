@@ -11,7 +11,6 @@ public class Loadout : MonoBehaviour
 
 
     Text countText;
-    GameObject fade;
 
     public void StartLoadout()
     {
@@ -25,7 +24,9 @@ public class Loadout : MonoBehaviour
 
     IEnumerator CountDown()
     {
-        int count = 1;
+   
+        int count = 4;
+        countText.text = (count +1).ToString();
 
         while (count > -1)
         {
@@ -91,6 +92,7 @@ public class Loadout : MonoBehaviour
                 else if (rndMode == 2)
                 {
                     LoadDoubleDamage(tank);
+                    tank.transform.FindChild("Canvas").FindChild("doubleDamage").GetComponent<CanvasGroup>().alpha = 1;
                 }
             }
         }
@@ -121,7 +123,7 @@ public class Loadout : MonoBehaviour
         secondBurrell.name = "Burrell2";
         secondBurrell.GetComponent<Burrell_Movement>().enabled = false;
         secondBurrell.transform.SetParent(burrell.transform.parent, true);
-        secondBurrell.transform.localEulerAngles = new Vector3(0, 0, 180 - burrell.transform.eulerAngles.z);
+        secondBurrell.transform.localEulerAngles = new Vector3(0, 0, 170);
         secondBurrell.transform.localScale = burrell.transform.localScale;
         tank.GetComponent<Tank>().BurrellCount = 2;
         tank.GetComponent<Tank>().DoubleBurrell = true;
@@ -145,7 +147,6 @@ public class Loadout : MonoBehaviour
             Armor arm = gm.GetComponent<Armor>();
             arm.SetStrength(strength);
             arm.Tank = tank;
-
         }
 
 

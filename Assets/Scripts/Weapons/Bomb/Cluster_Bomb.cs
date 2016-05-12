@@ -4,7 +4,7 @@ using System.Collections;
 public class Cluster_Bomb : MonoBehaviour, IWeapon
 {
 
-
+    public const int COST = 200;
     GameObject Tank;
 
     public void Create( Sprite sprite, Object explosion, float fireStrengh, GameObject tank)
@@ -13,11 +13,12 @@ public class Cluster_Bomb : MonoBehaviour, IWeapon
         Bomb = new WeaponData()
         {
             Damage = 30,
-            Strength = 10,
+            Strength = 5,
            BombObj = this.gameObject,Drag = this.Drag,
             SizeInital = new Vector3(0.7f, 0.7f, 0.7f),
             SizeFinal = new Vector3(0.7f, 0.7f, 0.7f),
             ExplosionSize = new Vector3(0.4f, 0.4f, 0.4f),
+            RadiusOfExplosion = 0f,
             IntialPeriod = 0.5f,
             SpriteColor = Color.black,
             Sprite = sprite,
@@ -34,6 +35,29 @@ public class Cluster_Bomb : MonoBehaviour, IWeapon
 
     public void OnCollisionEnter(Collision other)
     {
+        if (other.gameObject.tag != "Bomb")
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                GameObject wObj = new GameObject() { layer = 9 };
+                wObj.tag = "Bomb";
+                wObj.transform.position = new Vector3(Bomb.BombObj.transform.position.x, Bomb.BombObj.transform.position.y + 1);
+                WeaponsCombo.CurrentWeapon = wObj.AddComponent<Normal_Bomb>();
+                WeaponsCombo.CurrentWeapon.Create(Bomb.Sprite, Bomb.ExplosionPrefap, Bomb.Strength, Bomb.SoruceTank);
+                WeaponsCombo.CurrentWeapon.Bomb.RadiusOfExplosion = 1.3f;
+                WeaponsCombo.CurrentWeapon.FireCluster(Bomb.BombObj, 10, WeaponData.Direction.Up);
+            }
+            for (int i = 0; i < 2; i++)
+            {
+                GameObject wObj = new GameObject() { layer = 9 };
+                wObj.tag = "Bomb";
+                wObj.transform.position = new Vector3(Bomb.BombObj.transform.position.x, Bomb.BombObj.transform.position.y + 1);
+                WeaponsCombo.CurrentWeapon = wObj.AddComponent<Normal_Bomb>();
+                WeaponsCombo.CurrentWeapon.Create(Bomb.Sprite, Bomb.ExplosionPrefap, Bomb.Strength, Bomb.SoruceTank);
+                WeaponsCombo.CurrentWeapon.Bomb.RadiusOfExplosion = 1.3f;
+                WeaponsCombo.CurrentWeapon.FireCluster(Bomb.BombObj, 10, WeaponData.Direction.Up, false);
+            }
+        }
 
         if (other.gameObject.tag == "Player" || other.gameObject.layer == LayerMask.NameToLayer("AntiBomb"))
         {
@@ -41,14 +65,6 @@ public class Cluster_Bomb : MonoBehaviour, IWeapon
         }
         else
         {
-            for (int i = 0; i < 4; i++)
-            {
-                GameObject wObj = new GameObject() { layer = 9 };
-                wObj.tag = "Bomb";
-                WeaponsCombo.CurrentWeapon = wObj.AddComponent<Normal_Bomb>();
-                WeaponsCombo.CurrentWeapon.Create(Bomb.Sprite, Bomb.ExplosionPrefap, Bomb.Strength, Bomb.SoruceTank);
-                WeaponsCombo.CurrentWeapon.FireCluster(Bomb.BombObj, 10, WeaponData.Direction.Up);
-            }
             Bomb.OnCollide(Tank, other);
         }
     }
@@ -95,9 +111,9 @@ public class Cluster_Bomb : MonoBehaviour, IWeapon
     {
         Bomb.Fire(tank);
     }
-    public void FireCluster(GameObject mainBomb, float strength, WeaponData.Direction direction)
+    public void FireCluster(GameObject mainBomb, float strength, WeaponData.Direction direction, bool forward  =true)
     {
-        Bomb.FireCluster(mainBomb, strength,direction);
+        Bomb.FireCluster(mainBomb, strength,direction, forward);
     }
 
 }

@@ -68,6 +68,8 @@ public class DamageManager : MonoBehaviour
             tank.GetComponent<Tank>().Strength -= newStrength;
         else
             tank.GetComponent<Tank>().Strength = 0;
+
+        tank.GetComponent<Tank>().CalculateHealthAboveTank();
     }
     public void AddStrength(GameObject tank, float newStrength)
     {

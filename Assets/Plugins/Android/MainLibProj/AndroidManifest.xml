@@ -12,7 +12,7 @@
     
 
     <application>
-
+      
      <!-- Required for Nearby Connections API -->
         <meta-data android:name="com.google.android.gms.nearby.connection.SERVICE_ID"
             android:value="" />

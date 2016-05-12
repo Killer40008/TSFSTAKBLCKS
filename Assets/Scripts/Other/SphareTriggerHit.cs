@@ -20,9 +20,10 @@ public class SphareTriggerHit : MonoBehaviour
         {
             float direction = Mathf.Sign(CollisionPosisiton.x - other.transform.position.x);
             float deltaPosition = Vector3.Distance(CollisionPosisiton, other.transform.position);
-            Debug.Log(deltaPosition);
+            deltaPosition = float.IsPositiveInfinity(deltaPosition) == true || deltaPosition < 1 ? 1 : deltaPosition;
+
             Managers.DamageManager.SubstractHealth(other.gameObject, Weapon.Damage / (int)deltaPosition);
-            Managers.DamageManager.SubstractStrength(other.gameObject, Weapon.Strength / (int)deltaPosition);
+            Managers.DamageManager.SubstractStrength(other.gameObject, Weapon.Damage / (int)deltaPosition);
             bool desroyed = Managers.DestroyManager.CheckAndDestroy(other.gameObject);
 
             //set score
@@ -32,6 +33,14 @@ public class SphareTriggerHit : MonoBehaviour
                     Managers.PlayerInfos.AddMoneyToPlayer(Weapon.SoruceTank, 80);
 
 
+            triggeredList.Add(other.gameObject);
+        }
+        else if (other.gameObject.layer == LayerMask.NameToLayer("Armor") && !triggeredList.Contains(other.gameObject))
+        {
+            float deltaPosition = Vector3.Distance(CollisionPosisiton, other.transform.position);
+            deltaPosition = float.IsPositiveInfinity(deltaPosition) == true || deltaPosition < 1 ? 1 : deltaPosition;
+
+            other.GetComponent<Armor>().OnTriggerHit((Weapon.Damage / (int)deltaPosition) * 2);
             triggeredList.Add(other.gameObject);
         }
 

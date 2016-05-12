@@ -54,6 +54,14 @@ public class Fade : MonoBehaviour
        
     }
 
+    public void ShowDestroyedPanel()
+    {
+        transform.Find("Destroyed").GetComponent<CanvasGroup>().alpha = 1;
+        transform.Find("Destroyed").GetComponent<CanvasGroup>().interactable = true;
+        transform.Find("Destroyed").GetComponent<CanvasGroup>().blocksRaycasts = true;
+
+    }
+
 
 
     public void DestroyFade()

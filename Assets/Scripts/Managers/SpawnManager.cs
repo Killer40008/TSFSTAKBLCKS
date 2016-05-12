@@ -43,6 +43,7 @@ public class SpawnManager : MonoBehaviour
         tData.PlayerName = "comp" ;
         tData.PlayerRank = 0;
         tData.PlayerMoney = 0;
+        tData.IsAI = true;
         obj.GetComponent<Rigidbody>().centerOfMass = new Vector3(0f, -0.5f, 0);
     }
 
@@ -77,6 +78,7 @@ public class SpawnManager : MonoBehaviour
         tData.PlayerName = pd.PlayerName;
         tData.PlayerRank = pd.PlayerRank;
         tData.PlayerMoney = 0;
+        tData.IsAI = false;
 
     }
 

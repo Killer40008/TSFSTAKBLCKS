@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Molotove : MonoBehaviour, IWeapon
 {
-
+    public const int COST = 3000;
     GameObject Tank;
 
     public void Create(Sprite sprite, Object explosion, float fireStrengh, GameObject tank)
@@ -38,21 +38,17 @@ public class Molotove : MonoBehaviour, IWeapon
 
         if (other.gameObject.tag == "Player")
         {
-            if (Managers.MapsManager.CurrentMap != MapManager.Maps.Forest)
+
+            Vector3 position = other.transform.position;
+            position.y += 0.3f;
+            GameObject burnObj = Bomb.PlayExplosionEffect(false, position);
+            burnObj.GetComponent<SpriteRenderer>().sortingOrder = 100;
+            Managers.Me.StartCoroutine(SubtractHealth(other.gameObject, burnObj));
+            if (Managers.MapsManager.CurrentMap == MapManager.Maps.Forest)
             {
-                Vector3 position = other.transform.position;
-                position.y += 0.3f;
-                GameObject burnObj = Bomb.PlayExplosionEffect(false, position);
-                burnObj.GetComponent<SpriteRenderer>().sortingOrder = 100;
-                Managers.Me.StartCoroutine(SubtractHealth(other.gameObject, burnObj));
+                burnObj.transform.SetParent(other.gameObject.transform);
             }
-            else
-            {
-                var burnObj = Bomb.PlayExplosionEffect();
-                burnObj.GetComponent<SpriteRenderer>().sortingOrder = 100;
-                Bomb.Damage = 60;
-                Bomb.OnCollide(Tank, other);
-            }
+
         }
         else
         {
@@ -119,7 +115,7 @@ public class Molotove : MonoBehaviour, IWeapon
     {
         Bomb.Fire(tank);
     }
-    public void FireCluster(GameObject mainBomb, float strength, WeaponData.Direction direction)
+    public void FireCluster(GameObject mainBomb, float strength, WeaponData.Direction direction,bool forward = true)
     {
         Bomb.FireCluster(mainBomb, strength,direction);
     }

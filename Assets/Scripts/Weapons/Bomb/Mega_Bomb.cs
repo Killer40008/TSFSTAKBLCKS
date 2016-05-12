@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Mega_Bomb : MonoBehaviour, IWeapon
 {
+    public const int COST = 3000;
     GameObject Tank;
 
     public void Create( Sprite sprite, Object explosion, float fireStrengh, GameObject tank)
@@ -77,7 +78,7 @@ public class Mega_Bomb : MonoBehaviour, IWeapon
     {
         Bomb.Fire(tank);
     }
-    public void FireCluster(GameObject mainBomb, float strength, WeaponData.Direction direction)
+    public void FireCluster(GameObject mainBomb, float strength, WeaponData.Direction direction,bool forward = true)
     {
         Bomb.FireCluster(mainBomb, strength,direction);
     }

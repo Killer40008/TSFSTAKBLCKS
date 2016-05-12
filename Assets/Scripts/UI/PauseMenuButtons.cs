@@ -22,6 +22,7 @@ public class PauseMenuButtons : MonoBehaviour
     }
     public void OnBackClick()
     {
+        Managers.ResumeGame();
         SceneManager.LoadScene("Menu");
     }
 }

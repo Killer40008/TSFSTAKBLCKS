@@ -30,7 +30,7 @@ public class Tank_Movement : MonoBehaviour
             }
 
             //apply tank gravity
-            rigit.AddForce(Physics.gravity * 0.3f, ForceMode.VelocityChange);
+            rigit.AddForce(Physics.gravity * 0.7f, ForceMode.VelocityChange);
 
             ClampPosition();
             SuptractOil();
@@ -69,7 +69,7 @@ public class Tank_Movement : MonoBehaviour
 
     private void SuptractOil()
     {
-       float oil = GetComponent<Tank>().Oil -= 1;
+       float oil = GetComponent<Tank>().Oil -= 2;
        if (oil <= 0)
        {
            GameObject.Find("RightMovement").GetComponent<Button>().interactable = false;

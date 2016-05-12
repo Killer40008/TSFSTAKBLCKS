@@ -4,6 +4,8 @@ using System.Linq;
 
 public class Lighting : MonoBehaviour, IWeapon
 {
+    public const int COST = 11000;
+
     public const float Damage = 200;
     public  const float Strength = 200;
     GameObject Tank;
@@ -29,7 +31,7 @@ public class Lighting : MonoBehaviour, IWeapon
 
     public GameObject WeaponObj { get; set; }
     public float Drag { get; set; }
-    public void FireCluster(GameObject mainBomb, float strength, WeaponData.Direction direction)
+    public void FireCluster(GameObject mainBomb, float strength, WeaponData.Direction direction,bool forward = true)
     { }
 
     public void Fire(GameObject tank)
@@ -56,10 +58,11 @@ public class Lighting : MonoBehaviour, IWeapon
         bool nextTurn = true;
         foreach (GameObject cTank in Managers.TurnManager.tanks.Where(t => t != tank && t.activeSelf == true).ToArray())
         {
+            yield return new WaitForEndOfFrame();
             bool destroyed = false;
             GameObject armor = null;
             if ((armor = FindChildByLayer(cTank.transform, LayerMask.NameToLayer("Armor"))) != null)
-                armor.GetComponent<Armor>().OnLightingEnter();
+                armor.GetComponent<Armor>().OnLightingEnter(tank);
             else
             {
                 Managers.PlayerInfos.AddMoneyToPlayer(tank, 200);

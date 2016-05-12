@@ -8,6 +8,7 @@ public class ModesCombo : MonoBehaviour
 {
     public Object ArmorPrefap;
     public GameObject[] ArmorButtons;
+    public Object ModesParicleSystem;
     public static Dictionary<Color32, int> ColorStrength = new Dictionary<Color32, int>();
 
     public ModesCombo()
@@ -75,10 +76,16 @@ public class ModesCombo : MonoBehaviour
 
         //reset double damage
         Managers.TurnManager.PlayerTank.GetComponent<Tank>().DoubleDamage = false;
-        //reset double Burrell
-        if (Managers.TurnManager.PlayerTank.GetComponentsInChildren<Tank_Fire>().Length > 1)
-            Destroy(Managers.TurnManager.PlayerTank.GetComponentsInChildren<Tank_Fire>().Where(t => t.gameObject.tag == "SecondBurrell").FirstOrDefault().gameObject);
+        Managers.TurnManager.PlayerTank.transform.FindChild("Canvas").FindChild("doubleDamage").GetComponent<CanvasGroup>().alpha = 0;
 
+        //reset double Burrell
+        if (Managers.TurnManager.PlayerTank.GetComponent<Tank>().DoubleBurrell)
+        {
+            Destroy(Managers.TurnManager.PlayerTank.GetComponentsInChildren<Tank_Fire>().Where(t => t.gameObject.tag == "SecondBurrell").FirstOrDefault().gameObject);
+            Managers.TurnManager.PlayerTank.GetComponent<Tank>().BurrellCount = 1;
+            Managers.TurnManager.PlayerTank.GetComponent<Tank>().DoubleBurrell = false;
+            Managers.TurnManager.PlayerTank.transform.FindChild("Burrell").GetComponent<Tank_Fire>().enabled = true;
+        }
         //reset armors
         ClearArmor();
 
@@ -96,6 +103,12 @@ public class ModesCombo : MonoBehaviour
             NotifyMessage.ShowMessage("Double Damage Activated!", 3);
             ModesClass.SubtractModeQuantitie(ModesClass.Modes.Double_Damage);
             CloseCombo();
+
+            Vector3 pos = Managers.TurnManager.PlayerTank.transform.position;
+            pos.z = -10;
+            Instantiate(ModesParicleSystem, pos, Quaternion.identity);
+            Managers.TurnManager.PlayerTank.transform.FindChild("Canvas").FindChild("doubleDamage").GetComponent<CanvasGroup>().alpha = 1;
+
         }
         if (ModesClass.ModesQuantities[ModesClass.Modes.Double_Damage] == 0)
             button.GetComponent<Button>().interactable = false;
@@ -112,12 +125,17 @@ public class ModesCombo : MonoBehaviour
             GameObject secondBurrell = (GameObject)Instantiate(burrell, burrell.transform.position, Quaternion.identity);
             secondBurrell.tag = "SecondBurrell";
             secondBurrell.name = "Burrell2";
+            Managers.TurnManager.PlayerTank.GetComponent<Tank>().DoubleBurrell = true;
             secondBurrell.GetComponent<Burrell_Movement>().enabled = false;
             secondBurrell.transform.SetParent(burrell.transform.parent, true);
             secondBurrell.transform.localEulerAngles = new Vector3(0, 0, 180 - burrell.transform.eulerAngles.z);
             secondBurrell.transform.localScale = burrell.transform.localScale;
             ModesClass.SubtractModeQuantitie(ModesClass.Modes.Double_Burrell);
             CloseCombo();
+
+            Vector3 pos = Managers.TurnManager.PlayerTank.transform.position;
+            pos.z = -10;
+            Instantiate(ModesParicleSystem, pos, Quaternion.identity);
         }
         if (ModesClass.ModesQuantities[ModesClass.Modes.Double_Burrell] == 0)
             button.GetComponent<Button>().interactable = false;

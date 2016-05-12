@@ -17,12 +17,24 @@ public class DestroyManager : MonoBehaviour
            //destroy
            DestroyEffect(tank);
            tank.SetActive(false);
+           CheckForDestroyMessage();
 
            //check if there we have a winner
            CheckForWinner();
            return true;
        }
        return false;
+    }
+
+    private void CheckForDestroyMessage()
+    {
+        int tanksLives = Managers.TurnManager.tanks.Where(t => t.activeSelf == true).Count();
+        int playerTanks = Managers.TurnManager.tanks.Count(t => t.activeSelf && t.GetComponent<Tank>().IsAI == false);
+        if (tanksLives > 1 && playerTanks == 0)
+        {
+           GameObject fade = Fade.CreateFade();
+           fade.GetComponent<Fade>().ShowDestroyedPanel();
+        }
     }
 
     private void DestroyEffect(GameObject tank)
@@ -59,7 +71,7 @@ public class DestroyManager : MonoBehaviour
     }
 
 
-    void SetScoreToRoundScene()
+    public static void SetScoreToRoundScene()
     {
         foreach (GameObject gm in Managers.TurnManager.tanks)
         {

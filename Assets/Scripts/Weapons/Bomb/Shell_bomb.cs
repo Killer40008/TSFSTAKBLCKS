@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Shell_bomb : MonoBehaviour, IWeapon {
 
+    public const int COST = 6000;
     GameObject Tank;
 
     public void Create(Sprite sprite, Object explosion, float fireStrengh, GameObject tank)
@@ -85,7 +86,7 @@ public class Shell_bomb : MonoBehaviour, IWeapon {
         StartCoroutine(VelocityChanged(Bomb.BombObj.GetComponent<Rigidbody>()));
 
     }
-    public void FireCluster(GameObject mainBomb, float strength, WeaponData.Direction direction)
+    public void FireCluster(GameObject mainBomb, float strength, WeaponData.Direction direction,bool forward = true)
     {
         Bomb.FireCluster(mainBomb, strength, direction);
     }

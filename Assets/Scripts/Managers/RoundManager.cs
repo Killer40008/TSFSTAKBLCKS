@@ -39,5 +39,18 @@ public class RoundManager : MonoBehaviour
 
     }
 
+    public static bool ShowCounter;
+    public static void OpenBetweenRoandStore()
+    {
+        SceneManager.LoadScene("Store");
+        ShowCounter = true;
+    }
+
+    public static void OpenNormalStore()
+    {
+        SceneManager.LoadScene("Store");
+        ShowCounter = false;
+    }
+
 
 }

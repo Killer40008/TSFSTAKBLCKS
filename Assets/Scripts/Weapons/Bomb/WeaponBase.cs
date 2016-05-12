@@ -27,7 +27,7 @@ public interface IWeapon
     GameObject WeaponObj { get; set; }
     WeaponData Bomb { get; set; }
     void Fire(GameObject tank);
-    void FireCluster(GameObject mainBomb, float strength, WeaponData.Direction direction);
+    void FireCluster(GameObject mainBomb, float strength, WeaponData.Direction direction, bool forward = true);
     void Create( Sprite sprite, Object explosion, float fireStrengh, GameObject tank);
 }
 
@@ -57,10 +57,6 @@ public class WeaponData
     public GameObject SoruceTank { get; set; }
     public static GameObject LastPlayerCollide { get; private set; }
 
-    public WeaponData()
-    {
-        AllowNextTurn = true;
-    }
 
 
     public void PlayerHit(GameObject hit)
@@ -68,6 +64,8 @@ public class WeaponData
 
         if (!BombObjectDestroyed)
         {
+            BombObjectDestroyed = true;
+
 
             if (AntiStrikeSlider.allow)
                 AntiStrikeSlider.DeActive();
@@ -77,27 +75,29 @@ public class WeaponData
             bool destroyed = Managers.DestroyManager.CheckAndDestroy(hit);
 
             //set money
-            if (destroyed)
-                Managers.PlayerInfos.AddMoneyToPlayer(SoruceTank, 500);
-            else
-                Managers.PlayerInfos.AddMoneyToPlayer(SoruceTank, 100);
-
+            if (hit != SoruceTank)
+            {
+                if (destroyed)
+                    Managers.PlayerInfos.AddMoneyToPlayer(SoruceTank, 500);
+                else
+                    Managers.PlayerInfos.AddMoneyToPlayer(SoruceTank, 200);
+            }
 
             //
             LastPlayerCollide = hit.gameObject;
             PlayExplosionEffect();
-            BombObjectDestroyed = true;
         }
     }
 
 
-    public void FloorHit(GameObject bomb)
+    public void FloorHit(GameObject bomb, bool armorCall = false)
     {
-        Debug.Log(bomb.transform.position);
-        if (!BombObjectDestroyed)
+        if (!BombObjectDestroyed )
         {
+            BombObjectDestroyed = true;
+
             //Set damage to nearby tanks
-            if (RadiusOfExplosion > 0)
+            if (RadiusOfExplosion > 0 && armorCall == false)
             {
                 GameObject sphareTrigger = new GameObject();
                 sphareTrigger.transform.position = bomb.transform.position;
@@ -116,7 +116,6 @@ public class WeaponData
             //
             MonoBehaviour.Destroy(BombObj);
             PlayExplosionEffect();
-            BombObjectDestroyed = true;
         }
     }
 
@@ -156,9 +155,10 @@ public class WeaponData
 
     public enum Direction{Up=1,Down=-1}
     public static int ShellCount = 1;
-    public void FireCluster(GameObject mainBomb, float strength, Direction yDirection = Direction.Up)
+    public void FireCluster(GameObject mainBomb, float strength, Direction yDirection = Direction.Up, bool forward = true)
     {
         //set sprites and size , position , collider
+
 
         BombObj.transform.position = new Vector3(mainBomb.transform.position.x, mainBomb.transform.position.y + 1, 0);
         BombObj.transform.gameObject.AddComponent<SpriteRenderer>().sprite = Sprite;
@@ -171,12 +171,13 @@ public class WeaponData
 
         //set force and position 
         float direction = Mathf.Sign(mainBomb.transform.position.x - SoruceTank.transform.position.x);
+        direction = forward == true ? direction : -direction;
         Rigidbody rigit = BombObj.transform.gameObject.AddComponent<Rigidbody>();
         rigit.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
         rigit.mass = Mass;
         rigit.useGravity = true;
         if (yDirection == Direction.Up)
-            rigit.AddForce(new Vector3(direction, Random.Range(2 * (int)yDirection, 6 * (int)yDirection), 0), ForceMode.VelocityChange);
+            rigit.AddForce(new Vector3(direction * Random.Range(0.1f, 2.1f), Random.Range(2 * (int)yDirection, 6 * (int)yDirection), 0), ForceMode.VelocityChange);
         else
             rigit.AddForce(new Vector3(direction * ShellCount++ * 0.5f, 0, 0), ForceMode.VelocityChange);
 
@@ -251,12 +252,10 @@ public class WeaponData
         //clip.AddEvent(ev);
 
         if (BombObj.GetComponent<IWeapon>() is Molotove && Destroy)
-            Managers.Me.StartCoroutine(DestroyBurnObj(explosion));
+            Managers.WeaponManager.StartCoroutine(DestroyBurnObj(explosion));
 
         MonoBehaviour.Destroy(BombObj);
-        Managers.Me.StartCoroutine(CheckForNextStep());
-
-
+        Managers.TurnManager.StartCoroutine(CheckForNextStep());
         return explosion;
     }
     IEnumerator DestroyBurnObj(GameObject burnObj)
@@ -275,30 +274,37 @@ public class WeaponData
         AnimationClip clip = explosion.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip;
         AnimationEvent ev = new AnimationEvent() { functionName = "DestroyAnimationFinished", time = clip.length, intParameter = 0 };
         clip.AddEvent(ev);
+
+        if (TurnCorotine != null)
+            Managers.TurnManager.StopCoroutine(TurnCorotine);
+
         MonoBehaviour.Destroy(BombObj);
-        Managers.Me.StartCoroutine(CheckForNextStep());
+        Managers.TurnManager.StartCoroutine(CheckForNextStep());
+
+        TurnCorotine = CheckForNextStep();
+
         return explosion;
     }
 
-    static bool AllowNextTurn = true;
+    public static IEnumerator TurnCorotine = null;
+    public static volatile bool AllowNextTurn;
     IEnumerator CheckForNextStep()
     {
         yield return new WaitForEndOfFrame();
-        yield return new WaitForSeconds(0.5f);
-        if (GameObject.FindGameObjectsWithTag("Bomb").Length == 0)
-        {
-         
+        yield return new WaitForSeconds(0.7f);
+        if (GameObject.FindGameObjectsWithTag("Bomb").Count() != 0) { yield break; }
+        Managers.TurnManager.StopAllCoroutines();
+   
             GameObject tankSource = this.SoruceTank;
             if (tankSource != null)
             {
                 Tank tf = tankSource.GetComponent<Tank>();
-                if (tf.BurrellCount == 1) //for double burrell
+                if (tf.BurrellCount == 1 && AllowNextTurn) //for double burrell
                 {
-                    if (AllowNextTurn)
-                    {
-                        Managers.TurnManager.SetTurnToNextTank();
-                        AllowNextTurn = false;
-                    }
+
+                    Managers.TurnManager.SetTurnToNextTank();
+                    AllowNextTurn = false;
+
 
                     if (tankSource != Managers.TurnManager.PlayerTank && tf.DoubleBurrell)
                     {
@@ -322,7 +328,7 @@ public class WeaponData
                     NotifyMessage.ShowMessage("Second Burrell Activated!", 2);
                     GameObject.Find("Canvas").transform.FindChild("HUD").FindChild("DisabledPanel").GetComponent<CanvasGroup>().blocksRaycasts = false;
                 }
-                else if (tf.BurrellCount == 2)
+                else if (tf.BurrellCount == 2 && Managers.TurnManager.CurrentTank != Managers.TurnManager.PlayerTank)
                 {
 
                     if (!CheckForDamageValue(tankSource)) yield break;
@@ -330,12 +336,14 @@ public class WeaponData
                     tankSource.GetComponent<Tank>().BurrellCount = 1;
                     tankSource.GetComponent<Tank_AI>().LastTankHit = null;
 
-                    Managers.TurnManager.CurrentTank.GetComponent<Tank_AI>().AimBurrellToRandomTank(
-                        Managers.TurnManager.tanks.Where(t => t != Managers.TurnManager.CurrentTank).ToArray());
-
+                    if (Managers.TurnManager.tanks.Count(t => t.activeSelf == true) > 1)
+                    {
+                        Managers.TurnManager.CurrentTank.GetComponent<Tank_AI>().AimBurrellToRandomTank(
+                            Managers.TurnManager.tanks.Where(t => t != Managers.TurnManager.CurrentTank).ToArray());
+                    }
                 }
 
-            }
+            
         }
     }
 
@@ -344,42 +352,43 @@ public class WeaponData
     {
         if (Managers.DamageManager.GetHealth(tankSource) <= 0)
         {
-            if (AllowNextTurn)
-            {
+            
                 Managers.TurnManager.SetTurnToNextTank();
-                AllowNextTurn = false;
-            }
-            return false;
+            
+    
         }
         return true;
     }
 
     public void OnCollide(GameObject fireTank, Collision other)
     {
-        if (other.gameObject.tag == "Player")
+        if (!BombObjectDestroyed)
         {
-            PlayerHit(other.gameObject);
-            SetAlTankHit(fireTank, other.gameObject);
-        }
-        else if (other.gameObject.tag == "Terrain" || other.gameObject.tag == "Pistons" || other.gameObject.tag == "ForestFloor")
-        {
-            FloorHit(other.gameObject);
-            SetAlTankHit(fireTank, null);
-        }
-        else if (other.gameObject.tag == "Snow")
-        {
-            MonoBehaviour.Destroy(other.gameObject);
-            FloorHit(other.gameObject);
-            SetAlTankHit(fireTank, null);
-        }
-        else if (other.gameObject.tag == "Bomb")
-        {
-            //set score
-            Managers.PlayerInfos.AddMoneyToPlayer(fireTank, 50);
+            if (other.gameObject.tag == "Player")
+            {
+                PlayerHit(other.gameObject);
+                SetAlTankHit(fireTank, other.gameObject);
+            }
+            else if (other.gameObject.tag == "Terrain" || other.gameObject.tag == "Pistons" || other.gameObject.tag == "ForestFloor")
+            {
+                FloorHit(other.gameObject);
+                SetAlTankHit(fireTank, null);
+            }
+            else if (other.gameObject.tag == "Snow")
+            {
+                MonoBehaviour.Destroy(other.gameObject);
+                FloorHit(other.gameObject);
+                SetAlTankHit(fireTank, null);
+            }
+            else if (other.gameObject.tag == "Bomb")
+            {
+                //set score
+                Managers.PlayerInfos.AddMoneyToPlayer(fireTank, 50);
 
-            //play effect
-            PlayAntiStrikeCollisionEffect();
-            SetAlTankHit(fireTank, null);
+                //play effect
+                PlayAntiStrikeCollisionEffect();
+                SetAlTankHit(fireTank, null);
+            }
         }
     }
 
