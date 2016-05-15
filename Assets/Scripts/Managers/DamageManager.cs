@@ -37,11 +37,11 @@ public class DamageManager : MonoBehaviour
     {
         return tank.GetComponent<Tank>().Health;
     }
-    public void SubstractHealth(GameObject tank, float damage)
+    public void SubstractHealth(GameObject tank, float damage, bool useDoubleDamage = true)
     {
         if (GetHealth(tank) - damage > 0)
         {
-            if (Managers.TurnManager.CurrentTank.GetComponent<Tank>().DoubleDamage)
+            if (Managers.TurnManager.CurrentTank.GetComponent<Tank>().DoubleDamage && useDoubleDamage)
                 tank.GetComponent<Tank>().Health -= (damage * 2);
             else
                 tank.GetComponent<Tank>().Health -= (damage);

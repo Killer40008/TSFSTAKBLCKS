@@ -16,7 +16,7 @@ public class ModesCombo : MonoBehaviour
         ColorStrength.Clear();
         ColorStrength.Add(new Color32(244, 227, 0, 180), 100);
         ColorStrength.Add(new Color32(0, 244, 12, 180), 200);
-        ColorStrength.Add(new Color32(6, 0, 190, 180), 300);
+        ColorStrength.Add(new Color32(6, 0, 190, 180), 320);
         ColorStrength.Add(new Color32(195, 0, 0, 180), 400);
     }
 
@@ -128,7 +128,7 @@ public class ModesCombo : MonoBehaviour
             Managers.TurnManager.PlayerTank.GetComponent<Tank>().DoubleBurrell = true;
             secondBurrell.GetComponent<Burrell_Movement>().enabled = false;
             secondBurrell.transform.SetParent(burrell.transform.parent, true);
-            secondBurrell.transform.localEulerAngles = new Vector3(0, 0, 180 - burrell.transform.eulerAngles.z);
+            secondBurrell.transform.localEulerAngles = new Vector3(0, 0, 170);
             secondBurrell.transform.localScale = burrell.transform.localScale;
             ModesClass.SubtractModeQuantitie(ModesClass.Modes.Double_Burrell);
             CloseCombo();

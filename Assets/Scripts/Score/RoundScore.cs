@@ -44,7 +44,10 @@ public class RoundScore : MonoBehaviour
         yield return new WaitForSeconds(3);
         //
         if (RoundManager.CurrentRound == 3)
+        {
             SceneManager.LoadScene("Menu");
+            RoundManager.Reset();
+        }
         else
             RoundManager.OpenBetweenRoandStore();
     }

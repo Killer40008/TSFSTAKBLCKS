@@ -24,15 +24,14 @@ public class SphareTriggerHit : MonoBehaviour
 
             Managers.DamageManager.SubstractHealth(other.gameObject, Weapon.Damage / (int)deltaPosition);
             Managers.DamageManager.SubstractStrength(other.gameObject, Weapon.Damage / (int)deltaPosition);
-            bool desroyed = Managers.DestroyManager.CheckAndDestroy(other.gameObject);
 
             //set score
-                if (desroyed)
+            if (Managers.DamageManager.GetHealth(other.gameObject) == 0)
                     Managers.PlayerInfos.AddMoneyToPlayer(Weapon.SoruceTank, 500);
                 else
                     Managers.PlayerInfos.AddMoneyToPlayer(Weapon.SoruceTank, 80);
 
-
+            Managers.DestroyManager.CheckAndDestroy(other.gameObject);
             triggeredList.Add(other.gameObject);
         }
         else if (other.gameObject.layer == LayerMask.NameToLayer("Armor") && !triggeredList.Contains(other.gameObject))

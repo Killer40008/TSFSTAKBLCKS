@@ -71,16 +71,14 @@ public class Lighting : MonoBehaviour, IWeapon
 
             GameObject armor = FindChildByLayer(attackingTanks[i].transform, LayerMask.NameToLayer("Armor"));
             if (armor != null)
-                armor.GetComponent<Armor>().OnLightingEnter(tank, this.gameObject);
-
-
-
-            Bomb.PlayerHit(attackingTanks[i]);
+                armor.GetComponent<Armor>().OnLightingEnter(tank, attackingTanks[i], this.gameObject);
+            else
+                Bomb.PlayerHitLighting(attackingTanks[i], Damage);
         }
 
 
         yield return new WaitForSeconds(1);
-    
+        Managers.TurnManager.StartCoroutine(Bomb.CheckForNextStep());
 
         Fade.BackGroundFadeOut();
         Destroy(this.gameObject);

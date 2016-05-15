@@ -64,34 +64,55 @@ public class WeaponData
 
         if (!BombObjectDestroyed)
         {
-         
+
 
             if (AntiStrikeSlider.allow)
                 AntiStrikeSlider.DeActive();
 
             Managers.DamageManager.SubstractHealth(hit, Damage);
             Managers.DamageManager.SubstractStrength(hit, Strength);
-            bool destroyed = Managers.DestroyManager.CheckAndDestroy(hit);
 
             //set money
             if (hit != SoruceTank)
             {
-                if (destroyed)
+                if (Managers.DamageManager.GetHealth(hit) == 0)
                     Managers.PlayerInfos.AddMoneyToPlayer(SoruceTank, 500);
                 else
                     Managers.PlayerInfos.AddMoneyToPlayer(SoruceTank, 200);
             }
 
+            Managers.DestroyManager.CheckAndDestroy(hit);
             //
             LastPlayerCollide = hit.gameObject;
-            PlayExplosionEffect();
 
-            //
-            if (!(BombObj.GetComponent<IWeapon>() is Lighting))
-            {
-                BombObjectDestroyed = true;
-            }
+            PlayExplosionEffect();
+            BombObjectDestroyed = true;
+
         }
+    }
+    public void PlayerHitLighting(GameObject hit, float damage)
+    {
+
+
+        if (AntiStrikeSlider.allow)
+            AntiStrikeSlider.DeActive();
+        
+        
+        Managers.DamageManager.SubstractHealth(hit, damage, false);
+        Managers.DamageManager.SubstractStrength(hit, 0);
+
+        //set money
+        if (hit != SoruceTank)
+        {
+            if (Managers.DamageManager.GetHealth(hit) == 0)
+                Managers.PlayerInfos.AddMoneyToPlayer(SoruceTank, 500);
+            else
+                Managers.PlayerInfos.AddMoneyToPlayer(SoruceTank, 200);
+        }
+
+        Managers.DestroyManager.CheckAndDestroy(hit);
+
+
     }
 
 
@@ -120,11 +141,10 @@ public class WeaponData
             //
             if (!(BombObj.GetComponent<IWeapon>() is Lighting))
             {
+                PlayExplosionEffect();
                 MonoBehaviour.Destroy(BombObj);
                 BombObjectDestroyed = true;
             }
-
-            PlayExplosionEffect();
         }
     }
 
@@ -195,7 +215,7 @@ public class WeaponData
     public void DropAirstrike(GameObject plane)
     {
 
-        BombObj.transform.position = plane.transform.position;
+        BombObj.transform.position = new Vector3(plane.transform.position.x, plane.transform.position.y, 0);
         BombObj.transform.gameObject.AddComponent<SpriteRenderer>().sprite = Sprite;
         BombObj.transform.gameObject.GetComponent<SpriteRenderer>().color = SpriteColor;
         BombObj.transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
@@ -298,7 +318,7 @@ public class WeaponData
 
     public static IEnumerator TurnCorotine = null;
     public static volatile bool AllowNextTurn;
-    IEnumerator CheckForNextStep()
+    public IEnumerator CheckForNextStep()
     {
         yield return new WaitForEndOfFrame();
         yield return new WaitForSeconds(0.7f);

@@ -10,14 +10,22 @@ public class RoundManager : MonoBehaviour
 
     private static Queue mQueue = new Queue();
 
-    void Awake()
+    public static void Reset()
     {
-        DontDestroyOnLoad(this.gameObject);
+        CurrentRound = 0;
+        mQueue.Clear();
+
         //
         int[] mArray = new int[] { 0, 1, 2 };
         mArray = mArray.OrderBy(x => Random.Range(0, 100)).ToArray();
         foreach (int map in mArray)
             mQueue.Enqueue(map);
+    }
+
+    public void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+        Reset();
     }
 
     public static bool StartNextRound()

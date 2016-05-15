@@ -40,19 +40,20 @@ public class Armor : MonoBehaviour
             {
                 color.a = 0;
                 other.gameObject.GetComponent<IWeapon>().Bomb.FloorHit(other.gameObject, true);
-                Managers.DamageManager.SubstractHealth(Tank, Mathf.Abs(currentStrength));
-                Managers.DamageManager.SubstractStrength(Tank, Mathf.Abs(currentStrength));
-
-                bool destroyed = Managers.DestroyManager.CheckAndDestroy(Tank);
+                Managers.DamageManager.SubstractHealth(Tank, Mathf.Abs(currentStrength) / dMultiply);
+                Managers.DamageManager.SubstractStrength(Tank, Mathf.Abs(currentStrength) / dMultiply);
 
                 //set money
                 if (Tank != other.gameObject.GetComponent<IWeapon>().Bomb.SoruceTank)
                 {
-                    if (destroyed)
+                    if (Managers.DamageManager.GetHealth(Tank) == 0)
                         Managers.PlayerInfos.AddMoneyToPlayer(other.gameObject.GetComponent<IWeapon>().Bomb.SoruceTank, 500);
                     else
                         Managers.PlayerInfos.AddMoneyToPlayer(other.gameObject.GetComponent<IWeapon>().Bomb.SoruceTank, 50);
                 }
+
+                Managers.DestroyManager.CheckAndDestroy(Tank);
+
 
                 if (Tank.activeSelf)
                 {
@@ -104,7 +105,7 @@ public class Armor : MonoBehaviour
     }
     
 
-    public void OnLightingEnter(GameObject tank, GameObject lightingGameobject)
+    public void OnLightingEnter(GameObject tank, GameObject tankTarget ,GameObject lightingGameobject)
     {
         int dMultiply = tank.GetComponent<Tank>().DoubleDamage == true ? 2 : 1;
 
@@ -115,12 +116,8 @@ public class Armor : MonoBehaviour
         if (currentStrength <= 0)
         {
             color.a = 0;
-            lightingGameobject.GetComponent<IWeapon>().Bomb.FloorHit(lightingGameobject, true);
-
-            Managers.DamageManager.SubstractHealth(Tank, Mathf.Abs(currentStrength));
-            Managers.DamageManager.SubstractStrength(Tank, Mathf.Abs(currentStrength));
-            Managers.DestroyManager.CheckAndDestroy(Tank);
-
+            lightingGameobject.GetComponent<IWeapon>().Bomb.PlayerHitLighting(tankTarget, Mathf.Abs(currentStrength));
+            
             if (Tank.activeSelf)
             {
                 StartCoroutine(DeactiveArmor());
@@ -129,7 +126,6 @@ public class Armor : MonoBehaviour
         else
         {
             color.a = Mathf.Clamp(currentStrength / ArmorStrength, 0, 0.4243f);
-            lightingGameobject.GetComponent<IWeapon>().Bomb.FloorHit(lightingGameobject, true);
 
         }
 
