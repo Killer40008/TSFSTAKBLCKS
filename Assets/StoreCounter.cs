@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class StoreCounter : MonoBehaviour 
 {
     const int Time = 15;
+    public static bool Pause = false;
 
     void Start()
     {
@@ -31,11 +32,15 @@ public class StoreCounter : MonoBehaviour
 
         while (counter > 0)
         {
-            yield return new WaitForSeconds(Time / 100.0f);
-            counter -= 0.01f;
-            img.fillAmount = counter;
-            int val = ((int)(counter * Time));
-            this.transform.FindChild("Text").GetComponent<Text>().text = val.ToString();
+            yield return new WaitForEndOfFrame();
+            if (!Pause)
+            {
+                yield return new WaitForSeconds(Time / 100.0f);
+                counter -= 0.01f;
+                img.fillAmount = counter;
+                int val = ((int)(counter * Time));
+                this.transform.FindChild("Text").GetComponent<Text>().text = val.ToString();
+            }
         }
 
         RoundManager.StartNextRound();

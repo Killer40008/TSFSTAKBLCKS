@@ -8,7 +8,6 @@ public class BuyButton : MonoBehaviour
         GameObject fade = GameObject.Find("Fade");
         ShowPanel(fade);
         ShowPanel(GameObject.Find("Buy"));
-
     }
 
 
@@ -17,6 +16,9 @@ public class BuyButton : MonoBehaviour
         panel.GetComponent<CanvasGroup>().alpha = 1;
         panel.GetComponent<CanvasGroup>().blocksRaycasts = true;
         panel.GetComponent<CanvasGroup>().interactable = true;
+
+        if (RoundManager.ShowCounter)
+            StoreCounter.Pause = true;
     }
 
 
@@ -25,6 +27,9 @@ public class BuyButton : MonoBehaviour
         panel.GetComponent<CanvasGroup>().alpha = 0;
         panel.GetComponent<CanvasGroup>().blocksRaycasts = false;
         panel.GetComponent<CanvasGroup>().interactable = false;
+
+        if (RoundManager.ShowCounter)
+            StoreCounter.Pause = false;
     }
 
 
